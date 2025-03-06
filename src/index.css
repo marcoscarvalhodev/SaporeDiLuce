@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
 html, body {
-  height: 100vh;
+  font-size: 10px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }

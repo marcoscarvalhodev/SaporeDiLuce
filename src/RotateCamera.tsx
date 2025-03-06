@@ -81,7 +81,7 @@ export default class RotateCamera {
 
   animate = () => {
     if (this.isMouseDown) return;
-
+    
     if (this.camera) {
       this.camera.rotation.x = THREE.MathUtils.lerp(
         this.camera.rotation.x,

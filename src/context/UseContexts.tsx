@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { CreateContextOrbit } from './ContextOrbit';
+import { CreateContextAnimations } from './CreateContexts';
+import { CreateContextOrbit } from './CreateContexts';
 
 export const UseOrbitContext = () => {
   const useOrbitContext = useContext(CreateContextOrbit);
@@ -8,4 +9,14 @@ export const UseOrbitContext = () => {
   }
 
   return useOrbitContext;
+};
+
+export const UseAnimationsContext = () => {
+  const useAnimationsContext = useContext(CreateContextAnimations);
+
+  if (!useAnimationsContext) {
+    throw new Error('there is no animations context');
+  }
+
+  return useAnimationsContext;
 };

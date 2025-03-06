@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface OrbitProps {
-  orbitExists: boolean;
-  setOrbitExists: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const CreateContextOrbit = React.createContext<null | OrbitProps>(null);
+import { CreateContextOrbit } from './CreateContexts';
 
 export const ContextOrbitProvider = ({
   children,
@@ -13,9 +7,12 @@ export const ContextOrbitProvider = ({
   children: React.ReactNode;
 }) => {
   const [orbitExists, setOrbitExists] = React.useState(false);
+  const startButtonRef = React.useRef<HTMLButtonElement | null>(null);
 
   return (
-    <CreateContextOrbit.Provider value={{ orbitExists, setOrbitExists }}>
+    <CreateContextOrbit.Provider
+      value={{ orbitExists, setOrbitExists, startButtonRef }}
+    >
       {children}
     </CreateContextOrbit.Provider>
   );
