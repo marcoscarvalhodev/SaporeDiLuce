@@ -2,10 +2,8 @@ import * as THREE from 'three';
 import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import { useThree } from '@react-three/fiber';
-import MoveCamera from './MoveCamera';
 import { JSX } from 'react';
-import { UseOrbitContext } from './context/UseContexts';
+import { UseAnimationsContext, UseOrbitContext } from './context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -21,19 +19,11 @@ type GLTFResult = GLTF & {
 
 export function Restaurant(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
-  const { nodes,animations } = useGLTF(
-    '/restaurant.glb'
-  ) as GLTFResult;
+  const { nodes, animations } = useGLTF('/restaurant.glb') as GLTFResult;
   const { mixer } = useAnimations(animations, group);
 
   const { orbitExists } = UseOrbitContext();
-
-  const { camera } = useThree();
-  const { cameraForward } = MoveCamera(camera);
-
-  document
-    .getElementById('button-click')
-    ?.addEventListener('click', cameraForward);
+  const { doorClose } = UseAnimationsContext();
 
   React.useEffect(() => {
     if (orbitExists) {
@@ -49,15 +39,14 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
   }, [orbitExists, animations, mixer]);
 
   React.useEffect(() => {
-    const closeDoorButton = document.getElementById('close-door');
-    closeDoorButton?.addEventListener('click', () => {
+    if (doorClose) {
       animations.forEach((item) => {
         const doors = mixer.clipAction(item);
         doors.paused = false;
         doors.timeScale = -1;
       });
-    });
-  });
+    }
+  }, [doorClose, animations, mixer]);
 
   return (
     <group ref={group} {...props} dispose={null}>

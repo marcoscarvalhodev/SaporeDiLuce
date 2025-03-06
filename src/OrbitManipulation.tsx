@@ -7,10 +7,12 @@ import { UseOrbitContext } from './context/UseContexts';
 import gsap from 'gsap';
 
 import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import { AudioEffects } from './AudioEffects';
 
 const OrbitManipulation = () => {
   const { camera } = useThree();
   const orbitRef = React.useRef<OrbitControlsImpl>(null);
+  const { IntroductionAudio } = AudioEffects();
 
   const { orbitExists } = UseOrbitContext();
   const initialOrbit = new THREE.Vector3(-20, 1.8, -2.12);
@@ -29,12 +31,13 @@ const OrbitManipulation = () => {
 
   React.useEffect(() => {
     if (orbitRef.current && camera && orbitExists) {
+      IntroductionAudio();
       const tl = gsap.timeline();
 
       tl.to(
         orbitRef.current.target,
         {
-          x: 7,
+          x: 6.5,
           y: 2.7,
           z: 0.8,
           ease: 'power1.out',
@@ -57,7 +60,7 @@ const OrbitManipulation = () => {
         0
       );
       orbitRef.current.update();
-    } 
+    }
   });
 
   return (
