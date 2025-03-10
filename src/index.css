@@ -1,8 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-html, body {
+html,
+body {
   font-size: 10px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.button_call {
+  @apply px-[2.4rem] py-[1.2rem]  bg-amber-50 text-[#2e2c2c] text-[1.8rem] cursor-pointer rounded-[2rem] hover:bg-[#2e2c2c] hover:text-amber-50 transition-all duration-[0.5s]
 }
