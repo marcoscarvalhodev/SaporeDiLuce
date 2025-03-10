@@ -7,9 +7,11 @@ export const ContextAnimationsProvider = ({
   children: React.ReactNode;
 }) => {
   const [doorClose, setDoorClose] = React.useState(false);
-
+  const  [movementAudioState, setMovementAudioState] = React.useState(false);
+  const [doorOpen, setDoorOpen] = React.useState(false);
+ 
   return (
-    <CreateContextAnimations.Provider value={{ doorClose, setDoorClose }}>
+    <CreateContextAnimations.Provider value={{ doorClose, setDoorClose, doorOpen, setDoorOpen, movementAudioState, setMovementAudioState }}>
       {children}
     </CreateContextAnimations.Provider>
   );
