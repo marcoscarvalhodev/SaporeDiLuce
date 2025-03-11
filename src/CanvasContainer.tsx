@@ -48,10 +48,10 @@ function CanvasContainer() {
           rotation={[-1.5772074309645465, 1.556, 1.5772077820156805]}
         />
 
-        <Environment preset='forest' environmentIntensity={2} background />
-        <ambientLight intensity={1.5} color={'#ffffff'} />
+        <Environment preset="city" environmentIntensity={2} background />
+        
 
-        <AccessButtons />
+        {<AccessButtons />}
 
         <ContextAnimationsProvider>
           <MoveCameraOrbit
@@ -61,7 +61,7 @@ function CanvasContainer() {
               moveSound: true,
             }}
           />
-          <Restaurant />
+        <Restaurant />
         </ContextAnimationsProvider>
       </Canvas>
     </>

@@ -6,23 +6,24 @@ import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
 import gsap from 'gsap';
 import { UseAnimationsContext } from '../context/UseContexts';
+import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 const cameraPositions = {
   restaurant_enter: {
-    position: new THREE.Vector3(6.5, 1.32, 2.7),
-    target: new THREE.Vector3(5.7, 2.7, 0.6),
+    position: new THREE.Vector3(6.5, 2.8, 0.5),
+    target: new THREE.Vector3(6, 2.7, 0),
   },
   restaurant_leave: {
     position: new THREE.Vector3(15.08, 2.84, -2.54),
     target: new THREE.Vector3(-20, 1.8, -2.12),
   },
   dining_room_leave: {
-    position: new THREE.Vector3(6.5, 1.32, 2.7),
-    target: new THREE.Vector3(5.7, 2.7, 0.6),
+    position: new THREE.Vector3(0, 2.8, -2),
+    target: new THREE.Vector3(6, 2.7, 0),
   },
   dining_room_enter: {
-    position: new THREE.Vector3(-2, 3, -6),
-    target: new THREE.Vector3(-1.5, 2, -5),
+    position: new THREE.Vector3(1, 2.8, -4),
+    target: new THREE.Vector3(0.5, 2.7, -8),
   },
 };
 
@@ -51,10 +52,6 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
   const { MovementAudio, DoorAudio } = AudioEffects();
   const { setDoorClose } = UseAnimationsContext();
-
-  React.useEffect(() => {
-    console.log(controlsRef.current);
-  });
 
   const RestaurantOutsideMovement = React.useCallback(() => {
     if (controlsRef.current) {
@@ -117,26 +114,55 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
   const RestaurantInsideMovement = React.useCallback(() => {
     if (currentPosition.params.name) {
-      gsap.to(camera.position, {
-        x: cameraPositions[currentPosition.params.name].position.x,
-        y: cameraPositions[currentPosition.params.name].position.y,
-        z: cameraPositions[currentPosition.params.name].position.z,
-        duration: 3,
-        ease: 'power2.inOut',
-        onStart: () => {
-          if (currentPosition.params.moveSound) {
-            MovementAudio();
-            setDoorClose(false);
-          }
-        },
+      const tl = gsap.timeline();
 
-        onComplete: () => {
-          if (currentPosition.params.doorSound) {
-            DoorAudio();
-            setDoorClose(true);
-          }
+      tl.to(
+        camera.position,
+        {
+          x: cameraPositions[currentPosition.params.name].position.x,
+          y: cameraPositions[currentPosition.params.name].position.y,
+          z: cameraPositions[currentPosition.params.name].position.z,
+          duration: 3,
+          ease: 'power2.inOut',
+          onStart: () => {
+            if (currentPosition.params.moveSound) {
+              MovementAudio();
+              setDoorClose(false);
+            }
+          },
+
+          onComplete: () => {
+            if (currentPosition.params.doorSound) {
+              DoorAudio();
+              setDoorClose(true);
+            }
+          },
         },
-      });
+        0
+      );
+
+      if (currentPosition.params.name === 'dining_room_enter') {
+        tl.to(
+          camera.position,
+          {
+            duration: 1.7,
+            z: -8,
+            ease: 'power2.inOut',
+          },
+          1.6
+        );
+      } else if (currentPosition.params.name === 'dining_room_leave') {
+        tl.to(
+          camera.position,
+          {
+            duration: 1.7,
+            z: 0.5,
+            x: 6.5,
+            ease: 'power2.inOut',
+          },
+          1.6
+        );
+      }
 
       if (controlsRef.current) {
         gsap.to(controlsRef.current.target, {
@@ -176,6 +202,16 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     currentPosition.params.name,
     setDoorClose,
   ]);
+
+  React.useEffect(() => {
+    const gui = new GUI();
+
+    gui.addFolder('rotation');
+
+    gui.add(camera.rotation, 'x', -100, 100);
+    gui.add(camera.rotation, 'y', -100, 100);
+    gui.add(camera.rotation, 'z', -100, 100);
+  });
 
   React.useEffect(() => {
     if (!controlsRef.current) return;
