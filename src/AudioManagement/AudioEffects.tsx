@@ -2,7 +2,7 @@ import React from 'react';
 
 export const AudioEffects = () => {
   const MovementAudio = React.useCallback(() => {
-    const moveAudio = new Audio('/audio/movement_audio.mp3');
+    const moveAudio = new Audio('/audio/movement_audio.wav');
 
     moveAudio.play();
   }, []);
