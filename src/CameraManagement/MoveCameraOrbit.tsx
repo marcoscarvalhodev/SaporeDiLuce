@@ -6,7 +6,7 @@ import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
 import gsap from 'gsap';
 import { UseAnimationsContext } from '../context/UseContexts';
-import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import { roomNameProps } from '../context/CameraMovementContext';
 
 const cameraPositions = {
   restaurant_enter: {
@@ -25,16 +25,40 @@ const cameraPositions = {
     position: new THREE.Vector3(1, 2.8, -4),
     target: new THREE.Vector3(0.5, 2.7, -8),
   },
+  table_counter_leave: {
+    position: new THREE.Vector3(1, 2.8, -8),
+    target: new THREE.Vector3(0.5, 2.7, -8),
+  },
+  check_table_1: {
+    position: new THREE.Vector3(4.28, 1.8, -7.52),
+    target: new THREE.Vector3(2.32, 0.84, -8.04),
+  },
+  check_table_2: {
+    position: new THREE.Vector3(4.76, 1.8, -6.56),
+    target: new THREE.Vector3(3.76, 0.84, -5.08),
+  },
+  check_table_3: {
+    position: new THREE.Vector3(3.76, 1.8, -6.56),
+    target: new THREE.Vector3(4.5, 0.84, -8.52),
+  },
+  check_table_4: {
+    position: new THREE.Vector3(7.3, 1.64, -4.8),
+    target: new THREE.Vector3(6.56, 1.3, -4.8),
+  },
+  check_table_5: {
+    position: new THREE.Vector3(7.2, 2.32, -6.2),
+    target: new THREE.Vector3(6.72, 0.84, -7.8),
+  },
+
+  check_counter: {
+    position: new THREE.Vector3( 0.9, 1.88, -6.22),
+    target: new THREE.Vector3(-0.58, 1.72, -6.22),
+  }
 };
 
 interface MoveCameraOrbitProps {
   params: {
-    name:
-      | 'restaurant_enter'
-      | 'dining_room_enter'
-      | 'restaurant_leave'
-      | 'dining_room_leave'
-      | null;
+    name: roomNameProps | null;
     doorSound: boolean;
     moveSound: boolean;
   };
@@ -78,10 +102,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
         maxPolarAngle: Math.PI / 2,
         rotateSpeed: 0.05,
         duration: 1,
-        onComplete: () => {
-          console.log(controlsRef.current);
-          controlsRef.current?.update();
-        },
+        onComplete: () => {},
       });
 
       gsap.to(controlsRef.current.target, {
@@ -92,7 +113,6 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
         ease: 'power2.inOut',
         onStart: () => {
           MovementAudio();
-          controlsRef.current?.update();
           setDoorClose(false);
         },
 
@@ -135,6 +155,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
             if (currentPosition.params.doorSound) {
               DoorAudio();
               setDoorClose(true);
+              controlsRef.current?.update();
             }
           },
         },
@@ -179,14 +200,11 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
               controlsRef.current.minAzimuthAngle = -Infinity;
               controlsRef.current.maxAzimuthAngle = Infinity;
-
-              controlsRef.current.update();
             }
           },
 
           onComplete: () => {
             if (controlsRef.current) {
-              console.log(controlsRef.current);
               setInitialOrbit(controlsRef.current.target);
             }
           },
@@ -204,13 +222,19 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
   ]);
 
   React.useEffect(() => {
-    const gui = new GUI();
+    /*const gui = new GUI();
 
-    gui.addFolder('rotation');
+    gui.addFolder('position');
 
-    gui.add(camera.rotation, 'x', -100, 100);
-    gui.add(camera.rotation, 'y', -100, 100);
-    gui.add(camera.rotation, 'z', -100, 100);
+    gui.add(camera.position, 'x', -10, 10);
+    gui.add(camera.position, 'y', -10, 10);
+    gui.add(camera.position, 'z', -10, 10);
+
+    if (controlsRef.current) {
+      gui.add(controlsRef.current.target, 'x', -10, 10);
+      gui.add(controlsRef.current.target, 'y', -10, 10);
+      gui.add(controlsRef.current.target, 'z', -10, 10);
+    }*/
   });
 
   React.useEffect(() => {
