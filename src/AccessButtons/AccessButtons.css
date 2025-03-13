@@ -3,7 +3,7 @@
   height: 50px;
   border-radius: 999px;
   background: rgb(51, 51, 50); /*rgb(238, 238, 238);*/
-  transition: width 0.7s ;
+  transition: width 0.7s;
   margin: auto;
   cursor: pointer;
   overflow: hidden;
@@ -26,11 +26,16 @@
   }
 }
 
-.accessButtons:hover {
+.text_small:hover {
+  width: 200px;
+}
+
+.text_large:hover {
   width: 300px;
-
-.accessButtonsText {
-  opacity: 1;
-}
 }
 
+.accessButtons:hover {
+  .accessButtonsText {
+    opacity: 1;
+  }
+}
