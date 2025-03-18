@@ -22,7 +22,8 @@ type GLTFResult = GLTF & {
     table_3_button: THREE.Mesh;
     table_5_button: THREE.Mesh;
     table_4_button: THREE.Mesh;
-    balcony_button: THREE.Mesh;
+    counter_button: THREE.Mesh;
+    menu_button: THREE.Mesh;
   };
   materials: { '': THREE.MeshStandardMaterial };
 };
@@ -41,7 +42,8 @@ interface handleTableButtonProps {
 export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/access_buttons.glb') as GLTFResult;
 
-  const { state, dispatch } = UseButtonsRoomContext();
+  const { state, dispatch, menuActive, setMenuActive } =
+    UseButtonsRoomContext();
 
   const buttonRestaurant = React.useRef<null | HTMLDivElement>(null);
   const buttonDinner = React.useRef<HTMLDivElement | null>(null);
@@ -51,6 +53,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const buttonTable4 = React.useRef<HTMLDivElement | null>(null);
   const buttonTable5 = React.useRef<HTMLDivElement | null>(null);
   const buttonCounter = React.useRef<HTMLDivElement | null>(null);
+  const buttonMenu = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
 
@@ -68,6 +71,45 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       buttonCounter.current,
     ];
   });
+
+  const handleMenuButtonClick = React.useCallback(() => {
+    if (roomNameState === 'check_table_4') {
+      gsap.to(buttonMenu.current, {
+        opacity: 1,
+        pointerEvents: 'all',
+        duration: 0.7,
+      });
+    } else {
+      gsap.to(buttonMenu.current, {
+        opacity: 0,
+        pointerEvents: 'none',
+        duration: 0.7,
+      });
+    }
+  }, [roomNameState]);
+
+  const handleMenuActive = React.useCallback(() => {
+    if (roomNameState === 'check_table_4') {
+      if (menuActive) {
+        gsap.to(buttonTable4.current, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      } else {
+        gsap.to(buttonTable4.current, {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+        });
+      }
+    }
+  }, [menuActive, roomNameState]);
+
+  React.useEffect(() => {
+    handleMenuButtonClick();
+    handleMenuActive();
+  }, [handleMenuButtonClick, handleMenuActive]);
 
   const handleTablesButtonClick = ({
     tableRef,
@@ -137,7 +179,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
 
       gsap.to(tableRefCollection.current, {
         opacity: 0,
-        pointerEvents: 'all',
+        pointerEvents: 'none',
         duration: 0.7,
       });
     } else {
@@ -346,9 +388,9 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.balcony_button.geometry}
-        material={nodes.balcony_button.material}
-        position={[-1.433, 2, -7.028]}
+        geometry={nodes.counter_button.geometry}
+        material={nodes.counter_button.material}
+        position={[-1.433, 2.668, -7.028]}
         scale={0.074}
       >
         <Html>
@@ -364,6 +406,30 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             goText='Sit at Counter'
             outText='Leave Counter'
             enterEnvironment={tableActive}
+            textSize='small'
+          />
+        </Html>
+        <meshStandardMaterial opacity={0} transparent />
+      </mesh>
+
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.menu_button.geometry}
+        material={nodes.menu_button.material}
+        position={[6.388, 1.121, -4.595]}
+        scale={0.057}
+      >
+        <Html>
+          <ButtonReusable
+            id='menu_button'
+            ref={buttonMenu}
+            onClick={() => {
+              setMenuActive(!menuActive);
+            }}
+            goText='See Menu'
+            outText='Drop Menu'
+            enterEnvironment={menuActive}
             textSize='small'
           />
         </Html>
