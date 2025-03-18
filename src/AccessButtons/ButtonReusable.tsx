@@ -16,7 +16,8 @@ interface ButtonReusableProps {
     | 'table_3_button'
     | 'table_4_button'
     | 'table_5_button'
-    | 'counter_button';
+    | 'counter_button'
+    | 'menu_button';
 }
 
 const ButtonReusable = ({

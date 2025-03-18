@@ -10,7 +10,7 @@ import { ContextAnimationsProvider } from './context/AnimationsContext';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
 import { UseCameraMovementContext } from './context/UseContexts';
-import { RestaurantCounter } from './ModelsManagement/RestaurantCounter';
+import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -49,10 +49,11 @@ function CanvasContainer() {
           rotation={[-1.5772074309645465, 1.556, 1.5772077820156805]}
         />
 
-        <Environment  preset="city" environmentIntensity={1} background />
-        
+        <Environment preset='city' environmentIntensity={1} background />
 
         {<AccessButtons />}
+
+        <RestaurantMenu />
 
         <ContextAnimationsProvider>
           <MoveCameraOrbit
@@ -62,8 +63,7 @@ function CanvasContainer() {
               moveSound: true,
             }}
           />
-        <Restaurant />
-        <RestaurantCounter />
+          <Restaurant />
         </ContextAnimationsProvider>
       </Canvas>
     </>

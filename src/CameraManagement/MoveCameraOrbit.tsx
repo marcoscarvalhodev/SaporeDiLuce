@@ -12,48 +12,69 @@ const cameraPositions = {
   restaurant_enter: {
     position: new THREE.Vector3(6.5, 2.8, 0.5),
     target: new THREE.Vector3(6, 2.7, 0),
+    limitRotation: false,
   },
   restaurant_leave: {
     position: new THREE.Vector3(15.08, 2.84, -2.54),
     target: new THREE.Vector3(-20, 1.8, -2.12),
+    limitRotation: false,
   },
   dining_room_leave: {
     position: new THREE.Vector3(0, 2.8, -2),
     target: new THREE.Vector3(6, 2.7, 0),
+    limitRotation: false,
   },
   dining_room_enter: {
     position: new THREE.Vector3(1, 2.8, -4),
     target: new THREE.Vector3(0.5, 2.7, -8),
+    limitRotation: false,
   },
   table_counter_leave: {
     position: new THREE.Vector3(1, 2.8, -8),
     target: new THREE.Vector3(0.5, 2.7, -8),
+    limitRotation: false,
   },
   check_table_1: {
     position: new THREE.Vector3(4.28, 1.8, -7.52),
     target: new THREE.Vector3(2.32, 0.84, -8.04),
+    limitRotation: true,
+    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
   },
   check_table_2: {
     position: new THREE.Vector3(4.76, 1.8, -6.56),
-    target: new THREE.Vector3(3.76, 0.84, -5.08),
+    target: new THREE.Vector3(3.76, 1.16, -5.08),
+    limitRotation: true,
+    fromAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
+    toAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
   },
   check_table_3: {
     position: new THREE.Vector3(3.76, 1.8, -6.56),
     target: new THREE.Vector3(4.5, 0.84, -8.52),
+    limitRotation: true,
+    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
   },
   check_table_4: {
     position: new THREE.Vector3(7.3, 1.64, -4.8),
     target: new THREE.Vector3(6.56, 1.3, -4.8),
+    limitRotation: true,
+    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    toAzimuth: { min: Math.PI / 2.5, max: Math.PI / 1.5 },
   },
   check_table_5: {
-    position: new THREE.Vector3(7.2, 2.32, -6.2),
-    target: new THREE.Vector3(6.72, 0.84, -7.8),
+    position: new THREE.Vector3(6.5, 1.16, -6.2),
+    target: new THREE.Vector3(6.72, 1.16, -7.8),
+    limitRotation: true,
+    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
   },
-
   check_counter: {
-    position: new THREE.Vector3( 0.9, 1.88, -6.22),
+    position: new THREE.Vector3(0.9, 1.88, -6.22),
     target: new THREE.Vector3(-0.58, 1.72, -6.22),
-  }
+    limitRotation: true,
+    azimuthValues: { min: Math.PI / -1.5, max: Math.PI / -3 },
+  },
 };
 
 interface MoveCameraOrbitProps {
@@ -62,6 +83,14 @@ interface MoveCameraOrbitProps {
     doorSound: boolean;
     moveSound: boolean;
   };
+}
+
+interface CameraPropertiesProps {
+  position: THREE.Vector3;
+  target: THREE.Vector3;
+  limitRotation: boolean;
+  toAzimuth?: { min: number; max: number };
+  fromAzimuth?: { min: number; max: number };
 }
 
 const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
@@ -76,6 +105,35 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
   const { MovementAudio, DoorAudio } = AudioEffects();
   const { setDoorClose } = UseAnimationsContext();
+
+  const limitRotationInit = React.useCallback(() => {
+    if (currentPosition.params.name) {
+      const cameraProperties: CameraPropertiesProps =
+        cameraPositions[currentPosition.params.name];
+
+      if (cameraProperties.limitRotation) {
+        gsap.to(controlsRef.current, {
+          minPolarAngle: Math.PI / 2.7,
+          maxPolarAngle: Math.PI / 2.3,
+          rotateSpeed: 0.2,
+          duration: 1,
+        });
+
+        gsap.fromTo(
+          controlsRef.current,
+          {
+            minAzimuthAngle: cameraProperties.fromAzimuth?.min,
+            maxAzimuthAngle: cameraProperties.fromAzimuth?.max,
+          },
+          {
+            minAzimuthAngle: cameraProperties.toAzimuth?.min,
+            maxAzimuthAngle: cameraProperties.toAzimuth?.max,
+            duration: 1,
+          }
+        );
+      }
+    }
+  }, [currentPosition.params.name]);
 
   const RestaurantOutsideMovement = React.useCallback(() => {
     if (controlsRef.current) {
@@ -210,6 +268,8 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           },
         });
       }
+
+      limitRotationInit();
     }
   }, [
     DoorAudio,
@@ -219,6 +279,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     currentPosition.params.moveSound,
     currentPosition.params.name,
     setDoorClose,
+    limitRotationInit,
   ]);
 
   React.useEffect(() => {

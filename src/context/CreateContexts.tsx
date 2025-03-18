@@ -23,6 +23,8 @@ interface AudioChoiceProps {
 interface ButtonsRoomProps {
   state: buttonsReducerState;
   dispatch: React.ActionDispatch<[action: actionRoom]>;
+  menuActive: boolean;
+  setMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CreateCameraMovementContext =

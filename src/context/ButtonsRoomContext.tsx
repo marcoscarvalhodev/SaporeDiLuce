@@ -12,8 +12,12 @@ export const ContextButtonsRoomProvider = ({
     diningAreaEnter: false,
   });
 
+  const [menuActive, setMenuActive] = React.useState(false);
+
   return (
-    <CreateContextButtonsRoom.Provider value={{ state, dispatch }}>
+    <CreateContextButtonsRoom.Provider
+      value={{ state, dispatch, menuActive, setMenuActive }}
+    >
       {children}
     </CreateContextButtonsRoom.Provider>
   );
