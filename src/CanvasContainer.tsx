@@ -1,5 +1,4 @@
 import { Canvas } from '@react-three/fiber';
-import gsap from 'gsap';
 import React from 'react';
 import { Restaurant } from './ModelsManagement/Restaurant';
 import { Environment, PerspectiveCamera } from '@react-three/drei';
@@ -16,21 +15,16 @@ function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
   const canvasRef = React.useRef<null | HTMLCanvasElement>(null);
 
-  const { roomNameState } = UseCameraMovementContext();
+  const { roomNameState, refCanvasUpdated } = UseCameraMovementContext();
+
+  React.useEffect(() => {
+    refCanvasUpdated.current = canvasRef.current;
+  }, [refCanvasUpdated]);
 
   return (
     <>
       <Canvas
-        onMouseDown={() => {
-          gsap.to(canvasRef.current, {
-            cursor: 'grabbing',
-          });
-        }}
-        onMouseUp={() => {
-          gsap.to(canvasRef.current, {
-            cursor: 'grab',
-          });
-        }}
+        id='canvas-component'
         ref={canvasRef}
         style={{
           position: 'fixed',
@@ -43,19 +37,21 @@ function CanvasContainer() {
         className='bg-[#000000]'
       >
         <PerspectiveCamera
+        fov={50}
+          near={0.1}
+          far={1000}
           ref={perspectiveRef}
           makeDefault
           position={[15.08, 2.84, -2.54]}
-          rotation={[-1.5772074309645465, 1.556, 1.5772077820156805]}
+          
         />
 
         <Environment preset='city' environmentIntensity={1} background />
 
         {<AccessButtons />}
 
-        <RestaurantMenu />
-
         <ContextAnimationsProvider>
+          <RestaurantMenu />
           <MoveCameraOrbit
             params={{
               name: roomNameState,

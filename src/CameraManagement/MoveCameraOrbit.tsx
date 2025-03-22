@@ -160,7 +160,9 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
         maxPolarAngle: Math.PI / 2,
         rotateSpeed: 0.05,
         duration: 1,
-        onComplete: () => {},
+        onComplete: () => {
+          controlsRef.current?.update();
+        },
       });
 
       gsap.to(controlsRef.current.target, {
@@ -264,6 +266,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           onComplete: () => {
             if (controlsRef.current) {
               setInitialOrbit(controlsRef.current.target);
+              controlsRef.current.update();
             }
           },
         });
