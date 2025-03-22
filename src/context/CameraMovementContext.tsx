@@ -19,11 +19,13 @@ export const ContextCameraMovementProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [roomNameState, setRoomNameState] =
-    React.useState<null | roomNameProps>(null);
+  const [roomNameState, setRoomNameState] = React.useState<null | roomNameProps>(null);
+
+    const refCanvasUpdated = React.useRef<null | HTMLCanvasElement>(null);
+
   return (
     <CreateCameraMovementContext.Provider
-      value={{ roomNameState, setRoomNameState }}
+      value={{ roomNameState, setRoomNameState, refCanvasUpdated }}
     >
       {children}
     </CreateCameraMovementContext.Provider>

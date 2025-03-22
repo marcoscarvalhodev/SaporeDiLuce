@@ -48,7 +48,7 @@ const ButtonReusable = ({
       } relative top-[-2rem]`}
     >
       <div
-        className={`${id} accessButtons ${textSize === "small" ? "text_small" : "text_large"}`}
+        className={`${id} accessButtons ${textSize === "small" ? "text_small" : "text_large"} pointer-events-auto cursor-pointer`}
         onClick={onClick}
         ref={ref}
       >

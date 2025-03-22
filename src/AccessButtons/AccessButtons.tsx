@@ -73,23 +73,25 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   });
 
   const handleMenuButtonClick = React.useCallback(() => {
-    if (roomNameState === 'check_table_4') {
-      gsap.to(buttonMenu.current, {
-        opacity: 1,
-        pointerEvents: 'all',
-        duration: 0.7,
-      });
-    } else {
-      gsap.to(buttonMenu.current, {
-        opacity: 0,
-        pointerEvents: 'none',
-        duration: 0.7,
-      });
+    if (buttonMenu.current) {
+      if (roomNameState === 'check_table_4') {
+        gsap.to(buttonMenu.current, {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+        });
+      } else {
+        gsap.to(buttonMenu.current, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      }
     }
   }, [roomNameState]);
 
   const handleMenuActive = React.useCallback(() => {
-    if (roomNameState === 'check_table_4') {
+    if (roomNameState === 'check_table_4' && buttonTable4.current) {
       if (menuActive) {
         gsap.to(buttonTable4.current, {
           opacity: 0,
@@ -221,7 +223,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[8.09, 1.666, 0.416]}
         rotation={[0, 0, -Math.PI / 2]}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='restaurant_button'
             ref={buttonRestaurant}
@@ -232,7 +234,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='large'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -242,7 +244,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[2.567, 1.668, -2.375]}
         rotation={[0, 0, -Math.PI / 2]}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='dinner_button'
             ref={buttonDinner}
@@ -253,7 +255,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='large'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -263,7 +265,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[3.826, 1.492, -5.295]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='table_2_button'
             ref={buttonTable2}
@@ -279,7 +281,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -289,7 +291,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[2.425, 1.492, -8.084]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='table_1_button'
             ref={buttonTable1}
@@ -305,7 +307,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -315,7 +317,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[4.616, 1.492, -8.554]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='table_3_button'
             ref={buttonTable3}
@@ -331,7 +333,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -341,7 +343,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[6.781, 1.492, -7.75]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='table_5_button'
             ref={buttonTable5}
@@ -357,7 +359,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -367,7 +369,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[6.341, 1.492, -4.968]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='table_4_button'
             ref={buttonTable4}
@@ -383,7 +385,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
       <mesh
         castShadow
@@ -393,7 +395,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[-1.433, 2.668, -7.028]}
         scale={0.074}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='counter_button'
             ref={buttonCounter}
@@ -409,7 +411,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
 
       <mesh
@@ -420,7 +422,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         position={[6.388, 1.121, -4.595]}
         scale={0.057}
       >
-        <Html>
+        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             id='menu_button'
             ref={buttonMenu}
@@ -433,7 +435,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             textSize='small'
           />
         </Html>
-        <meshStandardMaterial opacity={0} transparent />
+        <meshStandardMaterial visible={false} />
       </mesh>
     </group>
   );
