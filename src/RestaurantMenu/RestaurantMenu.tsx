@@ -3,12 +3,11 @@ import React from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import {
-  UseAnimationsContext,
-  UseButtonsRoomContext,
+  UseButtonsContext,
   UseCameraMovementContext,
+  UseOverlaysContext,
 } from '../context/UseContexts';
 import gsap from 'gsap';
-import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 import { useThree } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
@@ -31,35 +30,22 @@ type GLTFResult = GLTF & {
 
 export function RestaurantMenu() {
   const { nodes, materials } = useGLTF('/restaurant_menu.glb') as GLTFResult;
-  const { menuActive } = UseButtonsRoomContext();
+  const { menuActive, setMenuOptionsClick, setMenuActive } =
+    UseButtonsContext();
   const refMenu = React.useRef<null | THREE.Group>(null);
   const refArrow = React.useRef<null | THREE.Mesh>(null);
 
   const { refCanvasUpdated } = UseCameraMovementContext();
 
-  const { arrowRefUpdated } = UseAnimationsContext();
+  const { setMenuOverlay } = UseOverlaysContext();
 
-
-  const [menuOptionsState, setMenuOptionsState] = React.useState('');
-  const [updatedMenuOption, setUpdatedMenuOption] = React.useState<
-    THREE.Object3D<THREE.Object3DEventMap>[] | undefined
-  >([]);
+  const [menuOptionsHover, setMenuOptionsHover] = React.useState('');
 
   React.useEffect(() => {
-    console.log(updatedMenuOption);
-  });
-
-  React.useEffect(() => {
-    arrowRefUpdated.current = refArrow.current;
-
-    const gui = new GUI();
-
-    gui.addFolder('arrow_position');
-
-    if (refArrow.current) {
-      gui.add(refArrow.current.position, 'x', -0.2, 0.2);
+    if (menuActive) {
+      setMenuOverlay(true);
     }
-  }, [arrowRefUpdated]);
+  });
 
   const { camera } = useThree();
 
@@ -72,40 +58,31 @@ export function RestaurantMenu() {
     arrowPosition?: number;
     menuOption: string;
   }) => {
-    if (isActive) {
-      setMenuOptionsState(menuOption);
+    if (menuActive) {
+      if (isActive) {
+        setMenuOptionsHover(menuOption);
 
-      gsap.to(refCanvasUpdated.current, {
-        cursor: 'pointer',
-      });
+        gsap.to(refCanvasUpdated.current, {
+          cursor: 'pointer',
+        });
 
-      if (refArrow.current) {
-        gsap.to(refArrow.current.position, {
-          x: arrowPosition,
-          duration: 1,
-          onStart: () => {
-            camera.updateProjectionMatrix();
-          },
+        if (refArrow.current) {
+          gsap.to(refArrow.current.position, {
+            x: arrowPosition,
+            duration: 0.5,
+            onStart: () => {
+              camera.updateProjectionMatrix();
+            },
+          });
+        }
+      } else {
+        setMenuOptionsHover(menuOption);
+        gsap.to(refCanvasUpdated.current, {
+          cursor: 'grab',
         });
       }
-    } else {
-      setMenuOptionsState(menuOption);
-      gsap.to(refCanvasUpdated.current, {
-        cursor: 'grab',
-      });
     }
   };
-
-  React.useEffect(() => {
-    setUpdatedMenuOption(
-      refMenu.current?.children.filter((item) => item.name === menuOptionsState)
-    );
-
-    /*document.addEventListener('mousemove', setThrottle);
-
-    return () => document.removeEventListener('mousemove', setThrottle);
-    */
-  }, [setUpdatedMenuOption, menuOptionsState]);
 
   React.useEffect(() => {
     if (refMenu.current) {
@@ -178,6 +155,10 @@ export function RestaurantMenu() {
             renderOrder={1}
           />
           <mesh
+            onClick={() => {
+              setMenuActive(false);
+              setMenuOptionsClick('dish_1');
+            }}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -200,12 +181,16 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={new THREE.Color(0, 0, 0)}
               transparent={true}
-              opacity={menuOptionsState === 'menu_option_1' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_1' ? 0.1 : 0}
               depthWrite={false}
               depthTest={true}
             />
           </mesh>
           <mesh
+            onClick={() => {
+              setMenuActive(false);
+              setMenuOptionsClick('dish_2');
+            }}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -227,12 +212,16 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={new THREE.Color(0, 0, 0)}
               transparent={true}
-              opacity={menuOptionsState === 'menu_option_2' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_2' ? 0.1 : 0}
               depthWrite={false}
               depthTest={true}
             />
           </mesh>
           <mesh
+            onClick={() => {
+              setMenuActive(false);
+              setMenuOptionsClick('dish_3');
+            }}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -255,12 +244,16 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={new THREE.Color(0, 0, 0)}
               transparent={true}
-              opacity={menuOptionsState === 'menu_option_3' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_3' ? 0.1 : 0}
               depthWrite={false}
               depthTest={true}
             />
           </mesh>
           <mesh
+            onClick={() => {
+              setMenuActive(false);
+              setMenuOptionsClick('dish_4');
+            }}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -283,12 +276,16 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={new THREE.Color(0, 0, 0)}
               transparent={true}
-              opacity={menuOptionsState === 'menu_option_4' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_4' ? 0.1 : 0}
               depthWrite={false}
               depthTest={true}
             />
           </mesh>
           <mesh
+            onClick={() => {
+              setMenuActive(false);
+              setMenuOptionsClick('dish_5');
+            }}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -310,7 +307,7 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={new THREE.Color(0, 0, 0)}
               transparent={true}
-              opacity={menuOptionsState === 'menu_option_5' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_5' ? 0.1 : 0}
               depthWrite={false}
               depthTest={true}
             />

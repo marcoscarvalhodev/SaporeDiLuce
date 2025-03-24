@@ -6,7 +6,7 @@ import { GLTF } from 'three-stdlib';
 import gsap from 'gsap';
 import './AccessButtons.css';
 import {
-  UseButtonsRoomContext,
+  UseButtonsContext,
   UseCameraMovementContext,
 } from '../context/UseContexts';
 import { Html } from '@react-three/drei';
@@ -42,8 +42,7 @@ interface handleTableButtonProps {
 export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/access_buttons.glb') as GLTFResult;
 
-  const { state, dispatch, menuActive, setMenuActive } =
-    UseButtonsRoomContext();
+  const { state, dispatch, menuActive, setMenuActive } = UseButtonsContext();
 
   const buttonRestaurant = React.useRef<null | HTMLDivElement>(null);
   const buttonDinner = React.useRef<HTMLDivElement | null>(null);
