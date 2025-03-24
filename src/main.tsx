@@ -6,17 +6,22 @@ import { ContextCameraMovementProvider } from './context/CameraMovementContext.t
 import TextContent from './TextContent.tsx';
 import AudioChoice from './AudioManagement/AudioChoice.tsx';
 import { ContextAudioChoiceProvider } from './context/AudioChoiceContext.tsx';
-import { ContextButtonsRoomProvider } from './context/ButtonsRoomContext.tsx';
+import { ContextButtonsProvider } from './context/ButtonsContext.tsx';
+import { ContextOverlaysProvider } from './context/OverlaysContext.tsx';
+import RestaurantMenuOverlay from './RestaurantOverlays/RestaurantMenuOverlay.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ContextAudioChoiceProvider>
       <ContextCameraMovementProvider>
-        <ContextButtonsRoomProvider>
-          <CanvasContainer />
-          <TextContent />
-          <AudioChoice />
-        </ContextButtonsRoomProvider>
+        <ContextButtonsProvider>
+          <ContextOverlaysProvider>
+            <CanvasContainer />
+            <TextContent />
+            <AudioChoice />
+            <RestaurantMenuOverlay />
+          </ContextOverlaysProvider>
+        </ContextButtonsProvider>
       </ContextCameraMovementProvider>
     </ContextAudioChoiceProvider>
   </StrictMode>

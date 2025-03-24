@@ -2,8 +2,9 @@ import { useContext } from 'react';
 import {
   CreateContextAnimations,
   CreateContextAudioChoice,
-  CreateContextButtonsRoom,
+  CreateContextButtons,
   CreateCameraMovementContext,
+  CreateOverlaysContext,
 } from './CreateContexts';
 
 export const UseCameraMovementContext = () => {
@@ -34,12 +35,25 @@ export const UseAnimationsContext = () => {
   return useAnimationsContext;
 };
 
-export const UseButtonsRoomContext = () => {
-  const useButtonsRoomContext = useContext(CreateContextButtonsRoom);
+export const UseButtonsContext = () => {
+  const useButtonsContext = useContext(CreateContextButtons);
 
-  if (!useButtonsRoomContext) {
+  if (!useButtonsContext) {
     throw new Error('there is no buttons room context');
   }
 
-  return useButtonsRoomContext;
+  return useButtonsContext;
 };
+
+
+
+export const UseOverlaysContext = () => {
+  const useOverlaysContext = useContext(CreateOverlaysContext);
+
+  if (!useOverlaysContext) {
+    throw new Error('there is no overlays context');
+  }
+
+  return useOverlaysContext;
+};
+
