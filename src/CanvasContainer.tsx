@@ -6,12 +6,12 @@ import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
 
 import { PerspectiveCamera as TypePerspectiveCamera } from 'three';
-import { ContextAnimationsProvider } from './context/AnimationsContext';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
 import { UseCameraMovementContext } from './context/UseContexts';
 import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
+import RestaurantWaiter from './ModelsManagement/RestaurantWaiter';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -61,9 +61,10 @@ function CanvasContainer() {
 
         {<AccessButtons />}
 
-        <ContextAnimationsProvider>
+        
           <RestaurantMenu />
           <RestaurantDishes />
+          <RestaurantWaiter />
           <MoveCameraOrbit
             params={{
               name: roomNameState,
@@ -72,7 +73,7 @@ function CanvasContainer() {
             }}
           />
           <Restaurant />
-        </ContextAnimationsProvider>
+      
       </Canvas>
     </>
   );

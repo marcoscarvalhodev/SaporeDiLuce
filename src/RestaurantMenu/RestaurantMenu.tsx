@@ -9,6 +9,7 @@ import {
 } from '../context/UseContexts';
 import gsap from 'gsap';
 import { useThree } from '@react-three/fiber';
+import { menuOptionsProps } from '../context/CreateContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -30,8 +31,9 @@ type GLTFResult = GLTF & {
 
 export function RestaurantMenu() {
   const { nodes, materials } = useGLTF('/restaurant_menu.glb') as GLTFResult;
-  const { menuActive, setMenuOptionsClick, setMenuActive } =
+  const { menuActive, setMenuOptionsClick, setMenuActive, setFoodOrdered } =
     UseButtonsContext();
+
   const refMenu = React.useRef<null | THREE.Group>(null);
   const refArrow = React.useRef<null | THREE.Mesh>(null);
 
@@ -48,6 +50,14 @@ export function RestaurantMenu() {
   });
 
   const { camera } = useThree();
+
+  const clickActiveMenu = (dish: menuOptionsProps) => {
+    if (menuActive) {
+      setFoodOrdered(true);
+      setMenuOptionsClick(dish);
+      setMenuActive(false);
+    }
+  };
 
   const pointerActiveMenu = ({
     isActive,
@@ -155,10 +165,7 @@ export function RestaurantMenu() {
             renderOrder={1}
           />
           <mesh
-            onClick={() => {
-              setMenuActive(false);
-              setMenuOptionsClick('dish_1');
-            }}
+            onClick={() => clickActiveMenu('dish_1')}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -187,10 +194,7 @@ export function RestaurantMenu() {
             />
           </mesh>
           <mesh
-            onClick={() => {
-              setMenuActive(false);
-              setMenuOptionsClick('dish_2');
-            }}
+            onClick={() => clickActiveMenu('dish_2')}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -218,10 +222,7 @@ export function RestaurantMenu() {
             />
           </mesh>
           <mesh
-            onClick={() => {
-              setMenuActive(false);
-              setMenuOptionsClick('dish_3');
-            }}
+            onClick={() => clickActiveMenu('dish_3')}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -250,10 +251,7 @@ export function RestaurantMenu() {
             />
           </mesh>
           <mesh
-            onClick={() => {
-              setMenuActive(false);
-              setMenuOptionsClick('dish_4');
-            }}
+            onClick={() => clickActiveMenu('dish_4')}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,
@@ -282,10 +280,7 @@ export function RestaurantMenu() {
             />
           </mesh>
           <mesh
-            onClick={() => {
-              setMenuActive(false);
-              setMenuOptionsClick('dish_5');
-            }}
+            onClick={() => clickActiveMenu('dish_5')}
             onPointerEnter={() =>
               pointerActiveMenu({
                 isActive: true,

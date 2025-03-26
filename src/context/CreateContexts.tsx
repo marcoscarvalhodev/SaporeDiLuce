@@ -15,6 +15,8 @@ interface AnimationsProps {
   setDoorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   movementAudioState: boolean;
   setMovementAudioState: React.Dispatch<React.SetStateAction<boolean>>;
+  finishedWaiterAnim: boolean;
+  setFinishedWaiterAnim: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface AudioChoiceProps {
@@ -40,6 +42,8 @@ interface ButtonsProps {
   dispatch: React.ActionDispatch<[action: actionRoom]>;
   menuActive: boolean;
   setMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
+  foodOrdered: boolean;
+  setFoodOrdered: React.Dispatch<React.SetStateAction<boolean>>;
   menuOptionsClick: menuOptionsProps;
   setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
 }
