@@ -1,5 +1,7 @@
 import React from 'react';
 import { UseAudioChoiceContext } from './context/UseContexts';
+import MenuOverlay from './RestaurantOverlays/MenuOverlay';
+import FoodReadyOverlay from './RestaurantOverlays/FoodReadyOverlay';
 
 const TextContent = () => {
   const ambientMusicRef = React.useRef<null | HTMLAudioElement>(null);
@@ -18,6 +20,8 @@ const TextContent = () => {
     <section className='fixed z-[999]'>
       <div>
         <audio ref={ambientMusicRef} src='/audio/violin_ambient.mp3' autoPlay />
+        <MenuOverlay />
+        <FoodReadyOverlay />
       </div>
     </section>
   );

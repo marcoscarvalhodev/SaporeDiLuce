@@ -3,7 +3,10 @@ import React from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import { UseButtonsContext } from '../context/UseContexts';
+import {
+  UseAnimationsContext,
+  UseButtonsContext,
+} from '../context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -25,6 +28,7 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/restaurant_plates.glb') as GLTFResult;
 
   const { menuOptionsClick } = UseButtonsContext();
+  const { finishedWaiterAnim } = UseAnimationsContext();
 
   const dishesWrapperRef = React.useRef<null | THREE.Group>(null);
 
@@ -35,7 +39,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
   });
 
   React.useEffect(() => {
-    console.log(menuOptionsClick)
     dishesWrapperRef.current?.traverse((child) => {
       if (
         child instanceof THREE.Mesh &&
@@ -44,7 +47,7 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
         child.material.map = texture;
 
         if (child.parent) {
-          if(child.parent.name === menuOptionsClick) {
+          if (child.parent.name === menuOptionsClick && finishedWaiterAnim) {
             child.material.setValues({
               opacity: 1,
               transparent: false,

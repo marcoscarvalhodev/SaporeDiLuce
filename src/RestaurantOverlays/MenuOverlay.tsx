@@ -2,7 +2,7 @@ import React from 'react';
 import { UseOverlaysContext } from '../context/UseContexts';
 import gsap from 'gsap';
 
-const RestaurantMenuOverlay = () => {
+const MenuOverlay = () => {
   const onlyRenderRef = React.useRef(false);
 
   const menuOverlayRef = React.useRef<HTMLDivElement | null>(null);
@@ -51,4 +51,4 @@ const RestaurantMenuOverlay = () => {
   );
 };
 
-export default RestaurantMenuOverlay;
+export default MenuOverlay;

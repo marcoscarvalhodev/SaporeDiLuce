@@ -8,7 +8,7 @@ import AudioChoice from './AudioManagement/AudioChoice.tsx';
 import { ContextAudioChoiceProvider } from './context/AudioChoiceContext.tsx';
 import { ContextButtonsProvider } from './context/ButtonsContext.tsx';
 import { ContextOverlaysProvider } from './context/OverlaysContext.tsx';
-import RestaurantMenuOverlay from './RestaurantOverlays/RestaurantMenuOverlay.tsx';
+import { ContextAnimationsProvider } from './context/AnimationsContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,10 +16,11 @@ createRoot(document.getElementById('root')!).render(
       <ContextCameraMovementProvider>
         <ContextButtonsProvider>
           <ContextOverlaysProvider>
-            <CanvasContainer />
-            <TextContent />
-            <AudioChoice />
-            <RestaurantMenuOverlay />
+            <ContextAnimationsProvider>
+              <CanvasContainer />
+              <TextContent />
+              <AudioChoice />
+            </ContextAnimationsProvider>
           </ContextOverlaysProvider>
         </ContextButtonsProvider>
       </ContextCameraMovementProvider>
