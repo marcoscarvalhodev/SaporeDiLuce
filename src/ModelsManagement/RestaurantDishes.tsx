@@ -8,6 +8,8 @@ import {
   UseButtonsContext,
 } from '../context/UseContexts';
 
+import gsap from 'gsap';
+
 type GLTFResult = GLTF & {
   nodes: {
     food_1: THREE.Mesh;
@@ -48,10 +50,16 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
 
         if (child.parent) {
           if (child.parent.name === menuOptionsClick && finishedWaiterAnim) {
-            child.material.setValues({
+           
+
+            gsap.to(child.material, {
               opacity: 1,
-              transparent: false,
-            });
+              duration: 1,
+              delay: 2,
+              onComplete: () => {
+                
+              }
+            })
           } else {
             child.material = new THREE.MeshStandardMaterial({
               opacity: 0,
