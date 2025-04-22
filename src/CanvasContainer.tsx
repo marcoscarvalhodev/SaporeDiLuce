@@ -12,6 +12,7 @@ import { UseCameraMovementContext } from './context/UseContexts';
 import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
 import RestaurantWaiter from './ModelsManagement/RestaurantWaiter';
+import TableCustomersMain from './TableCustomers/TableCustomersMain';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -61,19 +62,18 @@ function CanvasContainer() {
 
         {<AccessButtons />}
 
-        
-          <RestaurantMenu />
-          <RestaurantDishes />
-          <RestaurantWaiter />
-          <MoveCameraOrbit
-            params={{
-              name: roomNameState,
-              doorSound: roomNameState === 'restaurant_enter' ? true : false,
-              moveSound: true,
-            }}
-          />
-          <Restaurant />
-      
+        <TableCustomersMain />
+        <RestaurantMenu />
+        <RestaurantDishes />
+        <RestaurantWaiter />
+        <MoveCameraOrbit
+          params={{
+            name: roomNameState,
+            doorSound: roomNameState === 'restaurant_enter' ? true : false,
+            moveSound: true,
+          }}
+        />
+        <Restaurant />
       </Canvas>
     </>
   );

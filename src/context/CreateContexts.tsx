@@ -44,6 +44,8 @@ interface ButtonsProps {
   setMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
   foodOrdered: boolean;
   setFoodOrdered: React.Dispatch<React.SetStateAction<boolean>>;
+  foodOnTable: boolean;
+  setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
   menuOptionsClick: menuOptionsProps;
   setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
 }
