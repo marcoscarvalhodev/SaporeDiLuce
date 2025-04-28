@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
+import { UseCameraMovementContext } from '../context/UseContexts';
 type GLTFResult = GLTF & {
   nodes: {
     body_woman_1: THREE.SkinnedMesh;
@@ -36,59 +37,76 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF(
     '/table_customers/table_customers_1.glb'
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
+
+  const { roomNameState } = UseCameraMovementContext();
+
+  const man1AnimCam = actions['man_1_anim_cam'];
+  const woman1AnimCam = actions['woman_1_anim_cam'];
+  const woman1Anim1 = actions['woman_1_anim_1'];
+  const man1Anim1 = actions['man_1_anim_1'];
 
   React.useEffect(() => {
-    const woman1Anim1 = actions['woman_1_anim_1'];
-    const woman1AnimCam = actions['woman_1_anim_cam'];
-    const man1Anim1 = actions['man_1_anim_1'];
-    const man1AnimCam = actions['man_1_anim_cam'];
-
-    if (woman1Anim1 && man1Anim1) {
-      woman1Anim1.reset().play();
-      man1Anim1.reset().play();
+    function initialAnim() {
+      if (woman1Anim1 && man1Anim1) {
+        woman1Anim1.stop();
+        man1Anim1.stop();
+        woman1Anim1.timeScale = 1;
+        man1Anim1.timeScale = 1;
+        woman1Anim1.play();
+        man1Anim1.play();
+      }
     }
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'o') {
-        if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
-          woman1AnimCam.reset();
-          man1AnimCam.reset();
+    initialAnim();
+  }, [man1Anim1, woman1Anim1]);
 
-          // Play once and clamp at end
-          woman1AnimCam.clampWhenFinished = true;
-          man1AnimCam.clampWhenFinished = true;
-          woman1AnimCam.setLoop(THREE.LoopOnce, 1);
-          man1AnimCam.setLoop(THREE.LoopOnce, 1);
+  React.useEffect(() => {
+    if (roomNameState === 'check_table_1') {
+      if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
+        woman1AnimCam.reset();
+        man1AnimCam.reset();
 
-          // Set normal playback
-          woman1AnimCam.timeScale = 1;
-          man1AnimCam.timeScale = 1;
+        woman1AnimCam.clampWhenFinished = true;
+        man1AnimCam.clampWhenFinished = true;
 
-          woman1AnimCam.play();
-          man1AnimCam.play();
+        woman1AnimCam.setLoop(THREE.LoopOnce, 1);
+        man1AnimCam.setLoop(THREE.LoopOnce, 1);
 
-          woman1Anim1.crossFadeTo(woman1AnimCam, 1, true);
-          man1Anim1.crossFadeTo(man1AnimCam, 1, true);
-        }
-      } else if (event.key === 'p') {
-        if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
-          woman1AnimCam.timeScale = -1;
-          man1AnimCam.timeScale = -1;
+        woman1AnimCam.timeScale = 1;
+        man1AnimCam.timeScale = 1;
 
-          // Allow full playback (not clamped) for reversing
-          woman1AnimCam.clampWhenFinished = false;
-          man1AnimCam.clampWhenFinished = false;
-         
-          woman1AnimCam.crossFadeTo(woman1Anim1, 1, true);
-          man1AnimCam.crossFadeTo(man1Anim1, 1, true);
+        woman1AnimCam.play();
+        man1AnimCam.play();
 
-          woman1AnimCam.play();
-          man1AnimCam.play();
-        }
+        woman1Anim1.crossFadeTo(woman1AnimCam, 1, true);
+        man1Anim1.crossFadeTo(man1AnimCam, 1, true);
       }
-    });
-  });
+    } else if (roomNameState === 'dining_room_enter') {
+      if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
+        woman1Anim1.reset();
+        man1Anim1.reset();
+
+        woman1Anim1.clampWhenFinished = false;
+        man1Anim1.clampWhenFinished = false;
+
+        man1Anim1.timeScale = 1;
+        woman1Anim1.timeScale = 1;
+
+        woman1Anim1.play();
+        man1Anim1.play();
+
+        woman1AnimCam.crossFadeTo(woman1Anim1, 1, false);
+        man1AnimCam.crossFadeTo(man1Anim1, 1, false);
+      }
+    }
+  }, [actions,
+    roomNameState,
+    man1Anim1,
+    woman1Anim1,
+    man1AnimCam,
+    woman1AnimCam,]);
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>

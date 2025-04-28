@@ -1,8 +1,6 @@
-import * as THREE from 'three';
 import React from 'react';
 import { JSX } from 'react';
-import { useGLTF } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
+
 import gsap from 'gsap';
 import './AccessButtons.css';
 import {
@@ -13,21 +11,6 @@ import { Html } from '@react-three/drei';
 import { roomName } from '../helpers/buttonsReducer';
 import ButtonReusable from './ButtonReusable';
 
-type GLTFResult = GLTF & {
-  nodes: {
-    entrance_button: THREE.Mesh;
-    dining_button: THREE.Mesh;
-    table_2_button: THREE.Mesh;
-    table_1_button: THREE.Mesh;
-    table_3_button: THREE.Mesh;
-    table_5_button: THREE.Mesh;
-    table_4_button: THREE.Mesh;
-    counter_button: THREE.Mesh;
-    menu_button: THREE.Mesh;
-  };
-  materials: { '': THREE.MeshStandardMaterial };
-};
-
 interface handleTableButtonProps {
   tableRef: HTMLDivElement | null;
   stateName:
@@ -37,11 +20,11 @@ interface handleTableButtonProps {
     | 'check_table_4'
     | 'check_table_5'
     | 'check_counter';
+
+  customers?: (HTMLDivElement | null)[] | null;
 }
 
 export function AccessButtons(props: JSX.IntrinsicElements['group']) {
-  const { nodes } = useGLTF('/access_buttons.glb') as GLTFResult;
-
   const { state, dispatch, menuActive, setMenuActive } = UseButtonsContext();
 
   const buttonRestaurant = React.useRef<null | HTMLDivElement>(null);
@@ -53,6 +36,9 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const buttonTable5 = React.useRef<HTMLDivElement | null>(null);
   const buttonCounter = React.useRef<HTMLDivElement | null>(null);
   const buttonMenu = React.useRef<HTMLDivElement | null>(null);
+
+  const manTable1 = React.useRef<HTMLDivElement | null>(null);
+  const womanTable1 = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
 
@@ -115,6 +101,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const handleTablesButtonClick = ({
     tableRef,
     stateName,
+    customers,
   }: handleTableButtonProps) => {
     const updatedTableRefCollection = tableRefCollection.current.filter(
       (item) => item !== tableRef
@@ -124,12 +111,19 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       setTableActive(true);
 
       setRoomNameState(stateName);
-
       gsap.to([updatedTableRefCollection, buttonDinner.current], {
         opacity: 0,
         pointerEvents: 'none',
         duration: 0.7,
       });
+
+      if (customers) {
+        gsap.to(customers, {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+        });
+      }
     } else {
       gsap.to([updatedTableRefCollection, buttonDinner.current], {
         opacity: 1,
@@ -138,6 +132,14 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       });
       setTableActive(false);
       setRoomNameState('dining_room_enter');
+
+      if (customers) {
+        gsap.to(customers, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      }
     }
   };
 
@@ -217,8 +219,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.entrance_button.geometry}
-        material={nodes.entrance_button.material}
         position={[8.09, 1.666, 0.416]}
         rotation={[0, 0, -Math.PI / 2]}
       >
@@ -235,11 +235,10 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </Html>
         <meshStandardMaterial visible={false} />
       </mesh>
+
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.dining_button.geometry}
-        material={nodes.dining_button.material}
         position={[2.567, 1.668, -2.375]}
         rotation={[0, 0, -Math.PI / 2]}
       >
@@ -256,141 +255,188 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </Html>
         <meshStandardMaterial visible={false} />
       </mesh>
+
+      <group name='table_1_customers'>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[2.425, 1.492, -8.084]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_1_button'
+              ref={buttonTable1}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonTable1.current,
+                  stateName: 'check_table_1',
+                  customers: [manTable1.current, womanTable1.current],
+                });
+              }}
+              goText='Check Table'
+              outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[2.425, 1.092, -8.304]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              id='table_1_man'
+              ref={manTable1}
+              onClick={() => {}}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[2.425, 1.092, -7.804]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_1_woman'
+              ref={womanTable1}
+              onClick={() => {}}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+      </group>
+
+      <group name='table_2_customers'>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[3.826, 1.492, -5.295]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_2_button'
+              ref={buttonTable2}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonTable2.current,
+                  stateName: 'check_table_2',
+                  customers: null,
+                });
+              }}
+              goText='Check Table'
+              outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+      </group>
+
+      <group name='table_3_customers'>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[4.616, 1.492, -8.554]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_3_button'
+              ref={buttonTable3}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonTable3.current,
+                  stateName: 'check_table_3',
+                  customers: null,
+                });
+              }}
+              goText='Check Table'
+              outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+      </group>
+
+      <group name='table_4_customers'>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[6.341, 1.492, -4.968]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_4_button'
+              ref={buttonTable4}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonTable4.current,
+                  stateName: 'check_table_4',
+                  customers: null,
+                });
+              }}
+              goText='Sit at Table'
+              outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+      </group>
+
+      <group name='table_5_customers'>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[6.781, 1.492, -7.75]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              id='table_5_button'
+              ref={buttonTable5}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonTable5.current,
+                  stateName: 'check_table_5',
+                  customers: null,
+                });
+              }}
+              goText='Check Table'
+              outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+      </group>
+
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.table_2_button.geometry}
-        material={nodes.table_2_button.material}
-        position={[3.826, 1.492, -5.295]}
-        scale={0.057}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            id='table_2_button'
-            ref={buttonTable2}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonTable2.current,
-                stateName: 'check_table_2',
-              });
-            }}
-            goText='Check Table'
-            outText='Leave Table'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.table_1_button.geometry}
-        material={nodes.table_1_button.material}
-        position={[2.425, 1.492, -8.084]}
-        scale={0.057}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            id='table_1_button'
-            ref={buttonTable1}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonTable1.current,
-                stateName: 'check_table_1',
-              });
-            }}
-            goText='Check Table'
-            outText='Leave Table'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.table_3_button.geometry}
-        material={nodes.table_3_button.material}
-        position={[4.616, 1.492, -8.554]}
-        scale={0.057}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            id='table_3_button'
-            ref={buttonTable3}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonTable3.current,
-                stateName: 'check_table_3',
-              });
-            }}
-            goText='Check Table'
-            outText='Leave Table'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.table_5_button.geometry}
-        material={nodes.table_5_button.material}
-        position={[6.781, 1.492, -7.75]}
-        scale={0.057}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            id='table_5_button'
-            ref={buttonTable5}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonTable5.current,
-                stateName: 'check_table_5',
-              });
-            }}
-            goText='Check Table'
-            outText='Leave Table'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.table_4_button.geometry}
-        material={nodes.table_4_button.material}
-        position={[6.341, 1.492, -4.968]}
-        scale={0.057}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            id='table_4_button'
-            ref={buttonTable4}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonTable4.current,
-                stateName: 'check_table_4',
-              });
-            }}
-            goText='Sit at Table'
-            outText='Leave Table'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.counter_button.geometry}
-        material={nodes.counter_button.material}
         position={[-1.433, 2.668, -7.028]}
         scale={0.074}
       >
@@ -402,6 +448,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
               handleTablesButtonClick({
                 tableRef: buttonCounter.current,
                 stateName: 'check_counter',
+                customers: null,
               });
             }}
             goText='Sit at Counter'
@@ -416,8 +463,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.menu_button.geometry}
-        material={nodes.menu_button.material}
         position={[6.388, 1.121, -4.595]}
         scale={0.057}
       >
@@ -439,5 +484,3 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
     </group>
   );
 }
-
-useGLTF.preload('/access_buttons.glb');
