@@ -13,8 +13,7 @@ export const ContextButtonsProvider = ({
   });
 
   const [menuActive, setMenuActive] = React.useState(false);
-  const [menuOptionsClick, setMenuOptionsClick] =
-    React.useState<menuOptionsProps>('');
+  const [menuOptionsClick, setMenuOptionsClick] = React.useState<menuOptionsProps>('');
   const [foodOrdered, setFoodOrdered] = React.useState(false);
   const [foodOnTable, setFoodOnTable] = React.useState(false);
 

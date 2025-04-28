@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { forwardRef } from 'react';
 import gsap from 'gsap';
 
 interface ButtonReusableProps {
@@ -7,7 +7,6 @@ interface ButtonReusableProps {
   outText: string;
   enterEnvironment: boolean;
   onClick: () => void;
-  ref: Ref<HTMLDivElement> | undefined;
   id:
     | 'dinner_button'
     | 'restaurant_button'
@@ -17,46 +16,47 @@ interface ButtonReusableProps {
     | 'table_4_button'
     | 'table_5_button'
     | 'counter_button'
-    | 'menu_button';
+    | 'menu_button'
+    | 'table_1_man'
+    | 'table_1_woman';
 }
 
-const ButtonReusable = ({
-  onClick,
-  enterEnvironment,
-  outText,
-  goText,
-  ref,
-  id,
-  textSize,
-}: ButtonReusableProps) => {
-  React.useEffect(() => {
-    if (id !== 'restaurant_button') {
-      gsap.to(`.${id}`, {
-        opacity: 0,
-        pointerEvents: 'none',
-        duration: 0
-      });
-    }
-  }, [id]);
+const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
+  ({ onClick, enterEnvironment, outText, goText, id, textSize }, ref) => {
 
-  return (
-    <div
-      className={`${
-        textSize === 'small'
-          ? 'w-[20rem] left-[-10rem]'
-          : 'w-[40rem] left-[-20rem]'
-      } relative top-[-2rem]`}
-    >
+    React.useEffect(() => {
+      if (id !== 'restaurant_button') {
+        gsap.to(`.${id}`, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0,
+        });
+      }
+    }, [id]);
+
+    return (
       <div
-        className={`${id} accessButtons ${textSize === "small" ? "text_small" : "text_large"} pointer-events-auto cursor-pointer`}
-        onClick={onClick}
-        ref={ref}
+        className={`${
+          textSize === 'small'
+            ? 'w-[20rem] left-[-10rem]'
+            : 'w-[40rem] left-[-20rem]'
+        } relative top-[-2rem]`}
       >
-        <h1 className='accessButtonsText text-[2.8rem]'>
-          {enterEnvironment ? outText : goText}
-        </h1>
+        <div
+          className={`${id} accessButtons ${
+            textSize === 'small' ? 'text_small' : 'text_large'
+          } pointer-events-auto cursor-pointer`}
+          onClick={onClick}
+          ref={ref}
+        >
+          <h1
+            className={`accessButtonsText text-[2.8rem]`}
+          >
+            {enterEnvironment ? outText : goText}
+          </h1>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 export default ButtonReusable;
