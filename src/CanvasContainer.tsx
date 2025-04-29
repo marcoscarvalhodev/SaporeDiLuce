@@ -13,6 +13,7 @@ import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
 import RestaurantWaiter from './ModelsManagement/RestaurantWaiter';
 import TableCustomersMain from './TableCustomers/TableCustomersMain';
+import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -62,6 +63,7 @@ function CanvasContainer() {
 
         {<AccessButtons />}
 
+        <ReviewsCustomers />
         <TableCustomersMain />
         <RestaurantMenu />
         <RestaurantDishes />

@@ -37,7 +37,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF(
     '/table_customers/table_customers_1.glb'
   ) as GLTFResult;
-  const { actions, mixer } = useAnimations(animations, group);
+  const { actions } = useAnimations(animations, group);
 
   const { roomNameState } = UseCameraMovementContext();
 

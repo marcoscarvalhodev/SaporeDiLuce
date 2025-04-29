@@ -4,6 +4,7 @@ import { JSX } from 'react';
 import gsap from 'gsap';
 import './AccessButtons.css';
 import {
+  UseAnimationsContext,
   UseButtonsContext,
   UseCameraMovementContext,
 } from '../context/UseContexts';
@@ -41,6 +42,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const womanTable1 = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
+  const { setCustomerReview } = UseAnimationsContext();
 
   const [tableActive, setTableActive] = React.useState(false);
 
@@ -106,6 +108,8 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
     const updatedTableRefCollection = tableRefCollection.current.filter(
       (item) => item !== tableRef
     );
+
+    setCustomerReview('');
 
     if (roomNameState === 'dining_room_enter') {
       setTableActive(true);
@@ -224,6 +228,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+            color='black'
             id='restaurant_button'
             ref={buttonRestaurant}
             onClick={handleRestaurantButtonClick}
@@ -244,6 +249,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+            color='black'
             id='dinner_button'
             ref={buttonDinner}
             enterEnvironment={state.diningAreaEnter}
@@ -265,6 +271,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              color='black'
               id='table_1_button'
               ref={buttonTable1}
               onClick={() => {
@@ -288,12 +295,16 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           receiveShadow
           position={[2.425, 1.092, -8.304]}
           scale={0.057}
+          name='man_table_1'
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
+              color='orange'
               id='table_1_man'
               ref={manTable1}
-              onClick={() => {}}
+              onClick={() => {
+                setCustomerReview('man_table_1');
+              }}
               goText='Customer review'
               outText='Leave Table'
               enterEnvironment={false}
@@ -307,12 +318,16 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           receiveShadow
           position={[2.425, 1.092, -7.804]}
           scale={0.057}
+          name='woman_table_1'
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              color='orange'
               id='table_1_woman'
               ref={womanTable1}
-              onClick={() => {}}
+              onClick={() => {
+                setCustomerReview('woman_table_1');
+              }}
               goText='Customer review'
               outText='Leave Table'
               enterEnvironment={false}
@@ -333,6 +348,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             <ButtonReusable
               id='table_2_button'
               ref={buttonTable2}
+              color='black'
               onClick={() => {
                 handleTablesButtonClick({
                   tableRef: buttonTable2.current,
@@ -359,6 +375,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              color='black'
               id='table_3_button'
               ref={buttonTable3}
               onClick={() => {
@@ -387,6 +404,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              color='black'
               id='table_4_button'
               ref={buttonTable4}
               onClick={() => {
@@ -415,6 +433,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              color='black'
               id='table_5_button'
               ref={buttonTable5}
               onClick={() => {
@@ -442,6 +461,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+            color='black'
             id='counter_button'
             ref={buttonCounter}
             onClick={() => {
@@ -468,6 +488,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+            color='black'
             id='menu_button'
             ref={buttonMenu}
             onClick={() => {

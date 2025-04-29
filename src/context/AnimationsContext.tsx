@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateContextAnimations } from './CreateContexts';
+import { CreateContextAnimations, customerReviewProps } from './CreateContexts';
 
 export const ContextAnimationsProvider = ({
   children,
@@ -10,6 +10,7 @@ export const ContextAnimationsProvider = ({
   const [movementAudioState, setMovementAudioState] = React.useState(false);
   const [doorOpen, setDoorOpen] = React.useState(false);
   const [finishedWaiterAnim, setFinishedWaiterAnim] = React.useState(false);
+  const [customerReview, setCustomerReview] = React.useState<customerReviewProps>("");
 
   return (
     <CreateContextAnimations.Provider
@@ -22,6 +23,8 @@ export const ContextAnimationsProvider = ({
         setMovementAudioState,
         finishedWaiterAnim,
         setFinishedWaiterAnim,
+        customerReview,
+        setCustomerReview
       }}
     >
       {children}

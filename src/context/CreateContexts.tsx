@@ -8,6 +8,8 @@ interface CameraMovementProps {
   refCanvasUpdated: React.RefObject<HTMLCanvasElement | null>;
 }
 
+export type customerReviewProps = '' | 'man_table_1' | 'woman_table_1';
+
 interface AnimationsProps {
   doorClose: boolean;
   setDoorClose: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +19,8 @@ interface AnimationsProps {
   setMovementAudioState: React.Dispatch<React.SetStateAction<boolean>>;
   finishedWaiterAnim: boolean;
   setFinishedWaiterAnim: React.Dispatch<React.SetStateAction<boolean>>;
+  customerReview: customerReviewProps;
+  setCustomerReview: React.Dispatch<React.SetStateAction<customerReviewProps>>;
 }
 
 interface AudioChoiceProps {
@@ -36,6 +40,8 @@ export type menuOptionsProps =
   | 'dish_3'
   | 'dish_4'
   | 'dish_5';
+
+
 
 interface ButtonsProps {
   state: buttonsReducerState;

@@ -1,0 +1,11 @@
+.revealText {
+  display: inline-block;
+}
+.revealText span {
+  opacity: 0;
+  animation: fade-in 0.1s forwards;
+}
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
