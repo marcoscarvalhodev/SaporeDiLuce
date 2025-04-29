@@ -7,6 +7,7 @@ interface ButtonReusableProps {
   outText: string;
   enterEnvironment: boolean;
   onClick: () => void;
+  color: 'black' | 'orange';
   id:
     | 'dinner_button'
     | 'restaurant_button'
@@ -22,8 +23,10 @@ interface ButtonReusableProps {
 }
 
 const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
-  ({ onClick, enterEnvironment, outText, goText, id, textSize }, ref) => {
-
+  (
+    { onClick, enterEnvironment, outText, goText, id, textSize, color },
+    ref
+  ) => {
     React.useEffect(() => {
       if (id !== 'restaurant_button') {
         gsap.to(`.${id}`, {
@@ -43,14 +46,18 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
         } relative top-[-2rem]`}
       >
         <div
-          className={`${id} accessButtons ${
+          className={`${id} ${
+            color === 'black' ? 'bg-[#333332]' : 'bg-[#f0af0c]'
+          } accessButtons ${
             textSize === 'small' ? 'text_small' : 'text_large'
           } pointer-events-auto cursor-pointer`}
           onClick={onClick}
           ref={ref}
         >
           <h1
-            className={`accessButtonsText text-[2.8rem]`}
+            className={`accessButtonsText text-[2.8rem] ${
+              color === 'black' ? 'text-[white]' : 'text-[#333332]'
+            }`}
           >
             {enterEnvironment ? outText : goText}
           </h1>
