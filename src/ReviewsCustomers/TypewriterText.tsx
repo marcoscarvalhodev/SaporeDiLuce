@@ -22,7 +22,9 @@ const TypewriterText = ({ fullMessage }: { fullMessage: string }) => {
     }
   }, [currentIndex, fullMessage]);
 
-  return <p className='revealText text-[1.8rem]'>{displayedText}</p>;
+  return (
+    <p className='revealText text-[1.8rem] text-[#333332]'>{displayedText}</p>
+  );
 };
 
 export default TypewriterText;

@@ -10,6 +10,7 @@ import {
 import gsap from 'gsap';
 import { useThree } from '@react-three/fiber';
 import { menuOptionsProps } from '../context/CreateContexts';
+import RestaurantMenuOptions from './RestaurantMenuOptions';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -56,6 +57,7 @@ export function RestaurantMenu() {
       setFoodOrdered(true);
       setMenuOptionsClick(dish);
       setMenuActive(false);
+      setMenuOptionsHover('');
     }
   };
 
@@ -152,6 +154,7 @@ export function RestaurantMenu() {
 
   return (
     <>
+      <RestaurantMenuOptions menu_option={menuOptionsHover} />
       <group name='menu-wrapper' dispose={null}>
         <group ref={refMenu} position={[6.383, 0.996, -4.597]}>
           <mesh
