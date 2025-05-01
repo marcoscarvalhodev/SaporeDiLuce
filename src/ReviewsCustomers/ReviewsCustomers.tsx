@@ -43,7 +43,7 @@ const ReviewsCustomers = () => {
         <mesh position={position} key={customer_id}>
           <Html>
             <div className='w-[30rem] bg-[rgba(255,255,255,0.75)] p-[2rem] flex flex-col gap-[1.2rem] rounded-[1rem] select-none'>
-              <p className='text-[2.4rem]'>{name}</p>
+              <p className='text-[2.4rem] text-[#333332]'>{name}</p>
               <TypewriterText fullMessage={message} />
               <div>
                 <StarsComponent stars={stars} />

@@ -9,5 +9,5 @@ body {
 }
 
 .button_call {
-  @apply px-[2.4rem] py-[1.2rem]  bg-amber-50 text-[#2e2c2c] text-[1.8rem] cursor-pointer rounded-[2rem] hover:bg-[#2e2c2c] hover:text-amber-50 transition-all duration-[0.5s]
+  @apply px-[2.4rem] py-[1.2rem]  bg-amber-50 text-[#333332] text-[1.8rem] cursor-pointer rounded-[2rem] hover:bg-[#333332] hover:text-amber-50 transition-all duration-[0.5s]
 }

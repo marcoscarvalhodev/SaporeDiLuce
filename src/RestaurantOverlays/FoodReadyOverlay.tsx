@@ -4,7 +4,7 @@ import { UseAnimationsContext } from '../context/UseContexts';
 
 const FoodReadyOverlay = () => {
   const foodReadOverlayRef = React.useRef<null | HTMLDivElement>(null);
-  const { finishedWaiterAnim } = UseAnimationsContext();
+  const { finishedWaiterAnim, setFinishedWaiterAnim } = UseAnimationsContext();
 
   React.useEffect(() => {
     gsap.set(foodReadOverlayRef.current, { opacity: 0 });
@@ -24,6 +24,9 @@ const FoodReadyOverlay = () => {
           opacity: 0,
           pointerEvents: 'none',
           duration: 1,
+          onComplete: () => {
+            setFinishedWaiterAnim(false);
+          },
         },
         3
       );

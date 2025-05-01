@@ -21,10 +21,9 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF('/restaurant_waiter.glb') as GLTFResult;
   const { mixer, actions } = useAnimations(animations, group);
 
-
   const { setFinishedWaiterAnim } = UseAnimationsContext();
 
-  const { foodOrdered, setFoodOrdered} = UseButtonsContext();
+  const { foodOrdered, setFoodOrdered, setFoodOnTable } = UseButtonsContext();
 
   React.useEffect(() => {
     const waiterAnim1 = actions['waiter_anim_1'];
@@ -48,24 +47,22 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
           if (e.action === waiterAnim2) {
             setFinishedWaiterAnim(true);
             setFoodOrdered(false);
-
+            setFoodOnTable(true);
             waiterAnim2.reset();
           }
         });
       }
     } else {
       if (waiterAnim1) {
-        // Stop the second animation if it's playing
         if (waiterAnim2 && waiterAnim2.isRunning()) {
           waiterAnim2.reset();
-          waiterAnim2.stop(); // Stop the second animation
+          waiterAnim2.stop();
         }
 
         waiterAnim1.reset();
         waiterAnim1.play();
       }
     }
-
   }, [
     animations,
     mixer,
@@ -73,6 +70,7 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
     setFinishedWaiterAnim,
     actions,
     setFoodOrdered,
+    setFoodOnTable,
   ]);
 
   return (

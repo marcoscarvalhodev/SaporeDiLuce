@@ -285,21 +285,6 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     limitRotationInit,
   ]);
 
-  React.useEffect(() => {
-    /*const gui = new GUI();
-
-    gui.addFolder('position');
-
-    gui.add(camera.position, 'x', -10, 10);
-    gui.add(camera.position, 'y', -10, 10);
-    gui.add(camera.position, 'z', -10, 10);
-
-    if (controlsRef.current) {
-      gui.add(controlsRef.current.target, 'x', -10, 10);
-      gui.add(controlsRef.current.target, 'y', -10, 10);
-      gui.add(controlsRef.current.target, 'z', -10, 10);
-    }*/
-  });
 
   React.useEffect(() => {
     if (!controlsRef.current) return;
