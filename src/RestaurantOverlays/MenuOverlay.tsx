@@ -44,7 +44,7 @@ const MenuOverlay = () => {
       className='fixed pointer-events-none z-[999] top-0 left-0 right-0 bottom-0'
       ref={menuOverlayRef}
     >
-      <h1 className='absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] text-[4.8rem]'>
+      <h1 className='absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] text-[4.8rem] text-[white]'>
         Pick a meal from our menu
       </h1>
     </div>

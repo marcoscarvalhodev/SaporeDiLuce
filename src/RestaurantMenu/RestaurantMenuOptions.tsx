@@ -49,7 +49,7 @@ const RestaurantMenuOptions = ({ menu_option }: { menu_option: string }) => {
         <div className='w-[30rem] bg-[rgba(255,255,255,0.75)] p-[2rem] flex flex-col gap-[1.2rem] rounded-[1rem] select-none pointer-events-none'>
           <p className='text-[2.4rem] text-[#BA1717]'>{name}</p>
           <p className='text-[2rem] text-[#333332]'>{description}</p>
-          <p className='text-[2rem] text-[#333332]'>{price}</p>
+          <p className='text-[2rem] text-[#333332] font-semibold'>{price}</p>
         </div>
       </Html>
     ) : (

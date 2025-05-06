@@ -57,9 +57,6 @@ export function RestaurantMenu() {
       setFoodOrdered(true);
       setMenuActive(false);
       setMenuOptionsHover('');
-
-
-
       setMenuOptionsClick(dish);
     }
   };
@@ -74,6 +71,7 @@ export function RestaurantMenu() {
     menuOption: string;
   }) => {
     if (menuActive) {
+
       if (isActive) {
         setMenuOptionsHover(menuOption);
 
@@ -137,22 +135,6 @@ export function RestaurantMenu() {
         });
       }
     }
-  });
-
-  React.useEffect(() => {
-    /*const gui = new GUI();
-
-    gui.addFolder('menu_move');
-
-    if (refMenu.current) {
-      gui.add(refMenu.current.position, 'x', 6, 7.5);
-      gui.add(refMenu.current.position, 'y', -1.5, 1.5);
-      gui.add(refMenu.current.position, 'z', -6, -4);
-
-      gui.add(refMenu.current.rotation, 'x', 6, 7.5);
-      gui.add(refMenu.current.rotation, 'y', -1.5, 1.5);
-      gui.add(refMenu.current.rotation, 'z', -10, -4);
-    }*/
   });
 
   return (

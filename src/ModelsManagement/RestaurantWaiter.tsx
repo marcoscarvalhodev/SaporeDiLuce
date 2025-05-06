@@ -29,13 +29,23 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
     const waiterAnim1 = actions['waiter_anim_1'];
     const waiterAnim2 = actions['waiter_anim_2'];
 
-    if (foodOrdered) {
-      if (waiterAnim2) {
-        // Stop the first animation if it's playing
-        if (waiterAnim1 && waiterAnim1.isRunning()) {
-          waiterAnim1.fadeOut(1); // Stop the first animation
-        }
+    const finishedWaiterAnim = ({
+      action,
+    }: {
+      action: THREE.AnimationAction;
+    }) => {
+      if (action === waiterAnim2) {
+        setFinishedWaiterAnim(true);
+        setTimeout(() => {
+          setFoodOrdered(false);
+          waiterAnim2.reset();
+        }, 2000);
+      }
+    };
 
+    if (waiterAnim1 && waiterAnim2) {
+      if (foodOrdered) {
+        waiterAnim1.fadeOut(1);
         waiterAnim2.reset();
         waiterAnim2.clampWhenFinished = true;
         waiterAnim2.timeScale = 1;
@@ -43,18 +53,9 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
         waiterAnim2.setLoop(THREE.LoopOnce, 1);
         waiterAnim2.play();
 
-        mixer.addEventListener('finished', (e) => {
-          if (e.action === waiterAnim2) {
-            setFinishedWaiterAnim(true);
-            setFoodOrdered(false);
-            waiterAnim2.reset();
-          }
-        });
-      }
-    } else {
-      if (waiterAnim1) {
-        if (waiterAnim2 && waiterAnim2.isRunning()) {
-          
+        mixer.addEventListener('finished', finishedWaiterAnim);
+      } else {
+        if (waiterAnim2.isRunning()) {
           waiterAnim2.reset();
           waiterAnim2.stop();
         }
@@ -63,6 +64,8 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
         waiterAnim1.play();
       }
     }
+
+    return () => mixer.removeEventListener('finished', finishedWaiterAnim);
   }, [
     animations,
     mixer,
