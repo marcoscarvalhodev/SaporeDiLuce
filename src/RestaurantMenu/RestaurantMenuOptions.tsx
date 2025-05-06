@@ -30,9 +30,9 @@ const menuOptions = [
     option: 'menu_option_4',
   },
   {
-    name: 'RISOTTO FUNGHI E ZAFFERANO',
+    name: 'POLLO ALLA ZUCA',
     description:
-      'Creamy risotto cooked with earthy mushrooms and infused with fragrant saffron.',
+      'Tender chicken pieces simmered in a creamy pumpkin sauce with garlic, herbs, and a splash of white wine.',
     price: '$ 29.00',
     option: 'menu_option_5',
   },
@@ -41,7 +41,11 @@ const menuOptions = [
 const RestaurantMenuOptions = ({ menu_option }: { menu_option: string }) => {
   return menuOptions.map(({ name, description, price, option }) =>
     option === menu_option ? (
-      <Html position={[1.525, 1.092, -2.004]} key={option} style={{pointerEvents: 'none'}} >
+      <Html
+        position={[1.525, 1.092, -6.504]}
+        key={option}
+        style={{ pointerEvents: 'none' }}
+      >
         <div className='w-[30rem] bg-[rgba(255,255,255,0.75)] p-[2rem] flex flex-col gap-[1.2rem] rounded-[1rem] select-none pointer-events-none'>
           <p className='text-[2.4rem] text-[#BA1717]'>{name}</p>
           <p className='text-[2rem] text-[#333332]'>{description}</p>
@@ -49,7 +53,7 @@ const RestaurantMenuOptions = ({ menu_option }: { menu_option: string }) => {
         </div>
       </Html>
     ) : (
-      <></>
+      <Html key={option}></Html>
     )
   );
 };

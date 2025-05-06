@@ -1,37 +1,47 @@
 import React from 'react';
 import gsap from 'gsap';
-import { UseAnimationsContext } from '../context/UseContexts';
+import {
+  UseAnimationsContext,
+  UseButtonsContext,
+} from '../context/UseContexts';
 
 const FoodReadyOverlay = () => {
   const foodReadOverlayRef = React.useRef<null | HTMLDivElement>(null);
   const { finishedWaiterAnim, setFinishedWaiterAnim } = UseAnimationsContext();
-
+  const { setFoodOnTable } = UseButtonsContext();
   React.useEffect(() => {
-    gsap.set(foodReadOverlayRef.current, { opacity: 0 });
+    const ctx = gsap.context(() => {
+      gsap.set(foodReadOverlayRef.current, { opacity: 0 });
 
-    if (finishedWaiterAnim) {
-      const tl = gsap.timeline();
+      if (finishedWaiterAnim) {
+        const tl = gsap.timeline();
 
-      tl.to(foodReadOverlayRef.current, {
-        duration: 1,
-        opacity: 1,
-        pointerEvents: 'all',
-      });
-
-      tl.to(
-        foodReadOverlayRef.current,
-        {
-          opacity: 0,
-          pointerEvents: 'none',
+        tl.to(foodReadOverlayRef.current, {
           duration: 1,
+          opacity: 1,
+          pointerEvents: 'all',
           onComplete: () => {
-            setFinishedWaiterAnim(false);
+            setFoodOnTable(true);
           },
-        },
-        3
-      );
-    }
-  });
+        });
+
+        tl.to(
+          foodReadOverlayRef.current,
+          {
+            opacity: 0,
+            pointerEvents: 'none',
+            duration: 1,
+            onComplete: () => {
+              setFinishedWaiterAnim(false);
+            },
+          },
+          3
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, [finishedWaiterAnim, setFinishedWaiterAnim, setFoodOnTable]);
 
   return (
     <div
@@ -42,7 +52,6 @@ const FoodReadyOverlay = () => {
         <h1 className=' text-[4.8rem]'>
           Your meal will be ready in 15 minutes.
         </h1>
-        <p>Loading...</p>
       </div>
     </div>
   );
