@@ -27,7 +27,7 @@ const listCustomerReviews: customerReviews = [
   {
     name: 'Joanne',
     message:
-      'The risotto had a lovely texture, though the saffron flavor was slightly too strong.',
+      'Even though the garlic flavor was slightly strong, the gnocchi had a lovely texture, and I loved it',
     stars: 4.5,
     customer_id: 'woman_table_1',
     position: [1.825, 1.092, -8.004],

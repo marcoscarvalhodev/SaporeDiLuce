@@ -4,7 +4,7 @@ const TypewriterText = ({ fullMessage }: { fullMessage: string }) => {
   const [displayedText, setDisplayedText] = React.useState('');
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  const typingSpeed = 30;
+  const typingSpeed = 20;
 
   React.useEffect(() => {
     setDisplayedText('');
