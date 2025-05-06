@@ -55,9 +55,12 @@ export function RestaurantMenu() {
   const clickActiveMenu = (dish: menuOptionsProps) => {
     if (menuActive) {
       setFoodOrdered(true);
-      setMenuOptionsClick(dish);
       setMenuActive(false);
       setMenuOptionsHover('');
+
+
+
+      setMenuOptionsClick(dish);
     }
   };
 

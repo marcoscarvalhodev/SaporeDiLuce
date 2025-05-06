@@ -47,7 +47,6 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
           if (e.action === waiterAnim2) {
             setFinishedWaiterAnim(true);
             setFoodOrdered(false);
-            setFoodOnTable(true);
             waiterAnim2.reset();
           }
         });
@@ -55,6 +54,7 @@ export function RestaurantWaiter(props: JSX.IntrinsicElements['group']) {
     } else {
       if (waiterAnim1) {
         if (waiterAnim2 && waiterAnim2.isRunning()) {
+          
           waiterAnim2.reset();
           waiterAnim2.stop();
         }

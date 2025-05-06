@@ -3,38 +3,44 @@ import React from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import { UseButtonsContext } from '../context/UseContexts';
+import {
+  UseButtonsContext,
+} from '../context/UseContexts';
 
 import gsap from 'gsap';
 
 type GLTFResult = GLTF & {
   nodes: {
-    food_1: THREE.Mesh;
-    plate_1: THREE.Mesh;
-    food_2: THREE.Mesh;
-    plate_2: THREE.Mesh;
-    food_3: THREE.Mesh;
-    plate_3: THREE.Mesh;
-    food_5: THREE.Mesh;
-    plate_5: THREE.Mesh;
-    food_4: THREE.Mesh;
-    plate_4: THREE.Mesh;
+    pasta_scarpariello: THREE.Mesh;
+    gnocchi: THREE.Mesh;
+    pasta_gricia: THREE.Mesh;
+    paccheri: THREE.Mesh;
+    pollo: THREE.Mesh;
+    empty_plate: THREE.Mesh;
   };
   materials: { '': THREE.MeshStandardMaterial };
 };
 
 export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
-  const { nodes } = useGLTF('/restaurant_plates.glb') as GLTFResult;
+  const { nodes } = useGLTF('/restaurant_dishes.glb') as GLTFResult;
 
-  const { menuOptionsClick, foodOnTable } = UseButtonsContext();
-
+  const { menuOptionsClick, foodOnTable, setFoodOnTable } = UseButtonsContext();
   const dishesWrapperRef = React.useRef<null | THREE.Group>(null);
+
+  const [currentDish, setCurrentDish] = React.useState('');
 
   const texture = useTexture('./textures/food_restaurant_bake.jpg');
 
   React.useLayoutEffect(() => {
     texture.flipY = false;
   });
+
+  React.useEffect(() => {
+    if (foodOnTable) {
+      setCurrentDish(menuOptionsClick);
+      setFoodOnTable(false)
+    }
+  }, [foodOnTable, menuOptionsClick, setFoodOnTable]);
 
   React.useEffect(() => {
     dishesWrapperRef.current?.traverse((child) => {
@@ -44,99 +50,97 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
       ) {
         child.material.map = texture;
 
-        if (child.parent) {
-          if (child.parent.name === menuOptionsClick && foodOnTable) {
-            gsap.to(child.material, {
-              opacity: 1,
-              duration: 1,
-              delay: 2,
-              onComplete: () => {},
-            });
-          } else {
-            child.material = new THREE.MeshStandardMaterial({
-              opacity: 0,
-              transparent: true,
-            });
-          }
+        if (child.name === currentDish) {
+          gsap.to(child.material, {
+            opacity: 1,
+            duration: 1,
+            depthTest: true,
+            depthWrite: true,
+            delay: 2,
+
+            onComplete: () => {},
+          });
+        } else {
+          child.material = new THREE.MeshStandardMaterial({
+            opacity: 0,
+            transparent: true,
+            depthTest: false,
+            depthWrite: false,
+          });
         }
       }
     });
-  });
+  }, [menuOptionsClick, texture, currentDish]);
 
   return (
-    <group ref={dishesWrapperRef} {...props} dispose={null}>
-      <group position={[6.539, 1.02, -4.999]} name='dish_1'>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.food_1.geometry}
-          material={nodes.food_1.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plate_1.geometry}
-          material={nodes.plate_1.material}
-        />
-      </group>
-      <group position={[6.539, 1.02, -4.999]} name='dish_2'>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.food_2.geometry}
-          material={nodes.food_2.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plate_2.geometry}
-          material={nodes.plate_2.material}
-        />
-      </group>
-      <group position={[6.539, 1.02, -4.999]} name='dish_3'>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.food_3.geometry}
-          material={nodes.food_3.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plate_3.geometry}
-          material={nodes.plate_3.material}
-        />
-      </group>
-      <group position={[6.539, 1.02, -4.999]} name='dish_4'>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.food_5.geometry}
-          material={nodes.food_5.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plate_5.geometry}
-          material={nodes.plate_5.material}
-        />
-      </group>
-      <group position={[6.539, 1.02, -4.999]} name='dish_5'>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.food_4.geometry}
-          material={nodes.food_4.material}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plate_4.geometry}
-          material={nodes.plate_4.material}
-        />
-      </group>
+    <group {...props} dispose={null} ref={dishesWrapperRef}>
+      <mesh
+        name='dish_1'
+        castShadow
+        receiveShadow
+        geometry={nodes.pasta_scarpariello.geometry}
+        material={nodes.pasta_scarpariello.material}
+        position={[6.549, 1.018, -4.967]}
+        scale={0.397}
+        renderOrder={1}
+      />
+
+      <mesh
+        name='dish_2'
+        castShadow
+        receiveShadow
+        geometry={nodes.paccheri.geometry}
+        material={nodes.paccheri.material}
+        position={[6.549, 1.028, -4.967]}
+        rotation={[-0.101, 0.251, 0.035]}
+        scale={0.397}
+        renderOrder={1}
+      />
+      <mesh
+        name='dish_3'
+        castShadow
+        receiveShadow
+        geometry={nodes.pasta_gricia.geometry}
+        material={nodes.pasta_gricia.material}
+        position={[6.549, 1.018, -4.967]}
+        rotation={[1.237, 0.405, -1.4]}
+        scale={0.397}
+        renderOrder={1}
+      />
+      <mesh
+        name='dish_4'
+        castShadow
+        receiveShadow
+        geometry={nodes.gnocchi.geometry}
+        material={nodes.gnocchi.material}
+        position={[6.549, 1.014, -4.967]}
+        rotation={[1.506, -0.044, -2.413]}
+        scale={0.397}
+        renderOrder={1}
+      />
+
+      <mesh
+        name='dish_5'
+        castShadow
+        receiveShadow
+        geometry={nodes.pollo.geometry}
+        material={nodes.pollo.material}
+        position={[6.549, 1.014, -4.967]}
+        scale={0.397}
+        renderOrder={1}
+      />
+      <mesh
+        name='empty_dish'
+        castShadow
+        receiveShadow
+        geometry={nodes.empty_plate.geometry}
+        material={nodes.empty_plate.material}
+        position={[6.549, 1.014, -4.967]}
+        scale={0.397}
+        renderOrder={1}
+      />
     </group>
   );
 }
 
-useGLTF.preload('/restaurant_plates.glb');
+useGLTF.preload('/restaurant_dishes.glb');
