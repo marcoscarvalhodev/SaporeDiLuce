@@ -8,7 +8,7 @@ import {
 const FoodReadyOverlay = () => {
   const foodReadOverlayRef = React.useRef<null | HTMLDivElement>(null);
   const { finishedWaiterAnim, setFinishedWaiterAnim } = UseAnimationsContext();
-  const { setFoodOnTable } = UseButtonsContext();
+  const { setFoodOnTable, setShowEatButton } = UseButtonsContext();
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(foodReadOverlayRef.current, { opacity: 0 });
@@ -22,6 +22,7 @@ const FoodReadyOverlay = () => {
           pointerEvents: 'all',
           onComplete: () => {
             setFoodOnTable(true);
+            setShowEatButton(true);
           },
         });
 
@@ -41,7 +42,12 @@ const FoodReadyOverlay = () => {
     });
 
     return () => ctx.revert();
-  }, [finishedWaiterAnim, setFinishedWaiterAnim, setFoodOnTable]);
+  }, [
+    finishedWaiterAnim,
+    setFinishedWaiterAnim,
+    setFoodOnTable,
+    setShowEatButton,
+  ]);
 
   return (
     <div

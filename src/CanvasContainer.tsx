@@ -59,7 +59,7 @@ function CanvasContainer() {
           position={[15.08, 2.84, -2.54]}
         />
 
-        <Environment preset='city' environmentIntensity={1} background />
+        <Environment files={"./environment.hdr"} environmentIntensity={0.8} background />
 
         {<AccessButtons />}
 

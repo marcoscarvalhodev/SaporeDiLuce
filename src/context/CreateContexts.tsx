@@ -41,8 +41,6 @@ export type menuOptionsProps =
   | 'dish_4'
   | 'dish_5';
 
-
-
 interface ButtonsProps {
   state: buttonsReducerState;
   dispatch: React.ActionDispatch<[action: actionRoom]>;
@@ -51,7 +49,11 @@ interface ButtonsProps {
   foodOrdered: boolean;
   setFoodOrdered: React.Dispatch<React.SetStateAction<boolean>>;
   foodOnTable: boolean;
+  setEatFood: React.Dispatch<React.SetStateAction<boolean>>;
+  eatFood: boolean;
   setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
+  showEatButton: boolean;
+  setShowEatButton: React.Dispatch<React.SetStateAction<boolean>>;
   menuOptionsClick: menuOptionsProps;
   setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
 }
