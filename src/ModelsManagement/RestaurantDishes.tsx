@@ -3,11 +3,10 @@ import React from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import {
-  UseButtonsContext,
-} from '../context/UseContexts';
+import { UseButtonsContext } from '../context/UseContexts';
 
 import gsap from 'gsap';
+import { AudioEffects } from '../AudioManagement/AudioEffects';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -24,12 +23,27 @@ type GLTFResult = GLTF & {
 export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/restaurant_dishes.glb') as GLTFResult;
 
-  const { menuOptionsClick, foodOnTable, setFoodOnTable } = UseButtonsContext();
+  const {
+    menuOptionsClick,
+    foodOnTable,
+    setFoodOnTable,
+    showEatButton,
+    foodOrdered,
+  } = UseButtonsContext();
   const dishesWrapperRef = React.useRef<null | THREE.Group>(null);
+
+  const emptyPlateRef = React.useRef(false);
 
   const [currentDish, setCurrentDish] = React.useState('');
 
   const texture = useTexture('./textures/food_restaurant_bake.jpg');
+  const { OrderedFoodAudio } = AudioEffects();
+
+  React.useEffect(() => {
+    if (foodOrdered) {
+      OrderedFoodAudio();
+    }
+  }, [foodOrdered, OrderedFoodAudio]);
 
   React.useLayoutEffect(() => {
     texture.flipY = false;
@@ -38,9 +52,30 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
   React.useEffect(() => {
     if (foodOnTable) {
       setCurrentDish(menuOptionsClick);
-      setFoodOnTable(false)
+      setFoodOnTable(false);
     }
   }, [foodOnTable, menuOptionsClick, setFoodOnTable]);
+
+  const showEmptyPlate = React.useCallback(
+    (child: THREE.Mesh) => {
+      if (showEatButton) {
+        child.material = new THREE.MeshStandardMaterial({
+          opacity: 0,
+          transparent: true,
+          depthTest: false,
+          depthWrite: false,
+        });
+      } else {
+        child.material = new THREE.MeshStandardMaterial({
+          opacity: 1,
+          transparent: false,
+          depthTest: true,
+          depthWrite: true,
+        });
+      }
+    },
+    [showEatButton]
+  );
 
   React.useEffect(() => {
     dishesWrapperRef.current?.traverse((child) => {
@@ -48,17 +83,14 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
         child instanceof THREE.Mesh &&
         child.material instanceof THREE.MeshStandardMaterial
       ) {
-        child.material.map = texture;
-
-        if (child.name === currentDish) {
+        if (child.name === currentDish && showEatButton) {
+          emptyPlateRef.current = true;
           gsap.to(child.material, {
             opacity: 1,
             duration: 1,
             depthTest: true,
             depthWrite: true,
             delay: 2,
-
-            onComplete: () => {},
           });
         } else {
           child.material = new THREE.MeshStandardMaterial({
@@ -68,9 +100,13 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
             depthWrite: false,
           });
         }
+
+        if (child.name === 'empty_plate' && emptyPlateRef.current) {
+          showEmptyPlate(child);
+        }
       }
     });
-  }, [menuOptionsClick, texture, currentDish]);
+  }, [menuOptionsClick, texture, currentDish, showEatButton, showEmptyPlate]);
 
   return (
     <group {...props} dispose={null} ref={dishesWrapperRef}>
@@ -130,7 +166,7 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
         renderOrder={1}
       />
       <mesh
-        name='empty_dish'
+        name='empty_plate'
         castShadow
         receiveShadow
         geometry={nodes.empty_plate.geometry}

@@ -1,16 +1,26 @@
 import React from 'react';
 import gsap from 'gsap';
 import { UseButtonsContext } from '../context/UseContexts';
+import { AudioEffects } from '../AudioManagement/AudioEffects';
 const EatingOverlay = () => {
   const refEatingOverlay = React.useRef<null | HTMLDivElement>(null);
   const { eatFood, setShowEatButton, setEatFood } = UseButtonsContext();
+  const { EatingAudio } = AudioEffects();
+
+  React.useEffect(() => {
+    if (eatFood) {
+      setTimeout(() => {
+        EatingAudio();
+      }, 800);
+    }
+  }, [eatFood, EatingAudio]);
 
   React.useEffect(() => {
     const tl = gsap.timeline();
     if (eatFood) {
       tl.to(refEatingOverlay.current, {
         opacity: 1,
-        duration: 2,
+        duration: 1,
         pointerEvents: 'all',
         onComplete: () => {
           setShowEatButton(false);
@@ -19,9 +29,9 @@ const EatingOverlay = () => {
       });
 
       tl.to(refEatingOverlay.current, {
-        delay: 1,
+        delay: 4,
         opacity: 0,
-        duration: 2,
+        duration: 1,
         pointerEvents: 'none',
       });
     }
