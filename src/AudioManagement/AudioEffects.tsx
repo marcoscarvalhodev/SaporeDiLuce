@@ -13,8 +13,21 @@ export const AudioEffects = () => {
     doorAudio.play();
   }, []);
 
+  const OrderedFoodAudio = React.useCallback(() => {
+    const orderedFoodAudio = new Audio('/audio/ordered_food.mp3');
+
+    orderedFoodAudio.play();
+  }, []);
+
+  const EatingAudio = React.useCallback(() => {
+    const eatingAudio = new Audio('/audio/eating_sound.mp3');
+    eatingAudio.play();
+  }, []);
+
   return {
     MovementAudio,
     DoorAudio,
+    EatingAudio,
+    OrderedFoodAudio,
   };
 };
