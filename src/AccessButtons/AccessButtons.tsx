@@ -40,9 +40,11 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
 
   const manTable1 = React.useRef<HTMLDivElement | null>(null);
   const womanTable1 = React.useRef<HTMLDivElement | null>(null);
+  const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
   const { setCustomerReview } = UseAnimationsContext();
+  const { showEatButton, foodOrdered, setEatFood } = UseButtonsContext();
 
   const [tableActive, setTableActive] = React.useState(false);
 
@@ -58,6 +60,42 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       buttonCounter.current,
     ];
   });
+
+  React.useEffect(() => {
+    if (buttonEat.current) {
+      if (showEatButton) {
+        gsap.to(buttonEat.current, {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+        });
+      } else {
+        gsap.to(buttonEat.current, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      }
+    }
+  }, [showEatButton]);
+
+  const hideTable4Buttons = React.useCallback(() => {
+    if (buttonTable4.current && buttonMenu.current) {
+      if (showEatButton || foodOrdered) {
+        gsap.to([buttonTable4.current, buttonMenu.current], {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      } else {
+        gsap.to([buttonTable4.current, buttonMenu.current], {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+        });
+      }
+    }
+  }, [showEatButton, foodOrdered]);
 
   const handleMenuButtonClick = React.useCallback(() => {
     if (buttonMenu.current) {
@@ -96,9 +134,15 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   }, [menuActive, roomNameState]);
 
   React.useEffect(() => {
-    handleMenuButtonClick();
     handleMenuActive();
-  }, [handleMenuButtonClick, handleMenuActive]);
+    handleMenuButtonClick();
+  }, [handleMenuActive, handleMenuButtonClick]);
+
+  React.useEffect(() => {
+    
+      hideTable4Buttons();
+    
+  }, [foodOrdered, hideTable4Buttons]);
 
   const handleTablesButtonClick = ({
     tableRef,
@@ -416,6 +460,29 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
               }}
               goText='Sit at Table'
               outText='Leave Table'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[6.541, 1.142, -4.968]}
+          scale={0.057}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              color='black'
+              id='eat_button'
+              ref={buttonEat}
+              onClick={() => {
+                setEatFood(true);
+              }}
+              goText='Eat Food'
+              outText='Eat Food'
               enterEnvironment={tableActive}
               textSize='small'
             />

@@ -19,7 +19,8 @@ interface ButtonReusableProps {
     | 'counter_button'
     | 'menu_button'
     | 'table_1_man'
-    | 'table_1_woman';
+    | 'table_1_woman'
+    | 'eat_button';
 }
 
 const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(

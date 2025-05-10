@@ -9,6 +9,7 @@ import { ContextAudioChoiceProvider } from './context/AudioChoiceContext.tsx';
 import { ContextButtonsProvider } from './context/ButtonsContext.tsx';
 import { ContextOverlaysProvider } from './context/OverlaysContext.tsx';
 import { ContextAnimationsProvider } from './context/AnimationsContext.tsx';
+import EatingOverlay from './RestaurantOverlays/EatingOverlay.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
               <CanvasContainer />
               <TextContent />
               <AudioChoice />
+              <EatingOverlay />
             </ContextAnimationsProvider>
           </ContextOverlaysProvider>
         </ContextButtonsProvider>

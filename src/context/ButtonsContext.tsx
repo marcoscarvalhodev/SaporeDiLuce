@@ -13,9 +13,12 @@ export const ContextButtonsProvider = ({
   });
 
   const [menuActive, setMenuActive] = React.useState(false);
-  const [menuOptionsClick, setMenuOptionsClick] = React.useState<menuOptionsProps>('');
+  const [menuOptionsClick, setMenuOptionsClick] =
+    React.useState<menuOptionsProps>('');
   const [foodOrdered, setFoodOrdered] = React.useState(false);
   const [foodOnTable, setFoodOnTable] = React.useState(false);
+  const [showEatButton, setShowEatButton] = React.useState(false);
+  const [eatFood, setEatFood] = React.useState(false);
 
   return (
     <CreateContextButtons.Provider
@@ -30,6 +33,10 @@ export const ContextButtonsProvider = ({
         setFoodOrdered,
         foodOnTable,
         setFoodOnTable,
+        showEatButton,
+        setShowEatButton,
+        eatFood,
+        setEatFood,
       }}
     >
       {children}
