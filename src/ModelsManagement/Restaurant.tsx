@@ -10,18 +10,14 @@ import {
 
 type GLTFResult = GLTF & {
   nodes: {
-    Plane015: THREE.Mesh
-    Plane017: THREE.Mesh
-    Plane005: THREE.Mesh
-    CTRL_Hole005: THREE.Mesh
-    Plane018: THREE.Mesh
-    Plane022: THREE.Mesh
-    glass_material_2: THREE.Mesh
-    glass_material_3: THREE.Mesh
-    Plane019: THREE.Mesh
-    CTRL_Hole: THREE.Mesh
-    CTRL_Hole001: THREE.Mesh
-    glass_material: THREE.Mesh
+    Plane015: THREE.Mesh;
+    Plane017: THREE.Mesh;
+    glass_material_2: THREE.Mesh;
+    Plane022: THREE.Mesh;
+    glass_material_3: THREE.Mesh;
+    Plane019: THREE.Mesh;
+    glass_material: THREE.Mesh;
+    merged_scenery: THREE.Mesh;
   };
   materials: { '': THREE.MeshStandardMaterial };
 };
@@ -63,74 +59,93 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-    <group name="Scene">
-      <group name="WindowFrame005" position={[4.244, 2.013, -4.247]} />
-      <mesh
-        name="Plane015"
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane015.geometry}
-        material={nodes.Plane015.material}
-        position={[-4.126, 0.015, -2.54]}
-        rotation={[0, 0, -Math.PI / 2]}
-      />
-      <mesh
-        name="Plane017"
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane017.geometry}
-        material={nodes.Plane017.material}
-        position={[-4.122, 0.015, -5.085]}
-      />
-      <mesh
-        name="Plane005"
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane005.geometry}
-        material={nodes.Plane005.material}
-        position={[8.114, 5.036, -6.452]}
-        rotation={[-Math.PI, 0, -Math.PI]}
-        scale={-1}
-      />
-      <group name="Window_Group002" position={[4.656, 2.002, -10.401]} />
-      <group
-        name="Window_Group003"
-        position={[7.973, 3.46, 0.426]}
-        rotation={[0, Math.PI / 2, 0]}>
+      <group name='Scene'>
         <mesh
-          name="CTRL_Hole005"
+          name='Plane015'
           castShadow
           receiveShadow
-          geometry={nodes.CTRL_Hole005.geometry}
-          material={nodes.CTRL_Hole005.material}
-          position={[0, 0, 0.42]}
-        />
-      </group>
-      <mesh
-        name="Plane018"
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane018.geometry}
-        material={nodes.Plane018.material}
-        position={[-4.107, 0, -2.539]}
-        rotation={[0, 0, Math.PI / 2]}
-      />
-      <group name="door_right_wrapper" position={[8.069, 0, -0.815]}>
-        <mesh
-          name="Plane022"
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane022.geometry}
-          material={nodes.Plane022.material}
+          geometry={nodes.Plane015.geometry}
+          material={nodes.Plane015.material}
+          position={[-4.125, 0.015, -2.908]}
           rotation={[0, 0, -Math.PI / 2]}
+          scale={0.855}
         />
         <mesh
-          name="glass_material_2"
+          name='Plane017'
           castShadow
           receiveShadow
-          geometry={nodes.glass_material_2.geometry}
-          material={nodes.glass_material_2.material}
-          rotation={[0, 0, -Math.PI / 2]}
+          geometry={nodes.Plane017.geometry}
+          material={nodes.Plane017.material}
+          position={[-4.122, 0.015, -5.085]}
+          scale={0.855}
+        />
+        <group name='door_right_wrapper' position={[8.069, 0, -0.63]}>
+          <mesh
+            name='glass_material_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.glass_material_2.geometry}
+            material={nodes.glass_material_2.material}
+            rotation={[0, 0, -Math.PI / 2]}
+          >
+            <meshPhysicalMaterial
+              roughness={0.1}
+              metalness={0.1}
+              envMapIntensity={0.9}
+              transparent
+              opacity={0.7}
+              reflectivity={1}
+              transmission={1.0}
+              color={'#9e9fa0'}
+            />
+          </mesh>
+          <mesh
+            name='Plane022'
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane022.geometry}
+            material={nodes.Plane022.material}
+            rotation={[0, 0, -Math.PI / 2]}
+          />
+        </group>
+        <group name='door_left_wrapper' position={[8.069, 0, 1.482]}>
+          <mesh
+            name='glass_material_3'
+            castShadow
+            receiveShadow
+            geometry={nodes.glass_material_3.geometry}
+            material={nodes.glass_material_3.material}
+            rotation={[0, 0, -Math.PI / 2]}
+          >
+            {' '}
+            <meshPhysicalMaterial
+              roughness={0.1}
+              metalness={0.1}
+              envMapIntensity={0.9}
+              transparent
+              opacity={0.7}
+              reflectivity={1}
+              transmission={1.0}
+              color={'#9e9fa0'}
+            />
+          </mesh>
+          <mesh
+            name='Plane019'
+            castShadow
+            receiveShadow
+            geometry={nodes.Plane019.geometry}
+            material={nodes.Plane019.material}
+            rotation={[0, 0, -Math.PI / 2]}
+          />
+        </group>
+        <mesh
+          name='glass_material'
+          castShadow
+          receiveShadow
+          geometry={nodes.glass_material.geometry}
+          material={nodes.glass_material.material}
+          position={[-3.332, 2.232, -6.442]}
+          rotation={[-Math.PI, 1.187, Math.PI / 2]}
         >
           <meshPhysicalMaterial
             roughness={0.1}
@@ -143,78 +158,16 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
             color={'#9e9fa0'}
           />
         </mesh>
-      </group>
-      <group name="door_left_wrapper" position={[8.069, 0, 1.649]}>
         <mesh
-          name="glass_material_3"
+          name='merged_scenery'
           castShadow
           receiveShadow
-          geometry={nodes.glass_material_3.geometry}
-          material={nodes.glass_material_3.material}
-          rotation={[0, 0, -Math.PI / 2]}
-        >
-          <meshPhysicalMaterial
-            roughness={0.1}
-            metalness={0.1}
-            envMapIntensity={0.9}
-            transparent
-            opacity={0.7}
-            reflectivity={1}
-            transmission={1.0}
-            color={'#9e9fa0'}
-          />
-        </mesh>
-        <mesh
-          name="Plane019"
-          castShadow
-          receiveShadow
-          geometry={nodes.Plane019.geometry}
-          material={nodes.Plane019.material}
-          rotation={[0, 0, -Math.PI / 2]}
+          geometry={nodes.merged_scenery.geometry}
+          material={nodes.merged_scenery.material}
+          position={[0.162, 2.526, -3.035]}
         />
       </group>
-      <group name="Window_Group001" position={[4.244, 2.013, -4.147]}>
-        <mesh
-          name="CTRL_Hole"
-          castShadow
-          receiveShadow
-          geometry={nodes.CTRL_Hole.geometry}
-          material={nodes.CTRL_Hole.material}
-          position={[0, 0, 0.105]}
-        />
-      </group>
-      <group name="Window_Group" position={[6.43, 2.005, -4.169]}>
-        <mesh
-          name="CTRL_Hole001"
-          castShadow
-          receiveShadow
-          geometry={nodes.CTRL_Hole001.geometry}
-          material={nodes.CTRL_Hole001.material}
-          position={[0, 0, 0.105]}
-        />
-      </group>
-      <mesh
-        name="glass_material"
-        castShadow
-        receiveShadow
-        geometry={nodes.glass_material.geometry}
-        material={nodes.glass_material.material}
-        position={[8.117, 2.232, -7.191]}
-        rotation={[0, 0, -Math.PI / 2]}
-      >
-        <meshPhysicalMaterial
-            roughness={0.1}
-            metalness={0.1}
-            envMapIntensity={0.9}
-            transparent
-            opacity={0.7}
-            reflectivity={1}
-            transmission={1.0}
-            color={'#9e9fa0'}
-          />
-      </mesh>
     </group>
-  </group>
   );
 }
 

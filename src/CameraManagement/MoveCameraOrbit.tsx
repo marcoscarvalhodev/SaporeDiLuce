@@ -10,28 +10,28 @@ import { roomNameProps } from '../context/CameraMovementContext';
 
 const cameraPositions = {
   restaurant_enter: {
-    position: new THREE.Vector3(6.5, 2.8, 0.5),
-    target: new THREE.Vector3(6, 2.7, 0),
+    position: new THREE.Vector3(6.5, 2.2, 1),
+    target: new THREE.Vector3(6, 2.2, 0),
     limitRotation: false,
   },
   restaurant_leave: {
-    position: new THREE.Vector3(15.08, 2.84, -2.54),
-    target: new THREE.Vector3(-20, 1.8, -2.12),
+    position: new THREE.Vector3(15.08, 2.4, 2),
+    target: new THREE.Vector3(-20, 2, -2.12),
     limitRotation: false,
   },
   dining_room_leave: {
-    position: new THREE.Vector3(0, 2.8, -2),
-    target: new THREE.Vector3(6, 2.7, 0),
+    position: new THREE.Vector3(0, 2.2, -2),
+    target: new THREE.Vector3(6, 2.2, 0),
     limitRotation: false,
   },
   dining_room_enter: {
-    position: new THREE.Vector3(1, 2.8, -4),
-    target: new THREE.Vector3(0.5, 2.7, -8),
+    position: new THREE.Vector3(1, 2.2, -4),
+    target: new THREE.Vector3(0.5, 2.2, -8),
     limitRotation: false,
   },
   table_counter_leave: {
-    position: new THREE.Vector3(1, 2.8, -8),
-    target: new THREE.Vector3(0.5, 2.7, -8),
+    position: new THREE.Vector3(1, 2.2, -8),
+    target: new THREE.Vector3(0.5, 2.2, -8),
     limitRotation: false,
   },
   check_table_1: {
@@ -101,7 +101,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     new THREE.Vector3(-20, 1.8, -2.12)
   );
 
-  const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -2.54);
+  const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
 
   const { MovementAudio, DoorAudio } = AudioEffects();
   const { setDoorClose } = UseAnimationsContext();
