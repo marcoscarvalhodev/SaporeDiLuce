@@ -5,6 +5,7 @@ import {
   CreateContextButtons,
   CreateCameraMovementContext,
   CreateOverlaysContext,
+  CreateContextHumans,
 } from './CreateContexts';
 
 export const UseCameraMovementContext = () => {
@@ -55,5 +56,16 @@ export const UseOverlaysContext = () => {
   }
 
   return useOverlaysContext;
+};
+
+
+export const UseHumansContext = () => {
+  const useHumansContext = useContext(CreateContextHumans);
+
+  if (!useHumansContext) {
+    throw new Error('there is no humans context');
+  }
+
+  return useHumansContext;
 };
 

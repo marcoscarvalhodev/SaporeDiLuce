@@ -20,7 +20,8 @@ interface ButtonReusableProps {
     | 'menu_button'
     | 'table_1_man'
     | 'table_1_woman'
-    | 'eat_button';
+    | 'eat_button'
+    | 'waitress_button';
 }
 
 const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
@@ -28,7 +29,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
     { onClick, enterEnvironment, outText, goText, id, textSize, color },
     ref
   ) => {
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       if (id !== 'restaurant_button') {
         gsap.to(`.${id}`, {
           opacity: 0,
