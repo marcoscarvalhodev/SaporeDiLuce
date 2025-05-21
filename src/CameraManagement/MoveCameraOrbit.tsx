@@ -70,8 +70,8 @@ const cameraPositions = {
     toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
   },
   check_counter: {
-    position: new THREE.Vector3(0.9, 1.88, -6.22),
-    target: new THREE.Vector3(-0.58, 1.72, -6.22),
+    position: new THREE.Vector3(0.9, 1.88, -5.5),
+    target: new THREE.Vector3(-0.58, 1.72, -5.5),
     limitRotation: true,
     azimuthValues: { min: Math.PI / -1.5, max: Math.PI / -3 },
   },

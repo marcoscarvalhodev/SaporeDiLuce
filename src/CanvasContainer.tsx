@@ -11,9 +11,10 @@ import { AccessButtons } from './AccessButtons/AccessButtons';
 import { UseCameraMovementContext } from './context/UseContexts';
 import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
-import RestaurantWaiter from './ModelsManagement/RestaurantWaiter';
 import TableCustomersMain from './TableCustomers/TableCustomersMain';
 import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
+import { Waitress } from './RestaurantWaitress/Waitress';
+import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -59,7 +60,11 @@ function CanvasContainer() {
           position={[15.08, 2.84, -2.54]}
         />
 
-        <Environment files={"./environment.hdr"} environmentIntensity={0.8} background />
+        <Environment
+          files={'./environment.hdr'}
+          environmentIntensity={0.8}
+          background
+        />
 
         {<AccessButtons />}
 
@@ -67,7 +72,9 @@ function CanvasContainer() {
         <TableCustomersMain />
         <RestaurantMenu />
         <RestaurantDishes />
-        <RestaurantWaiter />
+        
+        <NotepadPen />
+        <Waitress />
         <MoveCameraOrbit
           params={{
             name: roomNameState,

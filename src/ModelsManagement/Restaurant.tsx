@@ -88,16 +88,7 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
             material={nodes.glass_material_2.material}
             rotation={[0, 0, -Math.PI / 2]}
           >
-            <meshPhysicalMaterial
-              roughness={0.1}
-              metalness={0.1}
-              envMapIntensity={0.9}
-              transparent
-              opacity={0.7}
-              reflectivity={1}
-              transmission={1.0}
-              color={'#9e9fa0'}
-            />
+           
           </mesh>
           <mesh
             name='Plane022'
@@ -118,16 +109,7 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
             rotation={[0, 0, -Math.PI / 2]}
           >
             {' '}
-            <meshPhysicalMaterial
-              roughness={0.1}
-              metalness={0.1}
-              envMapIntensity={0.9}
-              transparent
-              opacity={0.7}
-              reflectivity={1}
-              transmission={1.0}
-              color={'#9e9fa0'}
-            />
+           
           </mesh>
           <mesh
             name='Plane019'
@@ -147,16 +129,7 @@ export function Restaurant(props: JSX.IntrinsicElements['group']) {
           position={[-3.332, 2.232, -6.442]}
           rotation={[-Math.PI, 1.187, Math.PI / 2]}
         >
-          <meshPhysicalMaterial
-            roughness={0.1}
-            metalness={0.1}
-            envMapIntensity={0.9}
-            transparent
-            opacity={0.7}
-            reflectivity={1}
-            transmission={1.0}
-            color={'#9e9fa0'}
-          />
+          
         </mesh>
         <mesh
           name='merged_scenery'

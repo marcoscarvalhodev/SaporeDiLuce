@@ -4,9 +4,9 @@ import { JSX } from 'react';
 import gsap from 'gsap';
 import './AccessButtons.css';
 import {
-  UseAnimationsContext,
   UseButtonsContext,
   UseCameraMovementContext,
+  UseHumansContext,
 } from '../context/UseContexts';
 import { Html } from '@react-three/drei';
 import { roomName } from '../helpers/buttonsReducer';
@@ -38,12 +38,15 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const buttonCounter = React.useRef<HTMLDivElement | null>(null);
   const buttonMenu = React.useRef<HTMLDivElement | null>(null);
 
+  const buttonWaitress = React.useRef<HTMLDivElement | null>(null);
+
   const manTable1 = React.useRef<HTMLDivElement | null>(null);
   const womanTable1 = React.useRef<HTMLDivElement | null>(null);
   const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
-  const { setCustomerReview } = UseAnimationsContext();
+  const { setCustomerReview, setWaitressShowTable, waitressShowTable } =
+    UseHumansContext();
   const { showEatButton, foodOrdered, setEatFood } = UseButtonsContext();
 
   const [tableActive, setTableActive] = React.useState(false);
@@ -60,6 +63,54 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       buttonCounter.current,
     ];
   });
+
+  React.useEffect(() => {
+    if (
+      buttonCounter.current &&
+      buttonWaitress.current &&
+      buttonTable4.current &&
+      buttonMenu.current
+    ) {
+      const tl = gsap.timeline();
+      if (waitressShowTable) {
+        gsap.to([buttonCounter.current, buttonWaitress.current], {
+          opacity: 0,
+          duration: 0.7,
+          pointerEvents: 'none',
+        });
+      } else {
+        tl.to([buttonTable4.current, buttonMenu.current], {
+          opacity: 0,
+          duration: 0,
+          pointerEvents: 'none',
+        }).to([buttonTable4.current, buttonMenu.current], {
+          opacity: 1,
+          duration: 0.7,
+          pointerEvents: 'all',
+          delay: 5,
+        });
+      }
+    }
+  }, [waitressShowTable]);
+
+  React.useEffect(() => {
+    if (buttonWaitress.current) {
+      if (roomNameState === 'check_counter') {
+        gsap.to(buttonWaitress.current, {
+          opacity: 1,
+          pointerEvents: 'all',
+          duration: 0.7,
+          delay: 4,
+        });
+      } else {
+        gsap.to(buttonWaitress.current, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 0.7,
+        });
+      }
+    }
+  }, [roomNameState]);
 
   React.useEffect(() => {
     if (buttonEat.current) {
@@ -139,9 +190,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   }, [handleMenuActive, handleMenuButtonClick]);
 
   React.useEffect(() => {
-    
-      hideTable4Buttons();
-    
+    hideTable4Buttons();
   }, [foodOrdered, hideTable4Buttons]);
 
   const handleTablesButtonClick = ({
@@ -520,32 +569,57 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
       </group>
 
-      <mesh
-        castShadow
-        receiveShadow
-        position={[-1.433, 2.668, -7.028]}
-        scale={0.074}
-      >
-        <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
-          <ButtonReusable
-            color='black'
-            id='counter_button'
-            ref={buttonCounter}
-            onClick={() => {
-              handleTablesButtonClick({
-                tableRef: buttonCounter.current,
-                stateName: 'check_counter',
-                customers: null,
-              });
-            }}
-            goText='Sit at Counter'
-            outText='Leave Counter'
-            enterEnvironment={tableActive}
-            textSize='small'
-          />
-        </Html>
-        <meshStandardMaterial visible={false} />
-      </mesh>
+      <group>
+        <mesh
+          castShadow
+          receiveShadow
+          position={[-1.433, 1.668, -7.028]}
+          scale={0.074}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              color='black'
+              id='counter_button'
+              ref={buttonCounter}
+              onClick={() => {
+                handleTablesButtonClick({
+                  tableRef: buttonCounter.current,
+                  stateName: 'check_counter',
+                  customers: null,
+                });
+              }}
+              goText='Sit at Counter'
+              outText='Leave Counter'
+              enterEnvironment={tableActive}
+              textSize='small'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[-1.433, 1.368, -5.628]}
+          scale={0.074}
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
+            <ButtonReusable
+              color='orange'
+              id='waitress_button'
+              ref={buttonWaitress}
+              onClick={() => {
+                setWaitressShowTable(true);
+              }}
+              goText='Go to reserved table'
+              outText='Go to reserved table'
+              enterEnvironment={tableActive}
+              textSize='large'
+            />
+          </Html>
+          <meshStandardMaterial visible={false} />
+        </mesh>
+      </group>
 
       <mesh
         castShadow

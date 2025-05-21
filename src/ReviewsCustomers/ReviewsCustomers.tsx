@@ -1,7 +1,7 @@
 import React from 'react';
 import { customerReviewProps } from '../context/CreateContexts';
 import { Html } from '@react-three/drei';
-import { UseAnimationsContext } from '../context/UseContexts';
+import { UseHumansContext } from '../context/UseContexts';
 
 import './ReviewsCustomers.css';
 import TypewriterText from './TypewriterText';
@@ -35,7 +35,7 @@ const listCustomerReviews: customerReviews = [
 ];
 
 const ReviewsCustomers = () => {
-  const { customerReview } = UseAnimationsContext();
+  const { customerReview } = UseHumansContext();
 
   return listCustomerReviews.map(
     ({ name, message, stars, customer_id, position }) =>

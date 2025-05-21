@@ -1,13 +1,10 @@
 import React from 'react';
 import gsap from 'gsap';
-import {
-  UseAnimationsContext,
-  UseButtonsContext,
-} from '../context/UseContexts';
+import { UseButtonsContext, UseHumansContext } from '../context/UseContexts';
 
 const FoodReadyOverlay = () => {
   const foodReadOverlayRef = React.useRef<null | HTMLDivElement>(null);
-  const { finishedWaiterAnim, setFinishedWaiterAnim } = UseAnimationsContext();
+  const { finishedWaiterAnim, setFinishedWaiterAnim } = UseHumansContext();
   const { setFoodOnTable, setShowEatButton } = UseButtonsContext();
   React.useEffect(() => {
     const ctx = gsap.context(() => {

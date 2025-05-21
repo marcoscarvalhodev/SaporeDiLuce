@@ -17,10 +17,17 @@ interface AnimationsProps {
   setDoorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   movementAudioState: boolean;
   setMovementAudioState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface HumansProps {
   finishedWaiterAnim: boolean;
   setFinishedWaiterAnim: React.Dispatch<React.SetStateAction<boolean>>;
   customerReview: customerReviewProps;
   setCustomerReview: React.Dispatch<React.SetStateAction<customerReviewProps>>;
+  waitressShowTable: boolean;
+  setWaitressShowTable: React.Dispatch<React.SetStateAction<boolean>>;
+  waitressTalkTable: boolean;
+  setWaitressTalkTable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface AudioChoiceProps {
@@ -72,5 +79,9 @@ export const CreateContextAudioChoice =
   React.createContext<null | AudioChoiceProps>(null);
 
 export const CreateContextButtons = React.createContext<null | ButtonsProps>(
+  null
+);
+
+export const CreateContextHumans = React.createContext<null | HumansProps>(
   null
 );
