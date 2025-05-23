@@ -5,8 +5,10 @@ import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import {
   UseCameraMovementContext,
+  UseFoodContext,
   UseHumansContext,
 } from '../context/UseContexts';
+import { useFrame } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -35,13 +37,22 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   const counterActive = React.useRef(false);
 
   const { roomNameState } = UseCameraMovementContext();
-  const { waitressShowTable, waitressTalkTable } = UseHumansContext();
+  const {
+    waitressShowTable,
+    waitressTalkTable,
+    setFinishedWaitressAnim,
+    waitressReset,
+  } = UseHumansContext();
+  const { foodOrdered } = UseFoodContext();
+
+  const walkAnimEnabled = React.useRef(false);
+
   const [
     pos_anim,
     fake_walk_anim,
     introduction_anim,
     talk_table_anim,
-    /*main_walk_anim*/
+    main_walk_anim,
   ] = [
     actions['waitress_pos_anim'],
     actions['waitress_fake_walking_anim'],
@@ -49,6 +60,38 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
     actions['waitress_talk_on_table_anim'],
     actions['waitress_main_walk_anim'],
   ];
+
+  useFrame(() => {
+    if (main_walk_anim && main_walk_anim.time > 18 && walkAnimEnabled.current) {
+      setFinishedWaitressAnim(true);
+      walkAnimEnabled.current = false;
+    }
+  });
+
+  React.useEffect(() => {
+    if (waitressReset && pos_anim && main_walk_anim) {
+      main_walk_anim.reset();
+      main_walk_anim.stop();
+      pos_anim.reset();
+      pos_anim.timeScale = 1;
+      pos_anim.play();
+    }
+  }, [pos_anim, waitressReset, main_walk_anim]);
+
+  React.useEffect(() => {
+    if (foodOrdered) {
+      walkAnimEnabled.current = true;
+
+      if (pos_anim && main_walk_anim) {
+        pos_anim?.crossFadeTo(main_walk_anim, 1, true);
+        main_walk_anim.reset();
+        main_walk_anim.timeScale = 1;
+        main_walk_anim.repetitions = 1;
+        main_walk_anim.clampWhenFinished = true;
+        main_walk_anim.play();
+      }
+    }
+  }, [foodOrdered, pos_anim, main_walk_anim]);
 
   React.useEffect(() => {
     if (waitressTalkTable) {
@@ -84,7 +127,6 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   }, [fake_walk_anim, waitressShowTable, introduction_anim, talk_table_anim]);
 
   React.useEffect(() => {
-
     if (roomNameState === 'check_counter') {
       if (pos_anim && introduction_anim) {
         pos_anim?.crossFadeTo(introduction_anim, 1, true);

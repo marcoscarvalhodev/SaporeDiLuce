@@ -20,14 +20,16 @@ interface AnimationsProps {
 }
 
 interface HumansProps {
-  finishedWaiterAnim: boolean;
-  setFinishedWaiterAnim: React.Dispatch<React.SetStateAction<boolean>>;
+  finishedWaitressAnim: boolean;
+  setFinishedWaitressAnim: React.Dispatch<React.SetStateAction<boolean>>;
   customerReview: customerReviewProps;
   setCustomerReview: React.Dispatch<React.SetStateAction<customerReviewProps>>;
   waitressShowTable: boolean;
   setWaitressShowTable: React.Dispatch<React.SetStateAction<boolean>>;
   waitressTalkTable: boolean;
   setWaitressTalkTable: React.Dispatch<React.SetStateAction<boolean>>;
+  waitressReset: boolean;
+  setWaitressReset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface AudioChoiceProps {
@@ -53,16 +55,19 @@ interface ButtonsProps {
   dispatch: React.ActionDispatch<[action: actionRoom]>;
   menuActive: boolean;
   setMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
+  showEatButton: boolean;
+  setShowEatButton: React.Dispatch<React.SetStateAction<boolean>>;
+  menuOptionsClick: menuOptionsProps;
+  setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
+}
+
+interface FoodProps {
   foodOrdered: boolean;
   setFoodOrdered: React.Dispatch<React.SetStateAction<boolean>>;
   foodOnTable: boolean;
   setEatFood: React.Dispatch<React.SetStateAction<boolean>>;
   eatFood: boolean;
   setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
-  showEatButton: boolean;
-  setShowEatButton: React.Dispatch<React.SetStateAction<boolean>>;
-  menuOptionsClick: menuOptionsProps;
-  setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
 }
 
 export const CreateOverlaysContext = React.createContext<null | OverlaysProps>(
@@ -85,3 +90,5 @@ export const CreateContextButtons = React.createContext<null | ButtonsProps>(
 export const CreateContextHumans = React.createContext<null | HumansProps>(
   null
 );
+
+export const CreateContextFood = React.createContext<null | FoodProps>(null);

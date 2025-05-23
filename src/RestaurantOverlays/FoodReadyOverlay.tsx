@@ -1,16 +1,22 @@
 import React from 'react';
 import gsap from 'gsap';
-import { UseButtonsContext, UseHumansContext } from '../context/UseContexts';
+import {
+  UseButtonsContext,
+  UseFoodContext,
+  UseHumansContext,
+} from '../context/UseContexts';
 
 const FoodReadyOverlay = () => {
   const foodReadOverlayRef = React.useRef<null | HTMLDivElement>(null);
-  const { finishedWaiterAnim, setFinishedWaiterAnim } = UseHumansContext();
-  const { setFoodOnTable, setShowEatButton } = UseButtonsContext();
+  const { finishedWaitressAnim, setWaitressReset, setFinishedWaitressAnim } =
+    UseHumansContext();
+  const { setShowEatButton } = UseButtonsContext();
+  const { setFoodOnTable, setFoodOrdered } = UseFoodContext();
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(foodReadOverlayRef.current, { opacity: 0 });
 
-      if (finishedWaiterAnim) {
+      if (finishedWaitressAnim) {
         const tl = gsap.timeline();
 
         tl.to(foodReadOverlayRef.current, {
@@ -21,29 +27,31 @@ const FoodReadyOverlay = () => {
             setFoodOnTable(true);
             setShowEatButton(true);
           },
-        });
-
-        tl.to(
-          foodReadOverlayRef.current,
-          {
-            opacity: 0,
-            pointerEvents: 'none',
-            duration: 1,
-            onComplete: () => {
-              setFinishedWaiterAnim(false);
-            },
+        }).to(foodReadOverlayRef.current, {
+          opacity: 0,
+          pointerEvents: 'none',
+          duration: 1,
+          delay: 3,
+          onStart: () => {
+            setWaitressReset(true);
+            setFoodOrdered(false);
           },
-          3
-        );
+          onComplete: () => {
+            setWaitressReset(false);
+            setFinishedWaitressAnim(false);
+          },
+        });
       }
     });
 
     return () => ctx.revert();
   }, [
-    finishedWaiterAnim,
-    setFinishedWaiterAnim,
+    finishedWaitressAnim,
     setFoodOnTable,
     setShowEatButton,
+    setWaitressReset,
+    setFinishedWaitressAnim,
+    setFoodOrdered,
   ]);
 
   return (

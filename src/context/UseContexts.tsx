@@ -6,6 +6,7 @@ import {
   CreateCameraMovementContext,
   CreateOverlaysContext,
   CreateContextHumans,
+  CreateContextFood,
 } from './CreateContexts';
 
 export const UseCameraMovementContext = () => {
@@ -68,4 +69,16 @@ export const UseHumansContext = () => {
 
   return useHumansContext;
 };
+
+
+export const UseFoodContext = () => {
+  const useFoodContext = useContext(CreateContextFood);
+
+  if (!useFoodContext) {
+    throw new Error('there is no food context');
+  }
+
+  return useFoodContext;
+};
+
 

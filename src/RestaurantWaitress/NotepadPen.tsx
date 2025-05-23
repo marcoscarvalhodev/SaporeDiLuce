@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
+import { UseFoodContext } from '../context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -19,9 +20,28 @@ export function NotepadPen(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF('/notepad_pen.glb') as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
+  const { foodOrdered } = UseFoodContext();
+  const [notepad_anim, pen_anim] = [
+    actions['notepad_anim'],
+    actions['pen_anim'],
+  ];
   React.useEffect(() => {
-    console.log(actions);
-  });
+    if (notepad_anim && pen_anim) {
+      if (foodOrdered) {
+        notepad_anim.play();
+        pen_anim.play();
+        notepad_anim.paused = false;
+        pen_anim.paused = false;
+      } else {
+        notepad_anim.reset();
+        pen_anim.reset();
+        notepad_anim.stop();
+        pen_anim.stop();
+        notepad_anim.paused = true;
+        pen_anim.paused = true;
+      }
+    }
+  }, [foodOrdered, notepad_anim, pen_anim]);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
