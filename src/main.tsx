@@ -12,6 +12,7 @@ import { ContextAnimationsProvider } from './context/AnimationsContext.tsx';
 import EatingOverlay from './RestaurantOverlays/EatingOverlay.tsx';
 import { ContextHumansProvider } from './context/HumansContext.tsx';
 import WaitressActionsOverlay from './RestaurantOverlays/WaitressActionsOverlay.tsx';
+import { ContextFoodProvider } from './context/FoodContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,11 +22,13 @@ createRoot(document.getElementById('root')!).render(
           <ContextOverlaysProvider>
             <ContextAnimationsProvider>
               <ContextHumansProvider>
-                <CanvasContainer />
-                <TextContent />
-                <AudioChoice />
-                <EatingOverlay />
-                <WaitressActionsOverlay />
+                <ContextFoodProvider>
+                  <CanvasContainer />
+                  <TextContent />
+                  <AudioChoice />
+                  <EatingOverlay />
+                  <WaitressActionsOverlay />
+                </ContextFoodProvider>
               </ContextHumansProvider>
             </ContextAnimationsProvider>
           </ContextOverlaysProvider>

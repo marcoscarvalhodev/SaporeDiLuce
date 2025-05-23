@@ -20,13 +20,13 @@ const cameraPositions = {
     limitRotation: false,
   },
   dining_room_leave: {
-    position: new THREE.Vector3(0, 2.2, -2),
-    target: new THREE.Vector3(6, 2.2, 0),
+    position: new THREE.Vector3(0, 2, -2),
+    target: new THREE.Vector3(6, 2, 0),
     limitRotation: false,
   },
   dining_room_enter: {
-    position: new THREE.Vector3(1, 2.2, -4),
-    target: new THREE.Vector3(0.5, 2.2, -8),
+    position: new THREE.Vector3(1, 2, -4),
+    target: new THREE.Vector3(0.5, 2, -8),
     limitRotation: false,
   },
   table_counter_leave: {
@@ -230,7 +230,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
             z: -8,
             ease: 'power2.inOut',
           },
-          1.6
+          2
         );
       } else if (currentPosition.params.name === 'dining_room_leave') {
         tl.to(
@@ -284,7 +284,6 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     setDoorClose,
     limitRotationInit,
   ]);
-
 
   React.useEffect(() => {
     if (!controlsRef.current) return;

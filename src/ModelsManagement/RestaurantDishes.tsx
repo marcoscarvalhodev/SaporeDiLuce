@@ -3,7 +3,7 @@ import React from 'react';
 import { useGLTF, useTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import { UseButtonsContext } from '../context/UseContexts';
+import { UseButtonsContext, UseFoodContext } from '../context/UseContexts';
 
 import gsap from 'gsap';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
@@ -25,11 +25,11 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
 
   const {
     menuOptionsClick,
-    foodOnTable,
-    setFoodOnTable,
     showEatButton,
-    foodOrdered,
   } = UseButtonsContext();
+
+  const { foodOnTable, setFoodOnTable, foodOrdered } = UseFoodContext();
+
   const dishesWrapperRef = React.useRef<null | THREE.Group>(null);
 
   const emptyPlateRef = React.useRef(false);

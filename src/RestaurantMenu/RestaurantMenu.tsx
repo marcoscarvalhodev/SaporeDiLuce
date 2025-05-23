@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib';
 import {
   UseButtonsContext,
   UseCameraMovementContext,
+  UseFoodContext,
   UseOverlaysContext,
 } from '../context/UseContexts';
 import gsap from 'gsap';
@@ -32,13 +33,10 @@ type GLTFResult = GLTF & {
 
 export function RestaurantMenu() {
   const { nodes, materials } = useGLTF('/restaurant_menu.glb') as GLTFResult;
-  const {
-    menuActive,
-    setMenuOptionsClick,
-    setMenuActive,
-    setFoodOrdered,
-    
-  } = UseButtonsContext();
+  const { menuActive, setMenuOptionsClick, setMenuActive } =
+    UseButtonsContext();
+
+  const { setFoodOrdered } = UseFoodContext();
 
   const refMenu = React.useRef<null | THREE.Group>(null);
   const refArrow = React.useRef<null | THREE.Mesh>(null);

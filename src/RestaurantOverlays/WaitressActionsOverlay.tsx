@@ -2,8 +2,10 @@ import React from 'react';
 import gsap from 'gsap';
 import {
   UseCameraMovementContext,
+  UseFoodContext,
   UseHumansContext,
 } from '../context/UseContexts';
+
 const WaitressActionsOverlay = () => {
   const refWaitressTransition = React.useRef<HTMLDivElement | null>(null);
   const {
@@ -13,6 +15,7 @@ const WaitressActionsOverlay = () => {
     waitressTalkTable,
   } = UseHumansContext();
   const { setRoomNameState } = UseCameraMovementContext();
+  const { foodOrdered } = UseFoodContext();
 
   React.useEffect(() => {
     const tl = gsap.timeline();
@@ -50,6 +53,7 @@ const WaitressActionsOverlay = () => {
     setWaitressShowTable,
     setWaitressTalkTable,
     waitressTalkTable,
+    foodOrdered,
   ]);
   return (
     <div

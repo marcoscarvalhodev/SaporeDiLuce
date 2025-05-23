@@ -1,10 +1,17 @@
 import React from 'react';
 import gsap from 'gsap';
-import { UseButtonsContext } from '../context/UseContexts';
+import {
+  UseButtonsContext,
+  UseFoodContext,
+  UseHumansContext,
+} from '../context/UseContexts';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
 const EatingOverlay = () => {
   const refEatingOverlay = React.useRef<null | HTMLDivElement>(null);
-  const { eatFood, setShowEatButton, setEatFood } = UseButtonsContext();
+  const { setShowEatButton } = UseButtonsContext();
+  const { eatFood, setEatFood, setFoodOrdered } = UseFoodContext();
+  const { setWaitressShowTable } = UseHumansContext();
+
   const { EatingAudio } = AudioEffects();
 
   React.useEffect(() => {
@@ -25,6 +32,7 @@ const EatingOverlay = () => {
         onComplete: () => {
           setShowEatButton(false);
           setEatFood(false);
+          
         },
       });
 
@@ -35,7 +43,13 @@ const EatingOverlay = () => {
         pointerEvents: 'none',
       });
     }
-  }, [eatFood, setEatFood, setShowEatButton]);
+  }, [
+    eatFood,
+    setEatFood,
+    setShowEatButton,
+    setWaitressShowTable,
+    setFoodOrdered,
+  ]);
 
   return (
     <div

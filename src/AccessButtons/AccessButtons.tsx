@@ -6,6 +6,7 @@ import './AccessButtons.css';
 import {
   UseButtonsContext,
   UseCameraMovementContext,
+  UseFoodContext,
   UseHumansContext,
 } from '../context/UseContexts';
 import { Html } from '@react-three/drei';
@@ -47,7 +48,8 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
   const { setCustomerReview, setWaitressShowTable, waitressShowTable } =
     UseHumansContext();
-  const { showEatButton, foodOrdered, setEatFood } = UseButtonsContext();
+  const { showEatButton } = UseButtonsContext();
+  const { foodOrdered, setEatFood } = UseFoodContext();
 
   const [tableActive, setTableActive] = React.useState(false);
 
@@ -337,7 +339,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       <mesh
         castShadow
         receiveShadow
-        position={[2.567, 1.668, -2.375]}
+        position={[2.567, 1.268, -2.575]}
         rotation={[0, 0, -Math.PI / 2]}
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
