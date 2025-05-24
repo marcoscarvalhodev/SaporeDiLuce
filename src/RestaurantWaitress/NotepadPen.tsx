@@ -7,10 +7,10 @@ import { UseFoodContext } from '../context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
-    notepad: THREE.Mesh;
-    pen: THREE.Mesh;
-    Bone: THREE.Bone;
-    Bone_1: THREE.Bone;
+    notepad: THREE.Mesh
+    pen: THREE.Mesh
+    Bone: THREE.Bone
+    Bone_1: THREE.Bone
   };
   materials: { '': THREE.MeshStandardMaterial };
 };
@@ -44,19 +44,14 @@ export function NotepadPen(props: JSX.IntrinsicElements['group']) {
   }, [foodOrdered, notepad_anim, pen_anim]);
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name='Scene'>
+      <group name="Scene">
         <group
-          name='notepad_bone'
+          name="notepad_bone"
           position={[-1.169, 1.203, -8.636]}
-          rotation={[0, 0, -Math.PI / 2]}
-        >
+          rotation={[0, 0, -Math.PI / 2]}>
           <primitive object={nodes.Bone} />
         </group>
-        <group
-          name='pen_bone'
-          position={[-1.207, 1.209, -8.553]}
-          rotation={[0, 0.337, -1.559]}
-        >
+        <group name="pen_bone" position={[-1.207, 1.209, -8.553]} rotation={[0, 0.337, -1.559]}>
           <primitive object={nodes.Bone_1} />
         </group>
       </group>

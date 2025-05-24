@@ -32,7 +32,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF(
     '/restaurant_waitress.glb'
   ) as GLTFResult;
-  const { actions } = useAnimations(animations, group);
+  const { actions, mixer } = useAnimations(animations, group);
 
   const counterActive = React.useRef(false);
 
@@ -46,17 +46,20 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   const { foodOrdered } = UseFoodContext();
 
   const walkAnimEnabled = React.useRef(false);
+  const reverseIntroductionAnim = React.useRef(false);
 
   const [
     pos_anim,
     fake_walk_anim,
     introduction_anim,
+    introduction_backwards_anim,
     talk_table_anim,
     main_walk_anim,
   ] = [
     actions['waitress_pos_anim'],
-    actions['waitress_fake_walking_anim'],
+    actions['waitress_fake_walk_anim'],
     actions['waitress_introduction_anim'],
+    actions['waitress_introduction_backwards_anim'],
     actions['waitress_talk_on_table_anim'],
     actions['waitress_main_walk_anim'],
   ];
@@ -67,6 +70,49 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
       walkAnimEnabled.current = false;
     }
   });
+
+  React.useEffect(() => {
+    mixer.addEventListener(
+      'finished',
+      ({ action }: { action: THREE.AnimationAction }) => {
+        if (
+          action === introduction_backwards_anim &&
+          pos_anim &&
+          introduction_backwards_anim
+        ) {
+          introduction_backwards_anim.crossFadeTo(pos_anim, 0.5, true);
+          pos_anim.reset();
+          pos_anim.timeScale = 1;
+          pos_anim.play();
+        }
+      }
+    );
+  }, [mixer, pos_anim, introduction_backwards_anim]);
+
+  React.useEffect(() => {
+    if (
+      roomNameState !== 'dining_room_enter' &&
+      roomNameState !== 'check_counter'
+    ) {
+      reverseIntroductionAnim.current = false;
+    }
+  }, [roomNameState]);
+
+  React.useEffect(() => {
+    if (
+      roomNameState === 'dining_room_enter' &&
+      reverseIntroductionAnim.current
+    ) {
+      if (introduction_anim && introduction_backwards_anim) {
+        introduction_anim.crossFadeTo(introduction_backwards_anim, 0.5, true);
+        introduction_backwards_anim.reset();
+        introduction_backwards_anim.timeScale = 1;
+        introduction_backwards_anim.repetitions = 1;
+        introduction_backwards_anim.clampWhenFinished = true;
+        introduction_backwards_anim.play();
+      }
+    }
+  }, [roomNameState, introduction_anim, introduction_backwards_anim]);
 
   React.useEffect(() => {
     if (waitressReset && pos_anim && main_walk_anim) {
@@ -83,7 +129,9 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
       walkAnimEnabled.current = true;
 
       if (pos_anim && main_walk_anim) {
-        pos_anim?.crossFadeTo(main_walk_anim, 1, true);
+        pos_anim.reset();
+        pos_anim.stop();
+        pos_anim?.crossFadeTo(main_walk_anim, 0, true);
         main_walk_anim.reset();
         main_walk_anim.timeScale = 1;
         main_walk_anim.repetitions = 1;
@@ -128,6 +176,8 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
 
   React.useEffect(() => {
     if (roomNameState === 'check_counter') {
+      reverseIntroductionAnim.current = true;
+
       if (pos_anim && introduction_anim) {
         pos_anim?.crossFadeTo(introduction_anim, 1, true);
         counterActive.current = true;
@@ -136,15 +186,6 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
         introduction_anim.repetitions = 1;
         introduction_anim.clampWhenFinished = true;
         introduction_anim.play();
-      }
-    } else if (roomNameState === 'dining_room_enter' && counterActive.current) {
-      counterActive.current = false;
-
-      if (introduction_anim && pos_anim) {
-        introduction_anim?.crossFadeTo(pos_anim, 0.5, true);
-        pos_anim.reset();
-        pos_anim.timeScale = 1;
-        pos_anim.play();
       }
     }
   }, [introduction_anim, pos_anim, roomNameState]);
@@ -158,7 +199,6 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.body_waitress001.geometry}
             material={nodes.body_waitress001.material}
             skeleton={nodes.body_waitress001.skeleton}
-            frustumCulled={false}
           />
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
