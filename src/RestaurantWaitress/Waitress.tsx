@@ -42,12 +42,16 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
     waitressTalkTable,
     setFinishedWaitressAnim,
     waitressReset,
+    setWaitressDialogueCurrent,
   } = UseHumansContext();
   const { foodOrdered } = UseFoodContext();
 
   const walkAnimEnabled = React.useRef(false);
   const reverseIntroductionAnim = React.useRef(false);
-
+  const dialogueIntroduction = React.useRef(false);
+  const dialogueFakeWalk = React.useRef(false);
+  const dialogueTalkTable = React.useRef(false);
+  const dialogueTalkTableServe = React.useRef(false);
   const [
     pos_anim,
     fake_walk_anim,
@@ -69,7 +73,52 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
       setFinishedWaitressAnim(true);
       walkAnimEnabled.current = false;
     }
+
+    if (
+      introduction_anim &&
+      introduction_anim.time > 5 &&
+      dialogueIntroduction.current
+    ) {
+      setWaitressDialogueCurrent('introduction_talk');
+      dialogueIntroduction.current = false;
+    }
+
+    if (fake_walk_anim && fake_walk_anim.time > 1 && dialogueFakeWalk.current) {
+      setWaitressDialogueCurrent('fake_walk_talk');
+
+      dialogueFakeWalk.current = false;
+
+      setTimeout(() => {
+        setWaitressDialogueCurrent('');
+      }, 2500);
+    }
+
+    if (
+      talk_table_anim &&
+      talk_table_anim.time > 1 &&
+      dialogueTalkTable.current
+    ) {
+      setWaitressDialogueCurrent('table_talk');
+      dialogueTalkTable.current = false;
+    }
+
+    if (
+      main_walk_anim &&
+      main_walk_anim.time > 13 &&
+      dialogueTalkTableServe.current
+    ) {
+      setWaitressDialogueCurrent('table_talk_serve');
+      dialogueTalkTableServe.current = false;
+    }
   });
+
+  React.useEffect(() => {
+    mixer.addEventListener('finished', ({ action }) => {
+      if (action === talk_table_anim || action === main_walk_anim) {
+        setWaitressDialogueCurrent('');
+      }
+    });
+  }, [mixer, talk_table_anim, setWaitressDialogueCurrent, main_walk_anim]);
 
   React.useEffect(() => {
     mixer.addEventListener(
@@ -127,7 +176,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   React.useEffect(() => {
     if (foodOrdered) {
       walkAnimEnabled.current = true;
-
+      dialogueTalkTableServe.current = true;
       if (pos_anim && main_walk_anim) {
         pos_anim.reset();
         pos_anim.stop();
@@ -143,6 +192,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
 
   React.useEffect(() => {
     if (waitressTalkTable) {
+      dialogueTalkTable.current = true;
       if (fake_walk_anim && talk_table_anim) {
         fake_walk_anim.crossFadeTo(talk_table_anim, 0.5, true);
         talk_table_anim.reset();
@@ -163,6 +213,8 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
 
   React.useEffect(() => {
     if (waitressShowTable) {
+      dialogueFakeWalk.current = true;
+      setWaitressDialogueCurrent('');
       if (introduction_anim && fake_walk_anim) {
         introduction_anim?.crossFadeTo(fake_walk_anim, 0.5, true);
         fake_walk_anim.reset();
@@ -172,12 +224,18 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
         fake_walk_anim.play();
       }
     }
-  }, [fake_walk_anim, waitressShowTable, introduction_anim, talk_table_anim]);
+  }, [
+    fake_walk_anim,
+    waitressShowTable,
+    introduction_anim,
+    talk_table_anim,
+    setWaitressDialogueCurrent,
+  ]);
 
   React.useEffect(() => {
     if (roomNameState === 'check_counter') {
       reverseIntroductionAnim.current = true;
-
+      dialogueIntroduction.current = true;
       if (pos_anim && introduction_anim) {
         pos_anim?.crossFadeTo(introduction_anim, 1, true);
         counterActive.current = true;
@@ -195,6 +253,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='rig_waitress' position={[-4.53, 0, 0]}>
           <skinnedMesh
+            frustumCulled={false}
             name='body_waitress001'
             geometry={nodes.body_waitress001.geometry}
             material={nodes.body_waitress001.material}

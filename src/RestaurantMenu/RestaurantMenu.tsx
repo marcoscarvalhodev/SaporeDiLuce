@@ -47,11 +47,12 @@ export function RestaurantMenu() {
 
   const [menuOptionsHover, setMenuOptionsHover] = React.useState('');
 
+
   React.useEffect(() => {
     if (menuActive) {
       setMenuOverlay(true);
     }
-  });
+  }, [menuActive, setMenuOverlay]);
 
   const { camera } = useThree();
 
@@ -137,7 +138,7 @@ export function RestaurantMenu() {
         });
       }
     }
-  });
+  }, [menuActive]);
 
   return (
     <>
