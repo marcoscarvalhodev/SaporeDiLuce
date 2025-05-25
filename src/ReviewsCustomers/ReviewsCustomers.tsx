@@ -42,7 +42,7 @@ const ReviewsCustomers = () => {
       customer_id === customerReview ? (
         <mesh position={position} key={customer_id}>
           <Html>
-            <div className='w-[30rem] bg-[rgba(255,255,255,0.75)] p-[2rem] flex flex-col gap-[1.2rem] rounded-[1rem] select-none'>
+            <div className='dialogue_wrapper'>
               <p className='text-[2.4rem] text-[#333332]'>{name}</p>
               <TypewriterText fullMessage={message} />
               <div>

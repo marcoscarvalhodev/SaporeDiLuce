@@ -10,6 +10,13 @@ interface CameraMovementProps {
 
 export type customerReviewProps = '' | 'man_table_1' | 'woman_table_1';
 
+export type waiterDialogueProps =
+  | ''
+  | 'introduction_talk'
+  | 'fake_walk_talk'
+  | 'table_talk'
+  | 'table_talk_serve';
+
 interface AnimationsProps {
   doorClose: boolean;
   setDoorClose: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,6 +37,10 @@ interface HumansProps {
   setWaitressTalkTable: React.Dispatch<React.SetStateAction<boolean>>;
   waitressReset: boolean;
   setWaitressReset: React.Dispatch<React.SetStateAction<boolean>>;
+  waitressDialogueCurrent: waiterDialogueProps;
+  setWaitressDialogueCurrent: React.Dispatch<
+    React.SetStateAction<waiterDialogueProps>
+  >;
 }
 
 interface AudioChoiceProps {
