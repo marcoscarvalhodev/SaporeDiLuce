@@ -16,6 +16,7 @@ import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 import { Waitress } from './RestaurantWaitress/Waitress';
 import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
+import { Glasses } from './ModelsManagement/Glasses';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -74,7 +75,7 @@ function CanvasContainer() {
         <TableCustomersMain />
         <RestaurantMenu />
         <RestaurantDishes />
-
+        <Glasses />
         <NotepadPen />
         <Waitress />
         <MoveCameraOrbit

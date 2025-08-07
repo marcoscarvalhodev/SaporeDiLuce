@@ -40,6 +40,7 @@ const cameraPositions = {
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
     toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    setAzimuthalAngle: 1.5,
   },
   check_table_2: {
     position: new THREE.Vector3(4.76, 1.8, -6.56),
@@ -47,20 +48,23 @@ const cameraPositions = {
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
     toAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
+    setAzimuthalAngle: 1.5,
   },
   check_table_3: {
-    position: new THREE.Vector3(3.76, 1.8, -6.56),
-    target: new THREE.Vector3(4.5, 0.84, -8.52),
+    position: new THREE.Vector3(4.5, 1.8, -6.56),
+    target: new THREE.Vector3(5, 0.84, -8.52),
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
     toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    setAzimuthalAngle: 1.5,
   },
   check_table_4: {
     position: new THREE.Vector3(7.3, 1.64, -4.8),
-    target: new THREE.Vector3(6.56, 1.3, -4.8),
+    target: new THREE.Vector3(6.56, 1.4, -4.8),
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
     toAzimuth: { min: Math.PI / 2.5, max: Math.PI / 1.5 },
+    setAzimuthalAngle: 1.5,
   },
   check_table_5: {
     position: new THREE.Vector3(6.5, 1.16, -6.2),
@@ -68,12 +72,15 @@ const cameraPositions = {
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
     toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    setAzimuthalAngle: 1.5,
   },
   check_counter: {
     position: new THREE.Vector3(0.9, 1.88, -5.5),
     target: new THREE.Vector3(-0.58, 1.72, -5.5),
     limitRotation: true,
-    azimuthValues: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    fromAzimuth: { min: Math.PI / 4, max: Math.PI / 1.5 },
+    toAzimuth: { min: Math.PI / 4, max: Math.PI / 1.5 },
+    setAzimuthalAngle: 1.5,
   },
 };
 
@@ -91,6 +98,7 @@ interface CameraPropertiesProps {
   limitRotation: boolean;
   toAzimuth?: { min: number; max: number };
   fromAzimuth?: { min: number; max: number };
+  setAzimuthalAngle?: number;
 }
 
 const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
@@ -100,6 +108,10 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
   const [initalOrbit, setInitialOrbit] = React.useState(
     new THREE.Vector3(-20, 1.8, -2.12)
   );
+
+  React.useEffect(() => {
+    console.log(controlsRef.current);
+  }, []);
 
   const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
 
@@ -113,8 +125,9 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
       if (cameraProperties.limitRotation) {
         gsap.to(controlsRef.current, {
-          minPolarAngle: Math.PI / 2.7,
-          maxPolarAngle: Math.PI / 2.3,
+          minPolarAngle: Math.PI / 3,
+          maxPolarAngle: Math.PI / 2,
+
           rotateSpeed: 0.2,
           duration: 1,
         });
@@ -128,6 +141,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           {
             minAzimuthAngle: cameraProperties.toAzimuth?.min,
             maxAzimuthAngle: cameraProperties.toAzimuth?.max,
+
             duration: 1,
           }
         );
