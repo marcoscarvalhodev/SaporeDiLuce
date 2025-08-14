@@ -17,6 +17,8 @@ import { Waitress } from './RestaurantWaitress/Waitress';
 import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
 import { Glasses } from './ModelsManagement/Glasses';
+import { FloorCounter } from './ModelsManagement/FloorCounter';
+
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -86,6 +88,8 @@ function CanvasContainer() {
           }}
         />
         <Restaurant />
+        <FloorCounter />
+        
       </Canvas>
     </>
   );
