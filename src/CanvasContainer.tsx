@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
-import { Restaurant } from './ModelsManagement/Restaurant';
+/*import { Restaurant } from './ModelsManagement/Restaurant';*/
 import { Environment, PerspectiveCamera } from '@react-three/drei';
 import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
@@ -18,7 +18,9 @@ import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
 import { Glasses } from './ModelsManagement/Glasses';
 import { FloorCounter } from './ModelsManagement/FloorCounter';
-
+import { CeillingWalls } from './ModelsManagement/CeillingWalls';
+import EffectsComponent from './EffectsComponent/EffectsComponent';
+import { Lights } from './ModelsManagement/Lights';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -87,9 +89,10 @@ function CanvasContainer() {
             moveSound: true,
           }}
         />
-        <Restaurant />
+        <CeillingWalls />
         <FloorCounter />
-        
+        <Lights />
+        <EffectsComponent />
       </Canvas>
     </>
   );

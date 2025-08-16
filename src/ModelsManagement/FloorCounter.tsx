@@ -45,7 +45,7 @@ export function FloorCounter(props: JSX.IntrinsicElements['group']) {
           map={base_map}
           
           normalMap={normal_map}
-          
+          lightMap={base_map}
           
         />
       </mesh>
