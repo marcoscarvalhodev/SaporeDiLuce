@@ -21,6 +21,7 @@ import { FloorCounter } from './ModelsManagement/FloorCounter';
 import { CeillingWalls } from './ModelsManagement/CeillingWalls';
 import EffectsComponent from './EffectsComponent/EffectsComponent';
 import { Lights } from './ModelsManagement/Lights';
+import { MoldingDoors } from './ModelsManagement/MoldingDoors';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -91,6 +92,7 @@ function CanvasContainer() {
         />
         <CeillingWalls />
         <FloorCounter />
+        <MoldingDoors />
         <Lights />
         <EffectsComponent />
       </Canvas>
