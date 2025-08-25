@@ -24,6 +24,7 @@ import { Lights } from './ModelsManagement/Lights';
 import { MoldingDoors } from './ModelsManagement/MoldingDoors';
 import { ChairsDecorations } from './ModelsManagement/ChairsDecorations';
 import { WineBottles } from './ModelsManagement/WineBottles';
+import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -97,6 +98,7 @@ function CanvasContainer() {
         <FloorCounter />
         <MoldingDoors />
         <WineBottles />
+        <CouchPaintings />
         <Lights />
         <EffectsComponent />
       </Canvas>
