@@ -3,9 +3,10 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { JSX } from 'react'
+
 type GLTFResult = GLTF & {
   nodes: {
-    molding_doors002: THREE.Mesh
+    couch_paintings: THREE.Mesh
   }
   materials: {"": THREE.MeshStandardMaterial}
 }
@@ -17,8 +18,8 @@ export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.molding_doors002.geometry}
-        material={nodes.molding_doors002.material}
+        geometry={nodes.couch_paintings.geometry}
+        material={nodes.couch_paintings.material}
         position={[2.473, 2.023, 5.344]}
       />
     </group>
