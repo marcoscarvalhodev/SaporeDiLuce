@@ -74,9 +74,9 @@ export function Glasses(props: JSX.IntrinsicElements['group']) {
           envMapIntensity={0.9}
           transparent
           opacity={0.7}
-          reflectivity={1}
+          reflectivity={0.5}
           transmission={1.0}
-          color={'#9e9fa0'}
+          color={'#ffffff'}
         />
       </mesh>
     </group>
