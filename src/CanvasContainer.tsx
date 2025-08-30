@@ -1,6 +1,5 @@
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
-/*import { Restaurant } from './ModelsManagement/Restaurant';*/
 import { Environment, PerspectiveCamera } from '@react-three/drei';
 import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
@@ -16,7 +15,6 @@ import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 import { Waitress } from './RestaurantWaitress/Waitress';
 import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
-import { Glasses } from './ModelsManagement/Glasses';
 import { FloorCounter } from './ModelsManagement/FloorCounter';
 import { CeillingWalls } from './ModelsManagement/CeillingWalls';
 import EffectsComponent from './EffectsComponent/EffectsComponent';
@@ -83,7 +81,7 @@ function CanvasContainer() {
         <TableCustomersMain />
         <RestaurantMenu />
         <RestaurantDishes />
-        <Glasses />
+
         <NotepadPen />
         <Waitress />
         <MoveCameraOrbit
@@ -94,6 +92,7 @@ function CanvasContainer() {
           }}
         />
         <CeillingWalls />
+        
         <ChairsDecorations />
         <FloorCounter />
         <MoldingDoors />
