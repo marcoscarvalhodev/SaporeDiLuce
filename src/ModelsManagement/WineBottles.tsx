@@ -3,12 +3,10 @@ import React from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import { TextureLoader } from 'three';
-import { useLoader } from '@react-three/fiber';
-
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 type GLTFResult = GLTF & {
   nodes: {
-    wine_bottles_transparent: THREE.Mesh;
+    glasses_bottle_transparent: THREE.Mesh;
     wine_bottles: THREE.Mesh;
   };
   materials: { '': THREE.MeshStandardMaterial };
@@ -17,23 +15,18 @@ type GLTFResult = GLTF & {
 export function WineBottles(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/wine_bottles.glb') as GLTFResult;
 
-  const [base_map] = [
-    useLoader(TextureLoader, '/textures/wine_bottles/wine_bottles_base.webp'),
-  ];
-
-  React.useLayoutEffect(() => {
-    base_map.flipY = false;
-  });
+  const base_map = TextureAssetsLoader(
+    '/textures/wine_bottles/wine_bottles_base.webp'
+  );
 
   return (
     <group {...props} dispose={null}>
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.wine_bottles_transparent.geometry}
-        material={nodes.wine_bottles_transparent.material}
-        position={[1.657, 3.456, -9.942]}
-        rotation={[0, 0.71, 0]}
+        geometry={nodes.glasses_bottle_transparent.geometry}
+        material={nodes.glasses_bottle_transparent.material}
+        position={[2.562, 1.038, -7.988]}
       >
         <meshPhysicalMaterial
           roughness={0.1}
@@ -54,7 +47,7 @@ export function WineBottles(props: JSX.IntrinsicElements['group']) {
         position={[7.404, 2.529, -9.984]}
         rotation={[0, 0.493, 0]}
       >
-        <meshStandardMaterial map={base_map} />
+        <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
       </mesh>
     </group>
   );

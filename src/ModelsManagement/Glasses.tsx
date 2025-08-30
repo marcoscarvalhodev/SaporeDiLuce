@@ -39,7 +39,7 @@ export function Glasses(props: JSX.IntrinsicElements['group']) {
         material={materials.white_wine_liquid}
         position={[4.761, 1.034, -8.547]}
         rotation={[Math.PI, 0, Math.PI]}
-      />
+      ><meshStandardMaterial color={'black'} /></mesh>
       <mesh
         frustumCulled={false}
         castShadow

@@ -1,18 +1,23 @@
-import * as THREE from 'three'
-import React from 'react'
-import { useGLTF } from '@react-three/drei'
-import { GLTF } from 'three-stdlib'
-import { JSX } from 'react'
+import * as THREE from 'three';
+import React from 'react';
+import { useGLTF } from '@react-three/drei';
+import { GLTF } from 'three-stdlib';
+import { JSX } from 'react';
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
-    molding_doors: THREE.Mesh
-  }
-  materials: {"": THREE.MeshStandardMaterial}
-}
+    molding_doors: THREE.Mesh;
+  };
+  materials: { '': THREE.MeshStandardMaterial };
+};
 
 export function MoldingDoors(props: JSX.IntrinsicElements['group']) {
-  const { nodes } = useGLTF('/molding_doors.glb') as GLTFResult
+  const { nodes } = useGLTF('/molding_doors.glb') as GLTFResult;
+
+  const base_map = TextureAssetsLoader(
+    '/textures/molding_doors/molding_doors_base.webp'
+  );
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -21,9 +26,11 @@ export function MoldingDoors(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.molding_doors.geometry}
         material={nodes.molding_doors.material}
         position={[8.114, 2.518, -6.452]}
-      />
+      >
+        <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
+      </mesh>
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/molding_doors.glb')
+useGLTF.preload('/molding_doors.glb');
