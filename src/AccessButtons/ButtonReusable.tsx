@@ -49,7 +49,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
       >
         <div
           className={`${id} ${
-            color === 'black' ? 'bg-[#333332]' : 'bg-[#f0af0c]'
+            color === 'black' ? 'bg-[#f0f8fa]' : 'bg-[#f0af0c]'
           } accessButtons ${
             textSize === 'small' ? 'text_small' : 'text_large'
           } pointer-events-auto cursor-pointer`}
@@ -58,7 +58,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
         >
           <h1
             className={`accessButtonsText text-[2.8rem] ${
-              color === 'black' ? 'text-[white]' : 'text-[#333332]'
+              color === 'black' ? 'text-[#333332]' : 'text-[#333332]'
             }`}
           >
             {enterEnvironment ? outText : goText}

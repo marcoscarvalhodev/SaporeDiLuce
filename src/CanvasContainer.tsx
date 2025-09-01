@@ -20,7 +20,6 @@ import { CeillingWalls } from './ModelsManagement/CeillingWalls';
 import EffectsComponent from './EffectsComponent/EffectsComponent';
 import { Lights } from './ModelsManagement/Lights';
 import { MoldingDoors } from './ModelsManagement/MoldingDoors';
-import { ChairsDecorations } from './ModelsManagement/ChairsDecorations';
 import { WineBottles } from './ModelsManagement/WineBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 
@@ -93,7 +92,7 @@ function CanvasContainer() {
         />
         <CeillingWalls />
         
-        <ChairsDecorations />
+        
         <FloorCounter />
         <MoldingDoors />
         <WineBottles />

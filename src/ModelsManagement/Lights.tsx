@@ -24,7 +24,7 @@ export function Lights(props: JSX.IntrinsicElements['group']) {
         material={nodes.Cylinder046.material}
         position={[6.496, 4.466, -8.554]}
         scale={0.463}
-      ><meshStandardMaterial emissive={"#f3d162"} emissiveIntensity={40}/></mesh>
+      ><meshStandardMaterial emissive={"#e0fbfc"} emissiveIntensity={80}/></mesh>
     </group>
   )
 }

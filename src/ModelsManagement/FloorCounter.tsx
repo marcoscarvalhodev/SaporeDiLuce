@@ -9,6 +9,8 @@ import {
   UseAnimationsContext,
 } from '../context/UseContexts';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -34,28 +36,48 @@ export function FloorCounter(props: JSX.IntrinsicElements['group']) {
 
   const { doorClose } = UseAnimationsContext();
 
-  React.useEffect(() => {
+  const [door_left, door_right] = [nodes['door_left'], nodes['door_right']];
+
+  React.useEffect(() => {});
+
+  useGSAP(() => {
     if (
       roomNameState === 'restaurant_enter' ||
       roomNameState === 'restaurant_leave'
     ) {
-      animations.forEach((item) => {
+      /*animations.forEach((item) => {
         const doors = mixer.clipAction(item);
         doors.reset();
         doors.clampWhenFinished = true;
         doors.timeScale = 1;
         doors.setLoop(THREE.LoopOnce, 1);
         doors.play();
+      });*/
+
+      gsap.to(door_left.rotation, {
+        y: 1.6,
+        duration: 1.3,
+      });
+
+      gsap.to(door_right.rotation, {
+        y: -1.6,
+        duration: 1.3,
       });
     }
   }, [roomNameState, animations, mixer]);
 
-  React.useEffect(() => {
+  
+
+  useGSAP(() => {
     if (doorClose) {
-      animations.forEach((item) => {
-        const doors = mixer.clipAction(item);
-        doors.paused = false;
-        doors.timeScale = -1;
+      gsap.to(door_left.rotation, {
+        y: 0,
+        duration: 1.3,
+      });
+
+      gsap.to(door_right.rotation, {
+        y: 0,
+        duration: 1.3,
       });
     }
   }, [doorClose, animations, mixer]);
@@ -67,7 +89,11 @@ export function FloorCounter(props: JSX.IntrinsicElements['group']) {
           material={nodes.floor_counter.material}
           skeleton={nodes.floor_counter.skeleton}
         >
-          <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
+          <meshStandardMaterial
+            map={base_map}
+            lightMap={base_map}
+            lightMapIntensity={1}
+          />
         </skinnedMesh>
         <skinnedMesh
           geometry={nodes.glass_material.geometry}
