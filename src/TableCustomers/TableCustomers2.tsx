@@ -58,18 +58,23 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
+  React.useEffect(() => {
+    console.log(actions);
+  });
+
   const [chairs_base_map] = [
     TextureAssetsLoader(
       '/textures/chairs_decorations/chairs_decorations_base.webp'
     ),
   ];
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     actions['boy_anim_1']?.play();
     actions['woman_2_anim_1']?.play();
     actions['man_2_anim_1']?.play();
     actions['fork_anim']?.play();
-  });
+  });*/
+  
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
