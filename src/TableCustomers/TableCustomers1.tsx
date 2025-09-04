@@ -3,10 +3,7 @@ import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import {
-  UseCameraMovementContext,
-  UseHumansContext,
-} from '../context/UseContexts';
+import CustomersAnimations from '../helpers/CustomersAnimations';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,10 +33,6 @@ type GLTFResult = GLTF & {
   materials: { '': THREE.MeshStandardMaterial };
 };
 
-interface reviewAnimProps {
-  customerCam: THREE.AnimationAction | null;
-  customerReview: THREE.AnimationAction | null;
-}
 
 export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
@@ -48,10 +41,6 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   ) as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  const { customerReview } = UseHumansContext();
-
-  const { roomNameState } = UseCameraMovementContext();
-
   const man1AnimCam = actions['man_1_anim_cam'];
   const woman1AnimCam = actions['woman_1_anim_cam'];
   const woman1Anim1 = actions['woman_1_anim_1'];
@@ -59,7 +48,31 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const man1AnimReview = actions['man_1_anim_review'];
   const woman1AnimReview = actions['woman_1_anim_review'];
 
-  const ReviewAnimStart = ({
+  CustomersAnimations({
+    anim_action_init: [woman1Anim1, man1Anim1],
+    review_actions: [
+      {
+        action: {
+          customer_cam: man1AnimCam,
+          customer_review: man1AnimReview,
+          customer_init: man1Anim1,
+        },
+        customer_id: 'man_table_1',
+      },
+      {
+        action: {
+          customer_cam: woman1AnimCam,
+          customer_review: woman1AnimReview,
+          customer_init: woman1Anim1,
+        },
+        customer_id: 'woman_table_1',
+      },
+    ],
+
+    table_id: 'check_table_1',
+  });
+
+  /*const ReviewAnimStart = ({
     customerCam,
     customerReview,
   }: reviewAnimProps) => {
@@ -161,7 +174,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
     woman1Anim1,
     man1AnimCam,
     woman1AnimCam,
-  ]);
+  ]);*/
 
   return (
     <group ref={group} {...props} dispose={null}>

@@ -8,7 +8,7 @@ interface CameraMovementProps {
   refCanvasUpdated: React.RefObject<HTMLCanvasElement | null>;
 }
 
-export type customerReviewProps = '' | 'man_table_1' | 'woman_table_1';
+export type customerReviewProps = '' | 'man_table_1' | 'woman_table_1' | "man_table_2" | "woman_table_2" | "boy_table_2" | "woman_table_3" | "man_table_3" | "girl_table_3" | "man_table_5" | "woman_table_5";
 
 export type waiterDialogueProps =
   | ''
