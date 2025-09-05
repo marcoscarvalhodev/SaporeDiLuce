@@ -43,6 +43,10 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
 
   const manTable1 = React.useRef<HTMLDivElement | null>(null);
   const womanTable1 = React.useRef<HTMLDivElement | null>(null);
+  const manTable2 = React.useRef<HTMLDivElement | null>(null);
+  const womanTable2 = React.useRef<HTMLDivElement | null>(null);
+  const boyTable2 = React.useRef<HTMLDivElement | null>(null);
+
   const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
@@ -448,7 +452,11 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
                 handleTablesButtonClick({
                   tableRef: buttonTable2.current,
                   stateName: 'check_table_2',
-                  customers: null,
+                  customers: [
+                    manTable2.current,
+                    womanTable2.current,
+                    boyTable2.current,
+                  ],
                 });
               }}
               goText='Check Table'
@@ -458,6 +466,75 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             />
           </Html>
           <meshStandardMaterial visible={false} />
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[4.257, 1.033, -5.302]}
+          scale={0.057}
+          name='man_table_2'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              id='table_2_man'
+              ref={manTable2}
+              onClick={() => {
+                setCustomerReview('man_table_2');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[3.457, 1.033, -5.252]}
+          scale={0.057}
+          name='woman_table_2'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              id='table_2_woman'
+              ref={womanTable2}
+              onClick={() => {
+                setCustomerReview('woman_table_2');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+        <mesh
+          castShadow
+          receiveShadow
+          position={[3.807, 1.033, -4.902]}
+          scale={0.057}
+          name='boy_table_2'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              id='table_2_boy'
+              ref={boyTable2}
+              onClick={() => {
+                setCustomerReview('boy_table_2');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
         </mesh>
       </group>
 

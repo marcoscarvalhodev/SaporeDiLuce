@@ -6,6 +6,12 @@ const StarsComponent = ({ stars }: { stars: number }) => {
 
   React.useEffect(() => {
     switch (stars) {
+      case 3.5:
+        setRectWidth(170);
+        break;
+      case 4:
+        setRectWidth(195);
+        break;
       case 4.5:
         setRectWidth(220);
         break;
