@@ -33,7 +33,6 @@ type GLTFResult = GLTF & {
   materials: { '': THREE.MeshStandardMaterial };
 };
 
-
 export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
   const { nodes, animations } = useGLTF(
@@ -48,136 +47,34 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   const man1AnimReview = actions['man_1_anim_review'];
   const woman1AnimReview = actions['woman_1_anim_review'];
 
-  CustomersAnimations({
-    anim_action_init: [woman1Anim1, man1Anim1],
-    review_actions: [
-      {
-        action: {
-          customer_cam: man1AnimCam,
-          customer_review: man1AnimReview,
-          customer_init: man1Anim1,
-        },
-        customer_id: 'man_table_1',
-      },
-      {
-        action: {
-          customer_cam: woman1AnimCam,
-          customer_review: woman1AnimReview,
-          customer_init: woman1Anim1,
-        },
-        customer_id: 'woman_table_1',
-      },
-    ],
-
-    table_id: 'check_table_1',
-  });
-
-  /*const ReviewAnimStart = ({
-    customerCam,
-    customerReview,
-  }: reviewAnimProps) => {
-    if (customerCam && customerReview) {
-      customerCam?.crossFadeTo(customerReview, 0.3, true);
-      customerReview.reset();
-      customerReview.timeScale = 1;
-      customerReview.repetitions = 1;
-      customerReview.clampWhenFinished = true;
-      customerReview.play();
-    }
-  };
-
-  React.useEffect(() => {
-    if (man1AnimReview && woman1AnimReview && man1Anim1 && woman1Anim1) {
-      if (customerReview === 'man_table_1') {
-        ReviewAnimStart({
-          customerCam: man1AnimCam,
-          customerReview: man1AnimReview,
-        });
-      } else if (customerReview === 'woman_table_1') {
-        ReviewAnimStart({
-          customerCam: woman1AnimCam,
-          customerReview: woman1AnimReview,
-        });
-      } else {
-        man1AnimReview.crossFadeTo(man1Anim1, 1, true);
-        woman1AnimReview.crossFadeTo(woman1Anim1, 1, true);
-      }
-    }
-  }, [
-    customerReview,
-    man1AnimReview,
-    man1AnimCam,
-    man1Anim1,
-    woman1AnimReview,
-    woman1AnimCam,
-    woman1Anim1,
-  ]);
-
-  React.useEffect(() => {
-    function initialAnim() {
-      if (woman1Anim1 && man1Anim1) {
-        woman1Anim1.stop();
-        man1Anim1.stop();
-        woman1Anim1.timeScale = 1;
-        man1Anim1.timeScale = 1;
-        woman1Anim1.play();
-        man1Anim1.play();
-      }
-    }
-
-    initialAnim();
-  }, [man1Anim1, woman1Anim1]);
-
-  React.useEffect(() => {
-    if (roomNameState === 'check_table_1') {
-      if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
-        woman1AnimCam.reset();
-        man1AnimCam.reset();
-
-        woman1AnimCam.clampWhenFinished = true;
-        man1AnimCam.clampWhenFinished = true;
-
-        woman1AnimCam.repetitions = 1;
-        man1AnimCam.repetitions = 1;
-
-        woman1AnimCam.timeScale = 1;
-        man1AnimCam.timeScale = 1;
-
-        woman1AnimCam.play();
-        man1AnimCam.play();
-
-        woman1Anim1.crossFadeTo(woman1AnimCam, 1, true);
-        man1Anim1.crossFadeTo(man1AnimCam, 1, true);
-      }
-    } else if (roomNameState === 'dining_room_enter') {
-      if (woman1AnimCam && man1AnimCam && man1Anim1 && woman1Anim1) {
-        woman1Anim1.reset();
-        man1Anim1.reset();
-
-        woman1Anim1.clampWhenFinished = false;
-        man1Anim1.clampWhenFinished = false;
-
-        man1Anim1.timeScale = 1;
-        woman1Anim1.timeScale = 1;
-
-        woman1Anim1.play();
-        man1Anim1.play();
-
-        woman1AnimCam.crossFadeTo(woman1Anim1, 1, false);
-        man1AnimCam.crossFadeTo(man1Anim1, 1, false);
-      }
-    }
-  }, [
-    actions,
-    roomNameState,
-    man1Anim1,
-    woman1Anim1,
-    man1AnimCam,
-    woman1AnimCam,
-  ]);*/
 
   return (
     <group ref={group} {...props} dispose={null}>
+      <CustomersAnimations
+        anim_action_init={[woman1Anim1, man1Anim1]}
+        review_actions={[
+          {
+            action: {
+              customer_cam: man1AnimCam,
+              customer_review: man1AnimReview,
+              customer_init: man1Anim1,
+            },
+
+            customer_id: 'man_table_1',
+          },
+
+          {
+            action: {
+              customer_cam: woman1AnimCam,
+              customer_review: woman1AnimReview,
+              customer_init: woman1Anim1,
+            },
+            customer_id: 'woman_table_1',
+          },
+        ]}
+        table_id='check_table_1'
+      />
+
       <group name='Scene'>
         <group name='rig_woman_1'>
           <skinnedMesh

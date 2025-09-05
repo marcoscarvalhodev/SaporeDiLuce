@@ -33,39 +33,71 @@ const CustomersAnimations = ({
   const { customerReview } = UseHumansContext();
   const { roomNameState } = UseCameraMovementContext();
 
-  React.useEffect(() => {
-    function initialAnim() {
-      if (anim_action_init) {
-        anim_action_init.forEach((item) => {
-          if (item) {
-            item.stop();
-            item.timeScale = 1;
-            item.play();
-          }
-        });
+  const ReviewAnimStart = React.useCallback(
+    ({ customerCam, customerReview }: reviewAnimProps) => {
+      if (customerCam && customerReview) {
+        customerCam?.crossFadeTo(customerReview, 0.3, true);
+        customerReview.reset();
+        customerReview.timeScale = 1;
+        customerReview.repetitions = 1;
+        customerReview.clampWhenFinished = true;
+        customerReview.play();
       }
-    }
+    },
+    []
+  );
 
-    initialAnim();
+  const InitialAnim = React.useCallback(() => {
+    if (anim_action_init) {
+      anim_action_init.forEach((item) => {
+        if (item) {
+          item.stop();
+          item.timeScale = 1;
+          item.play();
+        }
+      });
+    }
   }, [anim_action_init]);
 
-  const ReviewAnimStart = ({
-    customerCam,
-    customerReview,
-  }: reviewAnimProps) => {
-    if (customerCam && customerReview) {
-      customerCam?.crossFadeTo(customerReview, 0.3, true);
-      customerReview.reset();
-      customerReview.timeScale = 1;
-      customerReview.repetitions = 1;
-      customerReview.clampWhenFinished = true;
-      customerReview.play();
+  const ReviewToInitAnim = React.useCallback(() => {
+    if (roomNameState === table_id) {
+      review_actions.forEach((item) => {
+        const customer_cam = item.action.customer_cam;
+        const customer_init = item.action.customer_init;
+
+        if (customer_cam && customer_init) {
+          
+          customer_cam.reset();
+          customer_cam.clampWhenFinished = true;
+          customer_cam.repetitions = 1;
+          customer_cam.timeScale = 1;
+          customer_cam.play();
+          customer_init.crossFadeTo(customer_cam, 1, true);
+        }
+      });
+    } else if (roomNameState === 'dining_room_enter') {
+      review_actions.forEach((item) => {
+        const customer_review = item.action.customer_review;
+        const customer_init = item.action.customer_init;
+         const customer_cam = item.action.customer_cam;
+
+        if (customer_review && customer_init && customer_cam) {
+          
+          
+          customer_init.reset();
+          customer_init.clampWhenFinished = false;
+          customer_init.timeScale = 1;
+          customer_init.play();
+          customer_review.crossFadeTo(customer_init, 1, true)
+          customer_cam.crossFadeTo(customer_init, 1, true);
+        }
+      });
     }
-  };
+  }, [roomNameState, review_actions, table_id]);
 
   React.useEffect(() => {
-    console.log(review_actions);
-  }, [review_actions]);
+    InitialAnim();
+  }, [InitialAnim]);
 
   React.useEffect(() => {
     const matchedItem = review_actions.find(
@@ -78,38 +110,13 @@ const CustomersAnimations = ({
         customerReview: matchedItem.action.customer_review,
       });
     }
-  }, [customerReview, review_actions]);
+  }, [customerReview, review_actions, ReviewAnimStart]);
 
   React.useEffect(() => {
-    if (roomNameState === table_id) {
-      review_actions.forEach((item) => {
-        const customer_cam = item.action.customer_cam;
-        const customer_init = item.action.customer_init;
+    ReviewToInitAnim();
+  }, [ReviewToInitAnim]);
 
-        if (customer_cam && customer_init) {
-          customer_init.crossFadeTo(customer_cam, 1, true);
-          customer_cam.reset();
-          customer_cam.clampWhenFinished = true;
-          customer_cam.repetitions = 1;
-          customer_cam.timeScale = 1;
-          customer_cam.play();
-        }
-      });
-    } else if (roomNameState === 'dining_room_enter') {
-      review_actions.forEach((item) => {
-        const customer_cam = item.action.customer_cam;
-        const customer_init = item.action.customer_init;
-
-        if (customer_cam && customer_init) {
-          customer_cam.crossFadeTo(customer_init, 1, true);
-          customer_init.reset();
-          customer_init.clampWhenFinished = false;
-          customer_init.timeScale = 1;
-          customer_init.play();
-        }
-      });
-    }
-  }, [review_actions, roomNameState, table_id]);
+  return null;
 };
 
 export default CustomersAnimations;
