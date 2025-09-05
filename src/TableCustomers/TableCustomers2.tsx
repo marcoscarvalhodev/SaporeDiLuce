@@ -5,6 +5,7 @@ import { Group } from 'three';
 import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/Addons.js';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
+import CustomersAnimations from '../helpers/CustomersAnimations';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -68,15 +69,53 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     ),
   ];
 
-  /*React.useEffect(() => {
-    actions['boy_anim_1']?.play();
-    actions['woman_2_anim_1']?.play();
-    actions['man_2_anim_1']?.play();
-    actions['fork_anim']?.play();
-  });*/
+   const man2AnimCam = actions['man_2_anim_cam'];
+  const woman2AnimCam = actions['woman_2_anim_cam'];
+  const boyAnimCam = actions["boy_anim_cam"]
+  const woman2Anim1 = actions['woman_2_anim_1'];
+  const man2Anim1 = actions['man_2_anim_1'];
+  const boyAnim1 = actions["boy_anim_1"]
+  const man2AnimReview = actions['man_2_anim_review'];
+  const woman2AnimReview = actions['woman_2_anim_review'];
+  const boyAnimReview = actions["boy_anim_review"]
   
   return (
     <group ref={group} {...props} dispose={null}>
+
+<CustomersAnimations
+        anim_action_init={[woman2Anim1, man2Anim1]}
+        review_actions={[
+          {
+            action: {
+              customer_cam: man2AnimCam,
+              customer_review: man2AnimReview,
+              customer_init: man2Anim1,
+            },
+
+            customer_id: 'man_table_2',
+          },
+
+          {
+            action: {
+              customer_cam: woman2AnimCam,
+              customer_review: woman2AnimReview,
+              customer_init: woman2Anim1,
+            },
+            customer_id: 'woman_table_2',
+          },
+
+          {
+            action: {
+              customer_cam: boyAnimCam,
+              customer_review: boyAnimReview,
+              customer_init: boyAnim1,
+            },
+            customer_id: "boy_table_2",
+          },
+        ]}
+        table_id='check_table_2'
+      />
+
       <group name='Scene'>
         <group
           name='fork'
