@@ -32,6 +32,31 @@ const listCustomerReviews: customerReviews = [
     customer_id: 'woman_table_1',
     position: [1.825, 1.092, -8.004],
   },
+
+  {
+    name: 'Robert',
+    message:
+      'The gnocchi is really nice, you should try it',
+    stars: 4.5,
+    customer_id: 'man_table_2',
+    position: [5.357, 1.233, -5.302],
+  },
+  {
+    name: 'Michelle',
+    message:
+      'I send my congrats to the chef for this magnificent food',
+    stars: 5,
+    customer_id: 'woman_table_2',
+    position: [2.957, 1.233, -5.302],
+  },
+  {
+    name: 'Josh',
+    message:
+      'Actually I wanted a hamburger, but I am satisfied with the spaghetti',
+    stars: 3.5,
+    customer_id: 'boy_table_2',
+    position: [4.057, 2.200, -4.002],
+  },
 ];
 
 const ReviewsCustomers = () => {

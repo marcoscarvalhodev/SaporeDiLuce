@@ -19,7 +19,10 @@ interface ButtonReusableProps {
     | 'counter_button'
     | 'menu_button'
     | 'table_1_man'
-    | 'table_1_woman'
+    | 'table_1_woman' 
+    | 'table_2_man'
+    | 'table_2_woman'
+    | 'table_2_boy'
     | 'eat_button'
     | 'waitress_button';
 }

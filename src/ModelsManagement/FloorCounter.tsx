@@ -92,7 +92,7 @@ export function FloorCounter(props: JSX.IntrinsicElements['group']) {
           <meshStandardMaterial
             map={base_map}
             lightMap={base_map}
-            lightMapIntensity={1}
+            lightMapIntensity={0}
           />
         </skinnedMesh>
         <skinnedMesh
