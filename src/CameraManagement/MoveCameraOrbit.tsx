@@ -109,10 +109,6 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     new THREE.Vector3(-20, 1.8, -2.12)
   );
 
-  React.useEffect(() => {
-    console.log(controlsRef.current);
-  }, []);
-
   const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
 
   const { MovementAudio, DoorAudio } = AudioEffects();
@@ -120,8 +116,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
   const limitRotationInit = React.useCallback(() => {
     if (currentPosition.params.name) {
-      const cameraProperties: CameraPropertiesProps =
-        cameraPositions[currentPosition.params.name];
+      const cameraProperties: CameraPropertiesProps = cameraPositions[currentPosition.params.name];
 
       if (cameraProperties.limitRotation) {
         gsap.to(controlsRef.current, {

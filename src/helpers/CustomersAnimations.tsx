@@ -103,12 +103,10 @@ const CustomersAnimations = ({
       default: {
         review_actions.forEach((item) => {
           const customer_init = item.action.customer_init;
-          if (customer_init) {
-            // Stop other animations first
+          if (customer_init) { 
             item.action.customer_cam?.stop();
             item.action.customer_review?.stop();
 
-            // Reset and play the init animation
             customer_init.reset();
             customer_init.clampWhenFinished = false;
             customer_init.timeScale = 1;

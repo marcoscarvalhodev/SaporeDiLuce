@@ -6,7 +6,6 @@ export type roomNameProps =
   | 'dining_room_enter'
   | 'restaurant_leave'
   | 'dining_room_leave'
-  | 'restaurant_outside_init'
   | 'check_table_1'
   | 'check_table_2'
   | 'check_table_3'
