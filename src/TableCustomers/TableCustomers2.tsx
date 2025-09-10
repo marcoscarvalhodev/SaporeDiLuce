@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/Addons.js';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import CustomersAnimations from '../helpers/CustomersAnimations';
+import { UseAnimationsContext } from '../context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -59,15 +60,13 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  React.useEffect(() => {
-    console.log(actions);
-  });
-
   const [chairs_base_map] = [
     TextureAssetsLoader(
       '/textures/chairs_decorations/chairs_decorations_base.webp'
     ),
   ];
+
+  const {customersAnimationsReady} = UseAnimationsContext()
 
    const man2AnimCam = actions['man_2_anim_cam'];
   const woman2AnimCam = actions['woman_2_anim_cam'];
@@ -83,7 +82,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
 
 <CustomersAnimations
-        anim_action_init={[woman2Anim1, man2Anim1]}
+        customerAnimationsReady={customersAnimationsReady}
         review_actions={[
           {
             action: {

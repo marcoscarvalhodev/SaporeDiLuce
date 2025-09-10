@@ -24,6 +24,9 @@ interface AnimationsProps {
   setDoorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   movementAudioState: boolean;
   setMovementAudioState: React.Dispatch<React.SetStateAction<boolean>>;
+  customersAnimationsReady: boolean;
+  clickedAudio: boolean;
+  setClickedAudio: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface HumansProps {

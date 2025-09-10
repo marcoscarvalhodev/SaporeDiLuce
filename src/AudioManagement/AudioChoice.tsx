@@ -1,10 +1,11 @@
 import React from 'react';
-import { UseAudioChoiceContext } from '../context/UseContexts';
+import { UseAnimationsContext, UseAudioChoiceContext } from '../context/UseContexts';
 import gsap from 'gsap';
 
 const AudioChoice = () => {
   const { setAudioPlay } = UseAudioChoiceContext();
-  const [clickedAudio, setClickedAudio] = React.useState(false);
+  const {clickedAudio, setClickedAudio} = UseAnimationsContext()
+  
   const audioChoiceWrapperRef = React.useRef<null | HTMLDivElement>(null);
 
   React.useEffect(() => {

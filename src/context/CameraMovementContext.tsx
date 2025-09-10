@@ -6,6 +6,7 @@ export type roomNameProps =
   | 'dining_room_enter'
   | 'restaurant_leave'
   | 'dining_room_leave'
+  | 'restaurant_outside_init'
   | 'check_table_1'
   | 'check_table_2'
   | 'check_table_3'
@@ -21,6 +22,7 @@ export const ContextCameraMovementProvider = ({
 }) => {
   const [roomNameState, setRoomNameState] = React.useState<null | roomNameProps>(null);
   const refCanvasUpdated = React.useRef<null | HTMLCanvasElement>(null);
+
 
   return (
     <CreateCameraMovementContext.Provider

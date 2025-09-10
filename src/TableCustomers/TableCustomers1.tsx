@@ -4,6 +4,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
+import { UseAnimationsContext } from '../context/UseContexts';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -39,6 +40,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
     '/table_customers/table_customers_1.glb'
   ) as GLTFResult;
   const { actions } = useAnimations(animations, group);
+  const {customersAnimationsReady} = UseAnimationsContext();
 
   const man1AnimCam = actions['man_1_anim_cam'];
   const woman1AnimCam = actions['woman_1_anim_cam'];
@@ -51,7 +53,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
   return (
     <group ref={group} {...props} dispose={null}>
       <CustomersAnimations
-        anim_action_init={[woman1Anim1, man1Anim1]}
+      customerAnimationsReady={customersAnimationsReady}
         review_actions={[
           {
             action: {
@@ -71,10 +73,10 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             },
             customer_id: 'woman_table_1',
           },
+
         ]}
         table_id='check_table_1'
       />
-
       <group name='Scene'>
         <group name='rig_woman_1'>
           <skinnedMesh
