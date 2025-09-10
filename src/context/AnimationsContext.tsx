@@ -9,6 +9,13 @@ export const ContextAnimationsProvider = ({
   const [doorClose, setDoorClose] = React.useState(false);
   const [movementAudioState, setMovementAudioState] = React.useState(false);
   const [doorOpen, setDoorOpen] = React.useState(false);
+  const [clickedAudio, setClickedAudio] = React.useState(false);
+  const [customersAnimationsReady, setCustomersAnimationsReady] =
+    React.useState(false);
+
+  React.useEffect(() => {
+    if (clickedAudio) setCustomersAnimationsReady(true);
+  }, [clickedAudio]);
 
   return (
     <CreateContextAnimations.Provider
@@ -19,6 +26,9 @@ export const ContextAnimationsProvider = ({
         setDoorOpen,
         movementAudioState,
         setMovementAudioState,
+        customersAnimationsReady,
+        clickedAudio,
+        setClickedAudio,
       }}
     >
       {children}

@@ -22,6 +22,7 @@ export const ContextCameraMovementProvider = ({
   const [roomNameState, setRoomNameState] = React.useState<null | roomNameProps>(null);
   const refCanvasUpdated = React.useRef<null | HTMLCanvasElement>(null);
 
+
   return (
     <CreateCameraMovementContext.Provider
       value={{ roomNameState, setRoomNameState, refCanvasUpdated }}
