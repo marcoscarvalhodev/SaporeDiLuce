@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import gsap from 'gsap';
 
 interface ButtonReusableProps {
+  hideButton?: boolean;
   textSize: 'small' | 'large';
   goText: string;
   outText: string;
@@ -19,7 +20,7 @@ interface ButtonReusableProps {
     | 'counter_button'
     | 'menu_button'
     | 'table_1_man'
-    | 'table_1_woman' 
+    | 'table_1_woman'
     | 'table_2_man'
     | 'table_2_woman'
     | 'table_2_boy'
@@ -29,9 +30,24 @@ interface ButtonReusableProps {
 
 const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
   (
-    { onClick, enterEnvironment, outText, goText, id, textSize, color },
+    {
+      onClick,
+      enterEnvironment,
+      outText,
+      goText,
+      id,
+      textSize,
+      color,
+      hideButton,
+    },
     ref
   ) => {
+    const [buttonMessage, setButtonMessage] = React.useState(false);
+
+    React.useEffect(() => {
+      setTimeout(() => setButtonMessage(enterEnvironment), 1000);
+    }, [setButtonMessage, enterEnvironment]);
+
     React.useLayoutEffect(() => {
       if (id !== 'restaurant_button') {
         gsap.to(`.${id}`, {
@@ -42,6 +58,23 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
       }
     }, [id]);
 
+    const buttonDisappear = React.useCallback(() => {
+      if (!hideButton) return;
+
+      const tl = gsap.timeline();
+
+      tl.to(`.${id}`, {
+        opacity: 0,
+        pointerEvents: 'none',
+        duration: 1,
+      }).to(`.${id}`, {
+        opacity: 1,
+        duration: 1,
+        pointerEvents: 'all',
+        delay: 2,
+      });
+    }, [hideButton, id]);
+
     return (
       <div
         className={`${
@@ -49,6 +82,9 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
             ? 'w-[20rem] left-[-10rem]'
             : 'w-[40rem] left-[-20rem]'
         } relative top-[-2rem]`}
+        onClick={() => {
+          buttonDisappear();
+        }}
       >
         <div
           className={`${id} ${
@@ -64,7 +100,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
               color === 'black' ? 'text-[#333332]' : 'text-[#333332]'
             }`}
           >
-            {enterEnvironment ? outText : goText}
+            {buttonMessage ? outText : goText}
           </h1>
         </div>
       </div>
