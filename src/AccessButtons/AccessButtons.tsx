@@ -327,6 +327,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+          hideButton
             color='black'
             id='restaurant_button'
             ref={buttonRestaurant}
@@ -348,6 +349,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
+          hideButton
             color='black'
             id='dinner_button'
             ref={buttonDinner}
@@ -370,6 +372,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+             hideButton
               color='black'
               id='table_1_button'
               ref={buttonTable1}
@@ -445,6 +448,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+            hideButton
               id='table_2_button'
               ref={buttonTable2}
               color='black'
@@ -547,6 +551,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+            hideButton
               color='black'
               id='table_3_button'
               ref={buttonTable3}
@@ -576,6 +581,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+            hideButton
               color='black'
               id='table_4_button'
               ref={buttonTable4}
@@ -628,6 +634,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+            hideButton
               color='black'
               id='table_5_button'
               ref={buttonTable5}
@@ -657,6 +664,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
+              hideButton
               color='black'
               id='counter_button'
               ref={buttonCounter}
