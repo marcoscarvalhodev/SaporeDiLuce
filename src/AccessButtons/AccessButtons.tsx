@@ -404,6 +404,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
               color='orange'
               id='table_1_man'
               ref={manTable1}
+              orangeButtonClass='orange_button'
               onClick={() => {
                 setCustomerReview('man_table_1');
               }}
@@ -425,6 +426,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               color='orange'
+              orangeButtonClass='orange_button'
               id='table_1_woman'
               ref={womanTable1}
               onClick={() => {
@@ -482,6 +484,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
+              orangeButtonClass='orange_button'
               id='table_2_man'
               ref={manTable2}
               onClick={() => {
@@ -505,6 +508,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
+              orangeButtonClass='orange_button'
               id='table_2_woman'
               ref={womanTable2}
               onClick={() => {
@@ -528,6 +532,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
+              orangeButtonClass='orange_button'  
               id='table_2_boy'
               ref={boyTable2}
               onClick={() => {
@@ -716,7 +721,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       >
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
-            color='black'
+            color='orange'
             id='menu_button'
             ref={buttonMenu}
             onClick={() => {

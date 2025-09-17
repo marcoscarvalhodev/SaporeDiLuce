@@ -4,6 +4,7 @@ import gsap from 'gsap';
 interface ButtonReusableProps {
   hideButton?: boolean;
   textSize: 'small' | 'large';
+  orangeButtonClass?: string;
   goText: string;
   outText: string;
   enterEnvironment: boolean;
@@ -45,7 +46,9 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
     const [buttonMessage, setButtonMessage] = React.useState(false);
 
     React.useEffect(() => {
-      setTimeout(() => setButtonMessage(enterEnvironment), 1000);
+      
+        setTimeout(() => setButtonMessage(enterEnvironment), 1000);
+      
     }, [setButtonMessage, enterEnvironment]);
 
     React.useLayoutEffect(() => {
@@ -63,7 +66,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
 
       const tl = gsap.timeline();
 
-      tl.to(`.${id}`, {
+      tl.to([`.${id}`], {
         opacity: 0,
         pointerEvents: 'none',
         duration: 1,
@@ -88,7 +91,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
       >
         <div
           className={`${id} ${
-            color === 'black' ? 'bg-[#f0f8fa]' : 'bg-[#f0af0c]'
+            color === 'black' ? 'bg-[#f0f8fac7]' : 'bg-[#f0af0cb2]'
           } accessButtons ${
             textSize === 'small' ? 'text_small' : 'text_large'
           } pointer-events-auto cursor-pointer`}
