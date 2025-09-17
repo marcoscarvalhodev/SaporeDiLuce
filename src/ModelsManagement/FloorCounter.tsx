@@ -45,14 +45,6 @@ export function FloorCounter(props: JSX.IntrinsicElements['group']) {
       roomNameState === 'restaurant_enter' ||
       roomNameState === 'restaurant_leave'
     ) {
-      /*animations.forEach((item) => {
-        const doors = mixer.clipAction(item);
-        doors.reset();
-        doors.clampWhenFinished = true;
-        doors.timeScale = 1;
-        doors.setLoop(THREE.LoopOnce, 1);
-        doors.play();
-      });*/
 
       gsap.to(door_left.rotation, {
         y: 1.6,
