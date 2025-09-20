@@ -148,8 +148,6 @@ export function RestaurantMenu() {
           <mesh
             ref={refArrow}
             name='arrow_choose'
-            castShadow
-            receiveShadow
             geometry={nodes.arrow_choose.geometry}
             material={materials['Material.006']}
             position={[-0.16, 0.002, 0.021]}
@@ -168,8 +166,6 @@ export function RestaurantMenu() {
               pointerActiveMenu({ isActive: false, menuOption: '' })
             }
             name='menu_option_1'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_option_1.geometry}
             material={nodes.menu_option_1.material}
             position={[-0.16, 0.004, -0.073]}
@@ -197,8 +193,6 @@ export function RestaurantMenu() {
               pointerActiveMenu({ isActive: false, menuOption: '' })
             }
             name='menu_option_2'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_option_2.geometry}
             material={nodes.menu_option_2.material}
             position={[-0.078, 0.004, -0.073]}
@@ -225,8 +219,6 @@ export function RestaurantMenu() {
               pointerActiveMenu({ isActive: false, menuOption: '' })
             }
             name='menu_option_3'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_option_3.geometry}
             material={nodes.menu_option_3.material}
             position={[0.001, 0.004, -0.073]}
@@ -254,8 +246,6 @@ export function RestaurantMenu() {
               pointerActiveMenu({ isActive: false, menuOption: '' })
             }
             name='menu_option_4'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_option_4.geometry}
             material={nodes.menu_option_4.material}
             position={[0.08, 0.004, -0.073]}
@@ -283,8 +273,6 @@ export function RestaurantMenu() {
               pointerActiveMenu({ isActive: false, menuOption: '' })
             }
             name='menu_option_5'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_option_5.geometry}
             position={[0.159, 0.004, -0.073]}
             renderOrder={1}
@@ -300,15 +288,11 @@ export function RestaurantMenu() {
           </mesh>
           <mesh
             name='menu_1'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_1.geometry}
             material={materials.menu}
           />
           <mesh
             name='menu_2'
-            castShadow
-            receiveShadow
             geometry={nodes.menu_2.geometry}
             material={materials['Material.005']}
           />

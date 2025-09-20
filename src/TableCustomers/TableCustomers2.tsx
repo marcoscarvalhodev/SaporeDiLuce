@@ -155,6 +155,8 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
           rotation={[1.486, -0.01, 0.122]}
         >
           <skinnedMesh
+            receiveShadow
+            castShadow
             name='chairs_decoration'
             geometry={nodes.chairs_decoration.geometry}
             material={nodes.chairs_decoration.material}
@@ -185,6 +187,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+          castShadow
             name='boy_lowerbody'
             geometry={nodes.boy_lowerbody.geometry}
             material={nodes.boy_lowerbody.material}
@@ -237,6 +240,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+          castShadow
             name='man_2_lowerbody'
             geometry={nodes.man_2_lowerbody.geometry}
             material={nodes.man_2_lowerbody.material}
@@ -289,6 +293,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            castShadow
             name='woman_2_lowerbody'
             geometry={nodes.woman_2_lowerbody.geometry}
             material={nodes.woman_2_lowerbody.material}

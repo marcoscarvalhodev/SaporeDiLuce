@@ -25,25 +25,26 @@ export function Glasses(props: JSX.IntrinsicElements['group']) {
     <group {...props} dispose={null}>
       <mesh
         frustumCulled={false}
-        castShadow
-        receiveShadow
+        
+        
         geometry={nodes.red_wine.geometry}
         material={materials.wine_liquid}
         position={[6.315, 1.041, -4.979]}
       />
       <mesh
         frustumCulled={false}
-        castShadow
-        receiveShadow
+        
+        
         geometry={nodes.white_wine.geometry}
         material={materials.white_wine_liquid}
         position={[4.761, 1.034, -8.547]}
         rotation={[Math.PI, 0, Math.PI]}
-      ><meshStandardMaterial color={'black'} /></mesh>
+      >
+        <meshStandardMaterial color={'black'} />
+      </mesh>
       <mesh
         frustumCulled={false}
-        castShadow
-        receiveShadow
+        
         geometry={nodes.water.geometry}
         position={[4.617, 1.053, -6.771]}
         rotation={[0, Math.PI / 2, 0]}
@@ -62,8 +63,7 @@ export function Glasses(props: JSX.IntrinsicElements['group']) {
       </mesh>
       <mesh
         frustumCulled={false}
-        castShadow
-        receiveShadow
+        
         geometry={nodes.glass_cup.geometry}
         position={[2.562, 1.038, -7.988]}
       >

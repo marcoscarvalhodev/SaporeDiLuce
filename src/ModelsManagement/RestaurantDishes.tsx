@@ -112,8 +112,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
     <group {...props} dispose={null} ref={dishesWrapperRef}>
       <mesh
         name='dish_1'
-        castShadow
-        receiveShadow
         geometry={nodes.pasta_scarpariello.geometry}
         material={nodes.pasta_scarpariello.material}
         position={[6.549, 1.018, -4.967]}
@@ -123,8 +121,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
 
       <mesh
         name='dish_2'
-        castShadow
-        receiveShadow
         geometry={nodes.paccheri.geometry}
         material={nodes.paccheri.material}
         position={[6.549, 1.028, -4.967]}
@@ -134,8 +130,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         name='dish_3'
-        castShadow
-        receiveShadow
         geometry={nodes.pasta_gricia.geometry}
         material={nodes.pasta_gricia.material}
         position={[6.549, 1.018, -4.967]}
@@ -145,8 +139,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         name='dish_4'
-        castShadow
-        receiveShadow
         geometry={nodes.gnocchi.geometry}
         material={nodes.gnocchi.material}
         position={[6.549, 1.014, -4.967]}
@@ -157,8 +149,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
 
       <mesh
         name='dish_5'
-        castShadow
-        receiveShadow
         geometry={nodes.pollo.geometry}
         material={nodes.pollo.material}
         position={[6.549, 1.014, -4.967]}
@@ -167,8 +157,6 @@ export function RestaurantDishes(props: JSX.IntrinsicElements['group']) {
       />
       <mesh
         name='empty_plate'
-        castShadow
-        receiveShadow
         geometry={nodes.empty_plate.geometry}
         material={nodes.empty_plate.material}
         position={[6.549, 1.014, -4.967]}

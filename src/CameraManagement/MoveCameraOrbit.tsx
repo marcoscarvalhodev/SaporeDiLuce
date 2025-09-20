@@ -35,8 +35,8 @@ const cameraPositions = {
     limitRotation: false,
   },
   check_table_1: {
-    position: new THREE.Vector3(4.28, 1.8, -7.52),
-    target: new THREE.Vector3(2.32, 0.84, -8.04),
+    position: new THREE.Vector3(4, 1.8, -7.52),
+    target: new THREE.Vector3(2.32, 1, -8.04),
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
     toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
