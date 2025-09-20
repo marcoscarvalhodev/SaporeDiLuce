@@ -13,6 +13,7 @@ interface reviewAnimProps {
 }
 
 interface CustomersAnimationProps {
+  actions: { [x: string]: THREE.AnimationAction | null };
   customerAnimationsReady: boolean;
   review_actions: {
     action: {
@@ -29,10 +30,10 @@ const CustomersAnimations = ({
   customerAnimationsReady,
   review_actions,
   table_id,
+  actions,
 }: CustomersAnimationProps) => {
   const { customerReview } = UseHumansContext();
   const { roomNameState } = UseCameraMovementContext();
-  
 
   const ReviewAnim = React.useCallback(
     ({ customerCam, customerReview }: reviewAnimProps) => {
@@ -103,7 +104,7 @@ const CustomersAnimations = ({
       default: {
         review_actions.forEach((item) => {
           const customer_init = item.action.customer_init;
-          if (customer_init) { 
+          if (customer_init) {
             item.action.customer_cam?.stop();
             item.action.customer_review?.stop();
 
@@ -117,12 +118,13 @@ const CustomersAnimations = ({
     }
   }, [roomNameState, review_actions, table_id]);
 
-  
+  React.useEffect(() => {
+    actions['blink_eyes']?.play();
+  }, [actions]);
 
   React.useEffect(() => {
-    
     if (!customerAnimationsReady) return;
-    
+
     InitToCamAnim();
   }, [InitToCamAnim, customerAnimationsReady]);
 
