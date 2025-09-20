@@ -21,8 +21,6 @@ export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.couch_paintings.geometry}
         material={nodes.couch_paintings.material}
         position={[2.473, 2.023, 5.344]}

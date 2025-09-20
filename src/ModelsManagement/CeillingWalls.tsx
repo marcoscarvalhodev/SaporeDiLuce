@@ -21,8 +21,8 @@ export function CeillingWalls(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        castShadow
-        receiveShadow
+        
+        
         geometry={nodes.ceilling_walls.geometry}
         material={nodes.ceilling_walls.material}
         position={[-0.378, 4.473, -2.514]}

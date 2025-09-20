@@ -22,8 +22,6 @@ export function WineBottles(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.glasses_bottle_transparent.geometry}
         material={nodes.glasses_bottle_transparent.material}
         position={[2.562, 1.038, -7.988]}
@@ -40,8 +38,6 @@ export function WineBottles(props: JSX.IntrinsicElements['group']) {
         />
       </mesh>
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.wine_bottles.geometry}
         material={nodes.wine_bottles.material}
         position={[7.404, 2.529, -9.984]}

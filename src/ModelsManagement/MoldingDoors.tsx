@@ -7,7 +7,7 @@ import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
-    molding_doors: THREE.Mesh;
+    molding_doors001: THREE.Mesh;
   };
   materials: { '': THREE.MeshStandardMaterial };
 };
@@ -21,13 +21,16 @@ export function MoldingDoors(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.molding_doors.geometry}
-        material={nodes.molding_doors.material}
-        position={[8.114, 2.518, -6.452]}
+        geometry={nodes.molding_doors001.geometry}
+        material={nodes.molding_doors001.material}
+        position={[-4.19, 0.116, 1.392]}
+        rotation={[0, -1.571, 0]}
       >
-        <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
+        <meshStandardMaterial
+          map={base_map}
+          lightMap={base_map}
+          lightMapIntensity={1}
+        />
       </mesh>
     </group>
   );

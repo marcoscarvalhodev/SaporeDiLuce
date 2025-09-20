@@ -36,6 +36,7 @@ function CanvasContainer() {
   return (
     <>
       <Canvas
+        shadows
         id='canvas-component'
         ref={canvasRef}
         style={{
