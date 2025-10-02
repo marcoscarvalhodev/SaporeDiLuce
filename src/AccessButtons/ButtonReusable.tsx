@@ -25,6 +25,11 @@ interface ButtonReusableProps {
     | 'table_2_man'
     | 'table_2_woman'
     | 'table_2_boy'
+    | "table_3_man"
+    | "table_3_woman"
+    | "table_3_girl"
+    | "table_5_man"
+    | "table_5_woman"
     | 'eat_button'
     | 'waitress_button';
 }
