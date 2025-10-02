@@ -38,24 +38,24 @@ const cameraPositions = {
     position: new THREE.Vector3(4, 1.8, -7.52),
     target: new THREE.Vector3(2.32, 1, -8.04),
     limitRotation: true,
-    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
-    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    fromAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.1 },
+    toAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.1 },
     setAzimuthalAngle: 1.5,
   },
   check_table_2: {
     position: new THREE.Vector3(4.76, 1.8, -6.56),
     target: new THREE.Vector3(3.76, 1.16, -5.08),
     limitRotation: true,
-    fromAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
-    toAzimuth: { min: Math.PI / -1, max: Math.PI / -1.7 },
+    fromAzimuth: { min: Math.PI / -0.98, max: Math.PI / -1.05 },
+    toAzimuth: { min: Math.PI / -0.98, max: Math.PI / -1.05 },
     setAzimuthalAngle: 1.5,
   },
   check_table_3: {
     position: new THREE.Vector3(5, 1.8, -6.56),
     target: new THREE.Vector3(5.2, 0.84, -8.6),
     limitRotation: true,
-    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
-    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    fromAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
+    toAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
     setAzimuthalAngle: 1.5,
   },
   check_table_4: {
@@ -70,8 +70,8 @@ const cameraPositions = {
     position: new THREE.Vector3(6.5, 1.16, -6.2),
     target: new THREE.Vector3(7, 1.16, -7.8),
     limitRotation: true,
-    fromAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
-    toAzimuth: { min: Math.PI / -1.5, max: Math.PI / -3 },
+    fromAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
+    toAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2  },
     setAzimuthalAngle: 1.5,
   },
   check_counter: {
@@ -120,8 +120,8 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
       if (cameraProperties.limitRotation) {
         gsap.to(controlsRef.current, {
-          minPolarAngle: Math.PI / 3,
-          maxPolarAngle: Math.PI / 2,
+          minPolarAngle: Math.PI / 2.5,
+          maxPolarAngle: Math.PI / 2.3,
 
           rotateSpeed: 0.2,
           duration: 1,

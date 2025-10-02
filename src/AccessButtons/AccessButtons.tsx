@@ -46,6 +46,9 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const manTable2 = React.useRef<HTMLDivElement | null>(null);
   const womanTable2 = React.useRef<HTMLDivElement | null>(null);
   const boyTable2 = React.useRef<HTMLDivElement | null>(null);
+  const manTable3 = React.useRef<HTMLDivElement | null>(null)
+ const womanTable3 = React.useRef<HTMLDivElement | null>(null)
+ const girlTable3 = React.useRef<HTMLDivElement | null>(null)
 
   const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
@@ -342,8 +345,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </mesh>
 
       <mesh
-        
-        
         position={[2.567, 1.268, -2.575]}
         rotation={[0, 0, -Math.PI / 2]}
       >
@@ -564,7 +565,11 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
                 handleTablesButtonClick({
                   tableRef: buttonTable3.current,
                   stateName: 'check_table_3',
-                  customers: null,
+                 customers: [
+                    manTable3.current,
+                    womanTable3.current,
+                    girlTable3.current,
+                  ]
                 });
               }}
               goText='Check Table'
@@ -575,6 +580,78 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           </Html>
           <meshStandardMaterial visible={false} />
         </mesh>
+
+        <mesh
+          
+          position={[5.016, 1.1, -8.51]}
+          scale={0.057}
+          name='man_table_3'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_3_man'
+              ref={manTable3}
+              onClick={() => {
+                setCustomerReview('man_table_3');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+         <mesh
+          
+          
+          position={[4.56, 1.092, -8.854]}
+          scale={0.057}
+          name='woman_table_3'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_3_woman'
+              ref={womanTable3}
+              onClick={() => {
+                setCustomerReview('woman_table_3');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+         <mesh
+          
+          
+          position={[4.616, 1.1, -8.1]}
+          scale={0.057}
+          name='girl_table_3'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_3_girl'
+              ref={girlTable3}
+              onClick={() => {
+                setCustomerReview('girl_table_3');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+
       </group>
 
       <group name='table_4_customers'>
