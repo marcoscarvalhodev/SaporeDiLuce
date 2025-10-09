@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
 import { UseAnimationsContext } from '../context/UseContexts';
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -16,7 +17,7 @@ type GLTFResult = GLTF & {
     man_3_upperbody: THREE.SkinnedMesh
     woman_3_eyebrows: THREE.SkinnedMesh
     woman_3_lowerbody: THREE.SkinnedMesh
-    woman_3_lowerbody001: THREE.SkinnedMesh
+    woman_3_upperbody: THREE.SkinnedMesh
     root: THREE.Bone
     ['MCH-torsoparent']: THREE.Bone
     ['MCH-hand_ikparentL']: THREE.Bone
@@ -68,6 +69,24 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
   const man3AnimReview = actions['man_3_anim_review'];
   const woman3AnimReview = actions['woman_3_anim_review'];
   const girlAnimReview = actions['girl_anim_review'];
+
+  const [
+      man_3_lowerbody,
+      man_3_upperbody,
+      woman_3_lowerbody,
+      woman_3_upperbody,
+      girl_lowerbody,
+      girl_upperbody,
+      eyebrow_eyelash,
+    ] = [
+      TextureAssetsLoader('/textures/bodies/man_3_lowerbody.webp'),
+      TextureAssetsLoader('/textures/bodies/man_3_upperbody.webp'),
+      TextureAssetsLoader('/textures/bodies/woman_3_lowerbody.webp'),
+      TextureAssetsLoader('/textures/bodies/woman_3_upperbody.webp'),
+      TextureAssetsLoader('/textures/bodies/girl_lowerbody.webp'),
+      TextureAssetsLoader('/textures/bodies/girl_upperbody.webp'),
+      TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
+    ];
   
   return (
     <group ref={group} {...props} dispose={null}>
@@ -112,19 +131,23 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.girl_eyebrows.geometry}
             material={nodes.girl_eyebrows.material}
             skeleton={nodes.girl_eyebrows.skeleton}
-          />
+          ><meshStandardMaterial
+              alphaMap={eyebrow_eyelash}
+              transparent
+              color={'black'}
+            /></skinnedMesh>
           <skinnedMesh
             name="girl_lowerbody"
             geometry={nodes.girl_lowerbody.geometry}
             material={nodes.girl_lowerbody.material}
             skeleton={nodes.girl_lowerbody.skeleton}
-          />
+          ><meshStandardMaterial map={girl_lowerbody} lightMap={girl_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
             name="girl_upperbody"
             geometry={nodes.girl_upperbody.geometry}
             material={nodes.girl_upperbody.material}
             skeleton={nodes.girl_upperbody.skeleton}
-          />
+          ><meshStandardMaterial map={girl_upperbody} lightMap={girl_upperbody} lightMapIntensity={1}/></skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-hand_ikparentL']} />
@@ -142,19 +165,23 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.man_3_eyebrows.geometry}
             material={nodes.man_3_eyebrows.material}
             skeleton={nodes.man_3_eyebrows.skeleton}
-          />
+          ><meshStandardMaterial
+              alphaMap={eyebrow_eyelash}
+              transparent
+              color={'#614c0f'}
+            /></skinnedMesh>
           <skinnedMesh
             name="man_3_lowerbody"
             geometry={nodes.man_3_lowerbody.geometry}
             material={nodes.man_3_lowerbody.material}
             skeleton={nodes.man_3_lowerbody.skeleton}
-          />
+          ><meshStandardMaterial map={man_3_lowerbody} lightMap={man_3_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
             name="man_3_upperbody"
             geometry={nodes.man_3_upperbody.geometry}
             material={nodes.man_3_upperbody.material}
             skeleton={nodes.man_3_upperbody.skeleton}
-          />
+          ><meshStandardMaterial map={man_3_upperbody} lightMap={man_3_upperbody} lightMapIntensity={1}/></skinnedMesh>
           <primitive object={nodes.root_1} />
           <primitive object={nodes['MCH-torsoparent_1']} />
           <primitive object={nodes['MCH-hand_ikparentL_1']} />
@@ -172,19 +199,23 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.woman_3_eyebrows.geometry}
             material={nodes.woman_3_eyebrows.material}
             skeleton={nodes.woman_3_eyebrows.skeleton}
-          />
+          ><meshStandardMaterial
+              alphaMap={eyebrow_eyelash}
+              transparent
+              color={'black'}
+            /></skinnedMesh>
           <skinnedMesh
             name="woman_3_lowerbody"
             geometry={nodes.woman_3_lowerbody.geometry}
             material={nodes.woman_3_lowerbody.material}
             skeleton={nodes.woman_3_lowerbody.skeleton}
-          />
+          ><meshStandardMaterial map={woman_3_lowerbody} lightMap={woman_3_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
-            name="woman_3_lowerbody001"
-            geometry={nodes.woman_3_lowerbody001.geometry}
-            material={nodes.woman_3_lowerbody001.material}
-            skeleton={nodes.woman_3_lowerbody001.skeleton}
-          />
+            name="woman_3_upperbody"
+            geometry={nodes.woman_3_upperbody.geometry}
+            material={nodes.woman_3_upperbody.material}
+            skeleton={nodes.woman_3_upperbody.skeleton}
+          ><meshStandardMaterial map={woman_3_upperbody} lightMap={woman_3_upperbody} lightMapIntensity={1}/></skinnedMesh>
           <primitive object={nodes.root_2} />
           <primitive object={nodes['MCH-torsoparent_2']} />
           <primitive object={nodes['MCH-hand_ikparentL_2']} />
