@@ -89,16 +89,16 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     man_2_upperbody,
     woman_2_lowerbody,
     woman_2_upperbody,
-    boy_upperbody,
     boy_lowerbody,
+    boy_upperbody,
     eyebrow_eyelash,
   ] = [
     TextureAssetsLoader('/textures/bodies/man_2_lowerbody.webp'),
     TextureAssetsLoader('/textures/bodies/man_2_upperbody.webp'),
     TextureAssetsLoader('/textures/bodies/woman_2_lowerbody.webp'),
     TextureAssetsLoader('/textures/bodies/woman_2_upperbody.webp'),
-    TextureAssetsLoader('/textures/bodies/boy_upperbody.webp'),
     TextureAssetsLoader('/textures/bodies/boy_lowerbody.webp'),
+    TextureAssetsLoader('/textures/bodies/boy_upperbody.webp'),
     TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
   ];
 
