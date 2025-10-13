@@ -131,6 +131,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.girl_eyebrows.geometry}
             material={nodes.girl_eyebrows.material}
             skeleton={nodes.girl_eyebrows.skeleton}
+             morphTargetDictionary={nodes.girl_eyebrows.morphTargetDictionary}
+            morphTargetInfluences={nodes.girl_eyebrows.morphTargetInfluences}
           ><meshStandardMaterial
               alphaMap={eyebrow_eyelash}
               transparent
@@ -141,6 +143,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.girl_lowerbody.geometry}
             material={nodes.girl_lowerbody.material}
             skeleton={nodes.girl_lowerbody.skeleton}
+             morphTargetDictionary={nodes.girl_lowerbody.morphTargetDictionary}
+            morphTargetInfluences={nodes.girl_lowerbody.morphTargetInfluences}
           ><meshStandardMaterial map={girl_lowerbody} lightMap={girl_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
             name="girl_upperbody"
@@ -165,6 +169,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.man_3_eyebrows.geometry}
             material={nodes.man_3_eyebrows.material}
             skeleton={nodes.man_3_eyebrows.skeleton}
+             morphTargetDictionary={nodes.man_3_eyebrows.morphTargetDictionary}
+            morphTargetInfluences={nodes.man_3_eyebrows.morphTargetInfluences}
           ><meshStandardMaterial
               alphaMap={eyebrow_eyelash}
               transparent
@@ -175,6 +181,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.man_3_lowerbody.geometry}
             material={nodes.man_3_lowerbody.material}
             skeleton={nodes.man_3_lowerbody.skeleton}
+               morphTargetDictionary={nodes.man_3_lowerbody.morphTargetDictionary}
+            morphTargetInfluences={nodes.man_3_lowerbody.morphTargetInfluences}
           ><meshStandardMaterial map={man_3_lowerbody} lightMap={man_3_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
             name="man_3_upperbody"
@@ -199,6 +207,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.woman_3_eyebrows.geometry}
             material={nodes.woman_3_eyebrows.material}
             skeleton={nodes.woman_3_eyebrows.skeleton}
+            morphTargetDictionary={nodes.woman_3_eyebrows.morphTargetDictionary}
+            morphTargetInfluences={nodes.woman_3_eyebrows.morphTargetInfluences}
           ><meshStandardMaterial
               alphaMap={eyebrow_eyelash}
               transparent
@@ -209,6 +219,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             geometry={nodes.woman_3_lowerbody.geometry}
             material={nodes.woman_3_lowerbody.material}
             skeleton={nodes.woman_3_lowerbody.skeleton}
+            morphTargetDictionary={nodes.woman_3_lowerbody.morphTargetDictionary}
+            morphTargetInfluences={nodes.woman_3_lowerbody.morphTargetInfluences}
           ><meshStandardMaterial map={woman_3_lowerbody} lightMap={woman_3_lowerbody} lightMapIntensity={1}/></skinnedMesh>
           <skinnedMesh
             name="woman_3_upperbody"
