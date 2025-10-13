@@ -35,16 +35,14 @@ const listCustomerReviews: customerReviews = [
 
   {
     name: 'Robert',
-    message:
-      'The gnocchi is really nice, you should try it',
+    message: 'The gnocchi is really nice, you should try it',
     stars: 4.5,
     customer_id: 'man_table_2',
     position: [5.357, 1.233, -5.302],
   },
   {
     name: 'Michelle',
-    message:
-      'I send my congrats to the chef for this magnificent food',
+    message: 'I send my congrats to the chef for this magnificent food',
     stars: 5,
     customer_id: 'woman_table_2',
     position: [2.957, 1.233, -5.302],
@@ -55,8 +53,24 @@ const listCustomerReviews: customerReviews = [
       'Actually I wanted a hamburger, but I am satisfied with the spaghetti',
     stars: 3.5,
     customer_id: 'boy_table_2',
-    position: [4.057, 2.200, -4.002],
+    position: [4.057, 2.2, -4.002],
   },
+  {
+    name: 'Lisa',
+    message: "This food here is so yummy, it's really, really perfect and makes me so happy",
+    stars: 5,
+    customer_id: 'girl_table_3',
+    position: [5.016, 1.75, -8.6],
+  },
+  {
+    name: 'Paul',
+    message:
+      "The food reminded me of my grandma's, some memories were unlocked here today",
+    stars: 5,
+    customer_id: 'man_table_3',
+    position: [5.016, 1.7, -9.5],
+  },
+  {name: "Christine", message: "Definitely a 5-star meal, never had anything like it before", stars: 5, customer_id: "woman_table_3", position: [5.016, 1.7, -9.31]}
 ];
 
 const ReviewsCustomers = () => {
