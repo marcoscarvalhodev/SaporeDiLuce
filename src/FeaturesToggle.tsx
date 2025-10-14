@@ -14,7 +14,7 @@ const FeaturesToggle = () => {
   React.useEffect(() => {
     parentWrapperRef.current?.addEventListener(
       'click',
-      (event: PointerEvent) => {
+      (event: MouseEvent) => {
         if (event.target === parentWrapperRef.current) {
           setSettingsActive(false);
         }
