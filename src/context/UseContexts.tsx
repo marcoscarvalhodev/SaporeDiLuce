@@ -7,6 +7,7 @@ import {
   CreateOverlaysContext,
   CreateContextHumans,
   CreateContextFood,
+  CreateContextFeaturesToggle,
 } from './CreateContexts';
 
 export const UseCameraMovementContext = () => {
@@ -81,4 +82,12 @@ export const UseFoodContext = () => {
   return useFoodContext;
 };
 
+export const UseFeaturesToggleContext = () => {
+  const useFeaturesToggleContext = useContext(CreateContextFeaturesToggle);
 
+  if(!useFeaturesToggleContext) {
+    throw new Error("there is no features toggle context")
+  }
+
+  return useFeaturesToggleContext;
+}

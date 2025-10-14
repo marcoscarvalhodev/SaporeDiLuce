@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import CanvasContainer from './CanvasContainer.tsx';
@@ -13,27 +12,32 @@ import EatingOverlay from './RestaurantOverlays/EatingOverlay.tsx';
 import { ContextHumansProvider } from './context/HumansContext.tsx';
 import WaitressActionsOverlay from './RestaurantOverlays/WaitressActionsOverlay.tsx';
 import { ContextFoodProvider } from './context/FoodContext.tsx';
+import FeaturesToggle from './FeaturesToggle.tsx';
+import { ContextFeaturesToggleProvider } from './context/FeaturesToggleContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ContextAudioChoiceProvider>
-      <ContextCameraMovementProvider>
-        <ContextButtonsProvider>
-          <ContextOverlaysProvider>
-            <ContextAnimationsProvider>
-              <ContextHumansProvider>
-                <ContextFoodProvider>
-                  <CanvasContainer />
-                  <TextContent />
-                  <AudioChoice />
-                  <EatingOverlay />
-                  <WaitressActionsOverlay />
-                </ContextFoodProvider>
-              </ContextHumansProvider>
-            </ContextAnimationsProvider>
-          </ContextOverlaysProvider>
-        </ContextButtonsProvider>
-      </ContextCameraMovementProvider>
-    </ContextAudioChoiceProvider>
-  </StrictMode>
+  <>
+    <ContextFeaturesToggleProvider>
+      <FeaturesToggle />
+      <ContextAudioChoiceProvider>
+        <ContextCameraMovementProvider>
+          <ContextButtonsProvider>
+            <ContextOverlaysProvider>
+              <ContextAnimationsProvider>
+                <ContextHumansProvider>
+                  <ContextFoodProvider>
+                    <CanvasContainer />
+                    <TextContent />
+                    <AudioChoice />
+                    <EatingOverlay />
+                    <WaitressActionsOverlay />
+                  </ContextFoodProvider>
+                </ContextHumansProvider>
+              </ContextAnimationsProvider>
+            </ContextOverlaysProvider>
+          </ContextButtonsProvider>
+        </ContextCameraMovementProvider>
+      </ContextAudioChoiceProvider>
+    </ContextFeaturesToggleProvider>
+  </>
 );
