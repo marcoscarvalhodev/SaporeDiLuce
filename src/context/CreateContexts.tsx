@@ -8,7 +8,18 @@ interface CameraMovementProps {
   refCanvasUpdated: React.RefObject<HTMLCanvasElement | null>;
 }
 
-export type customerReviewProps = '' | 'man_table_1' | 'woman_table_1' | "man_table_2" | "woman_table_2" | "boy_table_2" | "woman_table_3" | "man_table_3" | "girl_table_3" | "man_table_5" | "woman_table_5";
+export type customerReviewProps =
+  | ''
+  | 'man_table_1'
+  | 'woman_table_1'
+  | 'man_table_2'
+  | 'woman_table_2'
+  | 'boy_table_2'
+  | 'woman_table_3'
+  | 'man_table_3'
+  | 'girl_table_3'
+  | 'man_table_5'
+  | 'woman_table_5';
 
 export type waiterDialogueProps =
   | ''
@@ -84,6 +95,13 @@ interface FoodProps {
   setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface FeaturesToggleProps {
+  activeBloom: boolean;
+  setActiveBloom: React.Dispatch<React.SetStateAction<boolean>>;
+  activeReflections: boolean;
+  setActiveReflections: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export const CreateOverlaysContext = React.createContext<null | OverlaysProps>(
   null
 );
@@ -106,3 +124,6 @@ export const CreateContextHumans = React.createContext<null | HumansProps>(
 );
 
 export const CreateContextFood = React.createContext<null | FoodProps>(null);
+
+export const CreateContextFeaturesToggle =
+  React.createContext<null | FeaturesToggleProps>(null);
