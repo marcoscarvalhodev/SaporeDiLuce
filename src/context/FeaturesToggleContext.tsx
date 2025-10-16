@@ -8,6 +8,7 @@ export const ContextFeaturesToggleProvider = ({
 }) => {
   const [activeBloom, setActiveBloom] = React.useState(true);
   const [activeReflections, setActiveReflections] = React.useState(false);
+  const [activeAnimations, setActiveAnimations] = React.useState(true);
   return (
     <CreateContextFeaturesToggle.Provider
       value={{
@@ -15,6 +16,8 @@ export const ContextFeaturesToggleProvider = ({
         setActiveBloom,
         activeReflections,
         setActiveReflections,
+        activeAnimations,
+        setActiveAnimations,
       }}
     >
       {children}

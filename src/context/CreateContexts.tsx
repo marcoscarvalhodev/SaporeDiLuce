@@ -100,7 +100,14 @@ interface FeaturesToggleProps {
   setActiveBloom: React.Dispatch<React.SetStateAction<boolean>>;
   activeReflections: boolean;
   setActiveReflections: React.Dispatch<React.SetStateAction<boolean>>;
+  activeAnimations: boolean;
+  setActiveAnimations: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+
+export const CreateContextFeaturesToggle =
+  React.createContext<null | FeaturesToggleProps>(null);
+
 
 export const CreateOverlaysContext = React.createContext<null | OverlaysProps>(
   null
@@ -124,6 +131,3 @@ export const CreateContextHumans = React.createContext<null | HumansProps>(
 );
 
 export const CreateContextFood = React.createContext<null | FoodProps>(null);
-
-export const CreateContextFeaturesToggle =
-  React.createContext<null | FeaturesToggleProps>(null);

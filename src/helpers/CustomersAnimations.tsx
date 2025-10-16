@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import {
   UseHumansContext,
   UseCameraMovementContext,
+  UseFeaturesToggleContext,
 } from '../context/UseContexts';
 import { roomNameProps } from '../context/CameraMovementContext';
 import { customerReviewProps } from '../context/CreateContexts';
@@ -34,6 +35,7 @@ const CustomersAnimations = ({
 }: CustomersAnimationProps) => {
   const { customerReview } = UseHumansContext();
   const { roomNameState } = UseCameraMovementContext();
+  const { activeAnimations } = UseFeaturesToggleContext();
 
   const ReviewAnim = React.useCallback(
     ({ customerCam, customerReview }: reviewAnimProps) => {
@@ -119,18 +121,34 @@ const CustomersAnimations = ({
   }, [roomNameState, review_actions, table_id]);
 
   React.useEffect(() => {
+    const animActions = Object.keys(actions)
+      .filter((item) => item.includes('anim_1'))
+      .map((key) => actions[key]);
+
+    if (activeAnimations) {
+      animActions.forEach((item) => {
+        if(item) item.paused = false;
+      });
+    } else {
+      animActions.forEach((item) => {
+        if (item) item.paused = true;
+      });
+    }
+  }, [actions, activeAnimations]);
+
+  React.useEffect(() => {
     actions['blink_eyes']?.play();
   }, [actions]);
 
   React.useEffect(() => {
     if (!customerAnimationsReady) return;
 
-    InitToCamAnim();
-  }, [InitToCamAnim, customerAnimationsReady]);
+    if (activeAnimations) InitToCamAnim();
+  }, [InitToCamAnim, customerAnimationsReady, activeAnimations]);
 
   React.useEffect(() => {
-    InitReviewAnim();
-  }, [InitReviewAnim]);
+    if (activeAnimations) InitReviewAnim();
+  }, [InitReviewAnim, activeAnimations]);
 
   return null;
 };

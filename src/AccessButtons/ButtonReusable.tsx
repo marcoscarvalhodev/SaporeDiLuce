@@ -25,11 +25,11 @@ interface ButtonReusableProps {
     | 'table_2_man'
     | 'table_2_woman'
     | 'table_2_boy'
-    | "table_3_man"
-    | "table_3_woman"
-    | "table_3_girl"
-    | "table_5_man"
-    | "table_5_woman"
+    | 'table_3_man'
+    | 'table_3_woman'
+    | 'table_3_girl'
+    | 'table_5_man'
+    | 'table_5_woman'
     | 'eat_button'
     | 'waitress_button';
 }
@@ -51,9 +51,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
     const [buttonMessage, setButtonMessage] = React.useState(false);
 
     React.useEffect(() => {
-      
-        setTimeout(() => setButtonMessage(enterEnvironment), 1000);
-      
+      setTimeout(() => setButtonMessage(enterEnvironment), 1000);
     }, [setButtonMessage, enterEnvironment]);
 
     React.useLayoutEffect(() => {
@@ -85,7 +83,7 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
 
     return (
       <div
-        className={`${
+        className={` ${
           textSize === 'small'
             ? 'w-[20rem] left-[-10rem]'
             : 'w-[40rem] left-[-20rem]'
