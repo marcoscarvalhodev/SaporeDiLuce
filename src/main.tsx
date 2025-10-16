@@ -18,7 +18,6 @@ import { ContextFeaturesToggleProvider } from './context/FeaturesToggleContext.t
 createRoot(document.getElementById('root')!).render(
   <>
     <ContextFeaturesToggleProvider>
-      <FeaturesToggle />
       <ContextAudioChoiceProvider>
         <ContextCameraMovementProvider>
           <ContextButtonsProvider>
@@ -31,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
                     <AudioChoice />
                     <EatingOverlay />
                     <WaitressActionsOverlay />
+                    <FeaturesToggle />
                   </ContextFoodProvider>
                 </ContextHumansProvider>
               </ContextAnimationsProvider>

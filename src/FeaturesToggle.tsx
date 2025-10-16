@@ -1,38 +1,67 @@
 import React from 'react';
-import GearSVG from './assets/gear.svg?react';
-import { UseFeaturesToggleContext } from './context/UseContexts';
+import KnifeForkGear from './assets/knife_fork_gear.svg?react';
+
+import {
+  UseCameraMovementContext,
+  UseFeaturesToggleContext,
+} from './context/UseContexts';
+
+import './FeatureToggle.css';
+
 const FeaturesToggle = () => {
   const {
     setActiveBloom,
     setActiveReflections,
+    setActiveAnimations,
     activeBloom,
     activeReflections,
+    activeAnimations,
   } = UseFeaturesToggleContext();
   const [settingsActive, setSettingsActive] = React.useState(false);
   const parentWrapperRef = React.useRef<null | HTMLElement>(null);
+  const { roomNameState } = UseCameraMovementContext();
+  const [hideGear, setHideGear] = React.useState(false);
 
   React.useEffect(() => {
-    parentWrapperRef.current?.addEventListener(
-      'click',
-      (event: MouseEvent) => {
-        if (event.target === parentWrapperRef.current) {
-          setSettingsActive(false);
-        }
+    parentWrapperRef.current?.addEventListener('click', (event: MouseEvent) => {
+      if (event.target === parentWrapperRef.current) {
+        setSettingsActive(false);
       }
-    );
-  });
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (
+      roomNameState &&
+      [
+        'check_table_1',
+        'check_table_2',
+        'check_table_3',
+        'check_table_4',
+        'check_table_5',
+      ].includes(roomNameState)
+    ) {
+      setHideGear(true);
+    } else {
+      setHideGear(false);
+    }
+  }, [hideGear, roomNameState]);
 
   return (
     <section
       ref={parentWrapperRef}
-      className={`z-[9999] overflow-hidden fixed ${
+      className={`z-[9999] fixed ${
         settingsActive
           ? 'w-full h-full bg-[#9c9b9b80] transition-all duration-[0.5s]'
           : 'w-max h-max '
       } right-0 flex flex-col`}
     >
-      <GearSVG
-        className='w-[5rem] h-[5rem] self-end mr-[1.6rem] hover:cursor-pointer stroke-amber-300 hover:-rotate-[360deg] duration-[1s] transition-all ease-linear'
+      <KnifeForkGear
+        className={`gear_svg w-[7rem] h-[7rem] self-end mr-[1.6rem] mt-[1.6rem] hover:cursor-pointer hover:-rotate-[90deg] duration-[1s] transition-all ease-linear absolute right-0 ${
+          hideGear
+            ? 'opacity-0 pointer-events-none transition-all duration-[0.7s]'
+            : 'opacity-[100%] pointer-events-auto transition-all duration-[0.7s]'
+        } ${!settingsActive ? 'fork_active' : 'knife_active'} `}
         onClick={() => setSettingsActive(!settingsActive)}
       />
 
@@ -57,6 +86,15 @@ const FeaturesToggle = () => {
           }}
         >
           {activeBloom ? 'Disable bloom' : 'Enable bloom'}
+        </li>
+
+        <li
+          className='button_call w-max'
+          onClick={() => {
+            setActiveAnimations(!activeAnimations);
+          }}
+        >
+          {activeAnimations ? 'Disable animations' : 'Enable animations'}
         </li>
       </ul>
     </section>
