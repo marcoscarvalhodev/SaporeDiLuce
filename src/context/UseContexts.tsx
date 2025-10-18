@@ -8,6 +8,7 @@ import {
   CreateContextHumans,
   CreateContextFood,
   CreateContextFeaturesToggle,
+  CreateContextLoading,
 } from './CreateContexts';
 
 export const UseCameraMovementContext = () => {
@@ -48,8 +49,6 @@ export const UseButtonsContext = () => {
   return useButtonsContext;
 };
 
-
-
 export const UseOverlaysContext = () => {
   const useOverlaysContext = useContext(CreateOverlaysContext);
 
@@ -60,7 +59,6 @@ export const UseOverlaysContext = () => {
   return useOverlaysContext;
 };
 
-
 export const UseHumansContext = () => {
   const useHumansContext = useContext(CreateContextHumans);
 
@@ -70,7 +68,6 @@ export const UseHumansContext = () => {
 
   return useHumansContext;
 };
-
 
 export const UseFoodContext = () => {
   const useFoodContext = useContext(CreateContextFood);
@@ -85,9 +82,19 @@ export const UseFoodContext = () => {
 export const UseFeaturesToggleContext = () => {
   const useFeaturesToggleContext = useContext(CreateContextFeaturesToggle);
 
-  if(!useFeaturesToggleContext) {
-    throw new Error("there is no features toggle context")
+  if (!useFeaturesToggleContext) {
+    throw new Error('there is no features toggle context');
   }
 
   return useFeaturesToggleContext;
-}
+};
+
+export const UseLoadingContext = () => {
+  const useLoadingContext = useContext(CreateContextLoading);
+
+  if (!useLoadingContext) {
+    throw new Error('there is no features toggle context');
+  }
+
+  return useLoadingContext;
+};

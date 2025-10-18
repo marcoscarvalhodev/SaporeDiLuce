@@ -57,7 +57,7 @@ const FeaturesToggle = () => {
       } right-0 flex flex-col`}
     >
       <KnifeForkGear
-        className={`gear_svg w-[7rem] h-[7rem] self-end mr-[1.6rem] mt-[1.6rem] hover:cursor-pointer hover:-rotate-[90deg] duration-[1s] transition-all ease-linear absolute right-0 ${
+        className={`settings_gear w-[7rem] h-[7rem] self-end mr-[1.6rem] mt-[1.6rem] hover:cursor-pointer hover:-rotate-[90deg] duration-[1s] transition-all ease-linear absolute right-0 ${
           hideGear
             ? 'opacity-0 pointer-events-none transition-all duration-[0.7s]'
             : 'opacity-[100%] pointer-events-auto transition-all duration-[0.7s]'
@@ -74,6 +74,14 @@ const FeaturesToggle = () => {
       >
         <li
           className='button_call w-max'
+          onClick={() => {
+            setActiveAnimations(!activeAnimations);
+          }}
+        >
+          {activeAnimations ? 'Disable animations' : 'Enable animations'}
+        </li>
+        <li
+          className='button_call w-max'
           onClick={() => setActiveReflections(!activeReflections)}
         >
           {activeReflections ? 'Disable reflections' : 'Enable reflections'}
@@ -86,15 +94,6 @@ const FeaturesToggle = () => {
           }}
         >
           {activeBloom ? 'Disable bloom' : 'Enable bloom'}
-        </li>
-
-        <li
-          className='button_call w-max'
-          onClick={() => {
-            setActiveAnimations(!activeAnimations);
-          }}
-        >
-          {activeAnimations ? 'Disable animations' : 'Enable animations'}
         </li>
       </ul>
     </section>

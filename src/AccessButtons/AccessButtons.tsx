@@ -6,6 +6,7 @@ import './AccessButtons.css';
 import {
   UseButtonsContext,
   UseCameraMovementContext,
+  UseFeaturesToggleContext,
   UseFoodContext,
   UseHumansContext,
 } from '../context/UseContexts';
@@ -28,6 +29,7 @@ interface handleTableButtonProps {
 
 export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const { state, dispatch, menuActive, setMenuActive } = UseButtonsContext();
+  const { activeAnimations } = UseFeaturesToggleContext();
 
   const buttonRestaurant = React.useRef<null | HTMLDivElement>(null);
   const buttonDinner = React.useRef<HTMLDivElement | null>(null);
@@ -46,9 +48,9 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const manTable2 = React.useRef<HTMLDivElement | null>(null);
   const womanTable2 = React.useRef<HTMLDivElement | null>(null);
   const boyTable2 = React.useRef<HTMLDivElement | null>(null);
-  const manTable3 = React.useRef<HTMLDivElement | null>(null)
- const womanTable3 = React.useRef<HTMLDivElement | null>(null)
- const girlTable3 = React.useRef<HTMLDivElement | null>(null)
+  const manTable3 = React.useRef<HTMLDivElement | null>(null);
+  const womanTable3 = React.useRef<HTMLDivElement | null>(null);
+  const girlTable3 = React.useRef<HTMLDivElement | null>(null);
 
   const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
@@ -61,6 +63,57 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const [tableActive, setTableActive] = React.useState(false);
 
   const tableRefCollection = React.useRef<(HTMLDivElement | null)[]>([]);
+
+  React.useEffect(() => {
+  const reviewCollection = [
+    {
+      table: 'check_table_1',
+      reviewsButton: [manTable1.current, womanTable1.current],
+    },
+    {
+      table: 'check_table_2',
+      reviewsButton: [
+        manTable2.current,
+        womanTable2.current,
+        boyTable2.current,
+      ],
+    },
+    {
+      table: 'check_table_3',
+      reviewsButton: [
+        manTable3.current,
+        womanTable3.current,
+        girlTable3.current,
+      ],
+    },
+  ];
+
+  reviewCollection.forEach(({ table, reviewsButton }) => {
+    if (roomNameState && table === roomNameState) {
+      const validButtons = reviewsButton.filter(Boolean);
+      
+      if (validButtons.length > 0) {
+        if (activeAnimations) {
+          gsap.to(validButtons, {
+            opacity: 1,
+            pointerEvents: 'all',
+            duration: 0,
+            overwrite: true
+          });
+          
+        } else {
+          gsap.to(validButtons, {
+            opacity: 0,
+            pointerEvents: 'none',
+            duration: 0,
+            overwrite: true
+          });
+          
+        }
+      }
+    }
+  });
+}, [activeAnimations, roomNameState]);
 
   React.useEffect(() => {
     tableRefCollection.current = [
@@ -322,12 +375,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh
-        
-        
-        position={[8.09, 1.666, 0.416]}
-        rotation={[0, 0, -Math.PI / 2]}
-      >
+      <mesh position={[8.09, 1.666, 0.416]} rotation={[0, 0, -Math.PI / 2]}>
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             hideButton
@@ -344,10 +392,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         <meshStandardMaterial visible={false} />
       </mesh>
 
-      <mesh
-        position={[2.567, 1.268, -2.575]}
-        rotation={[0, 0, -Math.PI / 2]}
-      >
+      <mesh position={[2.567, 1.268, -2.575]} rotation={[0, 0, -Math.PI / 2]}>
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             hideButton
@@ -365,12 +410,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </mesh>
 
       <group name='table_1_customers'>
-        <mesh
-          
-          
-          position={[2.425, 1.492, -8.084]}
-          scale={0.057}
-        >
+        <mesh position={[2.425, 1.492, -8.084]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -394,8 +434,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          
-          
           position={[2.425, 1.092, -8.304]}
           scale={0.057}
           name='man_table_1'
@@ -418,8 +456,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          
-          
           position={[2.425, 1.092, -7.804]}
           scale={0.057}
           name='woman_table_1'
@@ -443,12 +479,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </group>
 
       <group name='table_2_customers'>
-        <mesh
-          
-          
-          position={[3.826, 1.492, -5.295]}
-          scale={0.057}
-        >
+        <mesh position={[3.826, 1.492, -5.295]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -476,8 +507,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          
-          
           position={[4.257, 1.033, -5.302]}
           scale={0.057}
           name='man_table_2'
@@ -500,8 +529,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          
-          
           position={[3.457, 1.033, -5.252]}
           scale={0.057}
           name='woman_table_2'
@@ -524,8 +551,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          
-          
           position={[3.807, 1.033, -4.902]}
           scale={0.057}
           name='boy_table_2'
@@ -549,12 +574,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </group>
 
       <group name='table_3_customers'>
-        <mesh
-          
-          
-          position={[4.616, 1.492, -8.554]}
-          scale={0.057}
-        >
+        <mesh position={[4.616, 1.492, -8.554]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -565,11 +585,11 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
                 handleTablesButtonClick({
                   tableRef: buttonTable3.current,
                   stateName: 'check_table_3',
-                 customers: [
+                  customers: [
                     manTable3.current,
                     womanTable3.current,
                     girlTable3.current,
-                  ]
+                  ],
                 });
               }}
               goText='Check Table'
@@ -581,12 +601,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <meshStandardMaterial visible={false} />
         </mesh>
 
-        <mesh
-          
-          position={[5.016, 1.1, -8.51]}
-          scale={0.057}
-          name='man_table_3'
-        >
+        <mesh position={[5.016, 1.1, -8.51]} scale={0.057} name='man_table_3'>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
@@ -604,9 +619,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           </Html>
         </mesh>
 
-         <mesh
-          
-          
+        <mesh
           position={[4.56, 1.092, -8.854]}
           scale={0.057}
           name='woman_table_3'
@@ -627,13 +640,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             />
           </Html>
         </mesh>
-         <mesh
-          
-          
-          position={[4.616, 1.1, -8.1]}
-          scale={0.057}
-          name='girl_table_3'
-        >
+        <mesh position={[4.616, 1.1, -8.1]} scale={0.057} name='girl_table_3'>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
@@ -650,17 +657,10 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             />
           </Html>
         </mesh>
-
-
       </group>
 
       <group name='table_4_customers'>
-        <mesh
-          
-          
-          position={[6.341, 1.492, -4.968]}
-          scale={0.057}
-        >
+        <mesh position={[6.341, 1.492, -4.968]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -683,12 +683,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <meshStandardMaterial visible={false} />
         </mesh>
 
-        <mesh
-          
-          
-          position={[6.541, 1.142, -4.968]}
-          scale={0.057}
-        >
+        <mesh position={[6.541, 1.142, -4.968]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               color='black'
@@ -708,12 +703,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </group>
 
       <group name='table_5_customers'>
-        <mesh
-          
-          
-          position={[6.781, 1.492, -7.75]}
-          scale={0.057}
-        >
+        <mesh position={[6.781, 1.492, -7.75]} scale={0.057}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -738,12 +728,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
       </group>
 
       <group>
-        <mesh
-          
-          
-          position={[-1.433, 1.668, -7.028]}
-          scale={0.074}
-        >
+        <mesh position={[-1.433, 1.668, -7.028]} scale={0.074}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               hideButton
@@ -766,12 +751,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <meshStandardMaterial visible={false} />
         </mesh>
 
-        <mesh
-          
-          
-          position={[-1.433, 1.368, -5.628]}
-          scale={0.074}
-        >
+        <mesh position={[-1.433, 1.368, -5.628]} scale={0.074}>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
             <ButtonReusable
               color='orange'
@@ -790,7 +770,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
       </group>
 
-      <mesh   position={[6.388, 1.121, -4.595]} scale={0.057}>
+      <mesh position={[6.388, 1.121, -4.595]} scale={0.057}>
         <Html style={{ pointerEvents: 'none' }} position={[0, 0, 0]}>
           <ButtonReusable
             color='orange'

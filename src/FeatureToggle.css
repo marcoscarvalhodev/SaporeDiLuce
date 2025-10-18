@@ -1,13 +1,13 @@
-.gear_svg #fork,
-.gear_svg #knife {
+.settings_gear #fork,
+.settings_gear #knife {
   
     fill: #413d3d;
     transition: fill 0.7s ease;
   
 }
 
-.gear_svg:hover #fork,
-.gear_svg:hover #knife {
+.settings_gear:hover #fork,
+.settings_gear:hover #knife {
 
     fill: #e40b0b;
   
