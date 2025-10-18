@@ -15,13 +15,14 @@ import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 import { Waitress } from './RestaurantWaitress/Waitress';
 import { NotepadPen } from './RestaurantWaitress/NotepadPen';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
-import { FloorCounter } from './ModelsManagement/FloorCounter';
+import { Floor } from './ModelsManagement/Floor';
 import { CeillingWalls } from './ModelsManagement/CeillingWalls';
 import EffectsComponent from './EffectsComponent/EffectsComponent';
 import { Lights } from './ModelsManagement/Lights';
 import { MoldingDoors } from './ModelsManagement/MoldingDoors';
 import { WineBottles } from './ModelsManagement/WineBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
+import { GroundDoor } from './ModelsManagement/GroundDoor';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -47,7 +48,7 @@ function CanvasContainer() {
           right: '0',
           cursor: 'grab',
         }}
-        className='bg-[#000000]'
+        className='bg-[#ffffff]'
         onPointerDown={() => {
           gsap.to(canvasRef.current, {
             cursor: 'grabbing',
@@ -74,11 +75,11 @@ function CanvasContainer() {
           background
         />
 
-        {<AccessButtons />}
+        <AccessButtons />
 
         <ReviewsCustomers />
         <WaitressDialogue />
-        
+
         <RestaurantMenu />
         <RestaurantDishes />
 
@@ -92,9 +93,8 @@ function CanvasContainer() {
           }}
         />
         <CeillingWalls />
-        
-        
-        <FloorCounter />
+        <GroundDoor />
+        <Floor />
         <MoldingDoors />
         <WineBottles />
         <CouchPaintings />

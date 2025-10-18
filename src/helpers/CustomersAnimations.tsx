@@ -125,15 +125,13 @@ const CustomersAnimations = ({
       .filter((item) => item.includes('anim_1'))
       .map((key) => actions[key]);
 
-    if (activeAnimations) {
-      animActions.forEach((item) => {
-        if(item) item.paused = false;
-      });
-    } else {
-      animActions.forEach((item) => {
-        if (item) item.paused = true;
-      });
+    if (actions['blink_eyes']) {
+      actions['blink_eyes'].paused = !activeAnimations;
     }
+    
+    animActions.forEach((item) => {
+      if (item) item.paused = !activeAnimations;
+    });
   }, [actions, activeAnimations]);
 
   React.useEffect(() => {

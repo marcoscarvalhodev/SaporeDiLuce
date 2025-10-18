@@ -1,0 +1,37 @@
+.loading_gear {
+
+  #knife,
+  #fork {
+    fill: #e40b0b;
+  }
+
+  #fork,
+  #knife {
+    animation: rotate-infinite 2s linear infinite,
+      blink-opacity 1.4s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+
+  #fork {
+    animation: rotate-infinite 2s linear infinite,
+      blink-opacity 1.4s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@keyframes rotate-infinite {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes blink-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

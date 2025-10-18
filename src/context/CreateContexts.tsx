@@ -104,10 +104,13 @@ interface FeaturesToggleProps {
   setActiveAnimations: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface LoadingProps {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export const CreateContextFeaturesToggle =
   React.createContext<null | FeaturesToggleProps>(null);
-
 
 export const CreateOverlaysContext = React.createContext<null | OverlaysProps>(
   null
@@ -131,3 +134,7 @@ export const CreateContextHumans = React.createContext<null | HumansProps>(
 );
 
 export const CreateContextFood = React.createContext<null | FoodProps>(null);
+
+export const CreateContextLoading = React.createContext<null | LoadingProps>(
+  null
+);
