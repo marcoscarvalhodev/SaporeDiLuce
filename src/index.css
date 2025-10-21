@@ -16,3 +16,9 @@ body {
 .dialogue_wrapper {
   @apply w-[30rem] bg-[rgba(255,255,255,0.75)] p-[2rem] flex flex-col gap-[1.2rem] rounded-[1rem] select-none;
 }
+
+canvas {
+  -moz-user-select: none;
+  user-select: none;
+  -moz-user-drag: none;
+}

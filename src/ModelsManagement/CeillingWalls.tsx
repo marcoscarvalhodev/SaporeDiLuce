@@ -21,13 +21,15 @@ export function CeillingWalls(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        
-        
         geometry={nodes.ceilling_walls.geometry}
         material={nodes.ceilling_walls.material}
         position={[-0.378, 4.473, -2.514]}
       >
-        <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
+        <meshStandardMaterial
+          map={base_map}
+          lightMap={base_map}
+          lightMapIntensity={1}
+        />
       </mesh>
     </group>
   );

@@ -71,7 +71,7 @@ const cameraPositions = {
     target: new THREE.Vector3(7, 1.16, -7.8),
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
-    toAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2  },
+    toAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
     setAzimuthalAngle: 1.5,
   },
   check_counter: {
@@ -116,7 +116,8 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
 
   const limitRotationInit = React.useCallback(() => {
     if (currentPosition.params.name) {
-      const cameraProperties: CameraPropertiesProps = cameraPositions[currentPosition.params.name];
+      const cameraProperties: CameraPropertiesProps =
+        cameraPositions[currentPosition.params.name];
 
       if (cameraProperties.limitRotation) {
         gsap.to(controlsRef.current, {

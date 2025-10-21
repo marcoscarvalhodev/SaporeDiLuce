@@ -7,7 +7,10 @@ import gsap from 'gsap';
 import { PerspectiveCamera as TypePerspectiveCamera } from 'three';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
-import { UseCameraMovementContext } from './context/UseContexts';
+import {
+  UseCameraMovementContext,
+  UseFeaturesToggleContext,
+} from './context/UseContexts';
 import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
 import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
 import TableCustomersMain from './TableCustomers/TableCustomersMain';
@@ -20,7 +23,7 @@ import { CeillingWalls } from './ModelsManagement/CeillingWalls';
 import EffectsComponent from './EffectsComponent/EffectsComponent';
 import { Lights } from './ModelsManagement/Lights';
 import { MoldingDoors } from './ModelsManagement/MoldingDoors';
-import { WineBottles } from './ModelsManagement/WineBottles';
+import { GlassesBottles } from './ModelsManagement/GlassesBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
 
@@ -29,6 +32,7 @@ function CanvasContainer() {
   const canvasRef = React.useRef<null | HTMLCanvasElement>(null);
 
   const { roomNameState, refCanvasUpdated } = UseCameraMovementContext();
+  const { activeShadows } = UseFeaturesToggleContext();
 
   React.useEffect(() => {
     refCanvasUpdated.current = canvasRef.current;
@@ -37,7 +41,10 @@ function CanvasContainer() {
   return (
     <>
       <Canvas
-        shadows
+        onCreated={({ gl }) => {
+          gl.sortObjects = false;
+        }}
+        shadows={activeShadows}
         id='canvas-component'
         ref={canvasRef}
         style={{
@@ -85,6 +92,15 @@ function CanvasContainer() {
 
         <NotepadPen />
         <Waitress />
+
+        <CeillingWalls />
+        <GroundDoor />
+        <Floor />
+        <MoldingDoors />
+
+        <CouchPaintings />
+        <Lights />
+        <TableCustomersMain />
         <MoveCameraOrbit
           params={{
             name: roomNameState,
@@ -92,15 +108,9 @@ function CanvasContainer() {
             moveSound: true,
           }}
         />
-        <CeillingWalls />
-        <GroundDoor />
-        <Floor />
-        <MoldingDoors />
-        <WineBottles />
-        <CouchPaintings />
-        <Lights />
-        <TableCustomersMain />
+
         <EffectsComponent />
+        <GlassesBottles />
       </Canvas>
     </>
   );

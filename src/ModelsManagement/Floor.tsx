@@ -19,13 +19,14 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
   const { nodes } = useGLTF('/floor.glb') as GLTFResult;
   const reflectMeshRef = React.useRef<null | THREE.Mesh>(null);
-  const base_map = TextureAssetsLoader(
-    '/textures/floor/floor_base.webp'
+  const base_map = TextureAssetsLoader('/textures/floor/floor_base.webp');
+  const normal_map = TextureAssetsLoader('/textures/floor/floor_normal.webp');
+  const roughness_map = TextureAssetsLoader(
+    '/textures/floor/floor_roughness.webp'
   );
 
   const { gl, camera, scene } = useThree();
   const { activeReflections } = UseFeaturesToggleContext();
-
 
   React.useEffect(() => {
     if (reflectMeshRef.current?.material) {
@@ -56,13 +57,19 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
         if (reflectMeshRef.current.material instanceof MeshReflectorMaterial) {
           reflectMeshRef.current.material.setValues({
             map: base_map,
+            normalMap: normal_map,
+            roughnessMap: roughness_map,
             lightMap: base_map,
+            normalScale: new THREE.Vector2(2, 2),
             lightMapIntensity: 1,
           });
         }
       } else {
         reflectMeshRef.current.material = new THREE.MeshStandardMaterial({
           map: base_map,
+          normalMap: normal_map,
+          normalScale: new THREE.Vector2(2, 2),
+          roughnessMap: roughness_map,
           lightMap: base_map,
           lightMapIntensity: 1,
         });
@@ -73,7 +80,6 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
   useFrame(() => {
     if (reflectMeshRef.current?.material instanceof MeshReflectorMaterial) {
       reflectMeshRef.current.material.update();
-      
     }
   });
 
@@ -81,13 +87,13 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
         <mesh
-        ref={reflectMeshRef}
-        castShadow
-        receiveShadow
-        geometry={nodes.floor.geometry}
-        material={nodes.floor.material}
-        position={[-6.251, 0.588, 0.276]}
-      />
+          ref={reflectMeshRef}
+          castShadow
+          receiveShadow
+          geometry={nodes.floor.geometry}
+          material={nodes.floor.material}
+          position={[-6.251, 0.588, 0.276]}
+        />
       </group>
     </group>
   );
