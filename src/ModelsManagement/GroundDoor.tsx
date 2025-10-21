@@ -38,7 +38,6 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
   const { door_right, door_left } = nodes;
 
   useGSAP(() => {
-
     if (
       roomNameState === 'restaurant_enter' ||
       roomNameState === 'restaurant_leave'
@@ -86,6 +85,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
             reflectivity={1}
             transmission={1.0}
             color={'#ccd3ff'}
+            depthWrite={false}
           />
         </skinnedMesh>
         <skinnedMesh

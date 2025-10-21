@@ -14,8 +14,10 @@ const FeaturesToggle = () => {
     setActiveReflections,
     setActiveAnimations,
     activeBloom,
+    setActiveShadows,
     activeReflections,
     activeAnimations,
+    activeShadows,
   } = UseFeaturesToggleContext();
   const [settingsActive, setSettingsActive] = React.useState(false);
   const parentWrapperRef = React.useRef<null | HTMLElement>(null);
@@ -85,6 +87,12 @@ const FeaturesToggle = () => {
           onClick={() => setActiveReflections(!activeReflections)}
         >
           {activeReflections ? 'Disable reflections' : 'Enable reflections'}
+        </li>
+        <li
+          className='button_call w-max'
+          onClick={() => setActiveShadows(!activeShadows)}
+        >
+          {activeShadows ? 'Disable shadows' : 'Enable shadows'}
         </li>
 
         <li

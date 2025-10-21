@@ -102,6 +102,8 @@ interface FeaturesToggleProps {
   setActiveReflections: React.Dispatch<React.SetStateAction<boolean>>;
   activeAnimations: boolean;
   setActiveAnimations: React.Dispatch<React.SetStateAction<boolean>>;
+  activeShadows: boolean;
+  setActiveShadows: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface LoadingProps {

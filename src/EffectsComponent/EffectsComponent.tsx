@@ -1,6 +1,10 @@
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import {
+  Bloom,
+  EffectComposer,
+} from '@react-three/postprocessing';
 import React from 'react';
 import { UseFeaturesToggleContext } from '../context/UseContexts';
+
 
 const EffectsComponent = () => {
   const { activeBloom } = UseFeaturesToggleContext();
@@ -14,7 +18,11 @@ const EffectsComponent = () => {
           luminanceThreshold={0.1}
           intensity={0.1}
         />
-      ) : <></>}
+      ) : (
+        <></>
+      )}
+
+      
     </EffectComposer>
   );
 };
