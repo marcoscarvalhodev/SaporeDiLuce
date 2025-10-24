@@ -51,7 +51,8 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const manTable3 = React.useRef<HTMLDivElement | null>(null);
   const womanTable3 = React.useRef<HTMLDivElement | null>(null);
   const girlTable3 = React.useRef<HTMLDivElement | null>(null);
-
+  const womanTable5 = React.useRef<HTMLDivElement | null>(null);
+  const manTable5 = React.useRef<HTMLDivElement | null>(null);
   const buttonEat = React.useRef<HTMLDivElement | null>(null);
 
   const { roomNameState, setRoomNameState } = UseCameraMovementContext();
@@ -65,55 +66,53 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
   const tableRefCollection = React.useRef<(HTMLDivElement | null)[]>([]);
 
   React.useEffect(() => {
-  const reviewCollection = [
-    {
-      table: 'check_table_1',
-      reviewsButton: [manTable1.current, womanTable1.current],
-    },
-    {
-      table: 'check_table_2',
-      reviewsButton: [
-        manTable2.current,
-        womanTable2.current,
-        boyTable2.current,
-      ],
-    },
-    {
-      table: 'check_table_3',
-      reviewsButton: [
-        manTable3.current,
-        womanTable3.current,
-        girlTable3.current,
-      ],
-    },
-  ];
+    const reviewCollection = [
+      {
+        table: 'check_table_1',
+        reviewsButton: [manTable1.current, womanTable1.current],
+      },
+      {
+        table: 'check_table_2',
+        reviewsButton: [
+          manTable2.current,
+          womanTable2.current,
+          boyTable2.current,
+        ],
+      },
+      {
+        table: 'check_table_3',
+        reviewsButton: [
+          manTable3.current,
+          womanTable3.current,
+          girlTable3.current,
+        ],
+      },
+    ];
 
-  reviewCollection.forEach(({ table, reviewsButton }) => {
-    if (roomNameState && table === roomNameState) {
-      const validButtons = reviewsButton.filter(Boolean);
-      
-      if (validButtons.length > 0) {
-        if (activeAnimations) {
-          gsap.to(validButtons, {
-            opacity: 1,
-            pointerEvents: 'all',
-            duration: 0,
-            overwrite: true
-          });
-          
-        } else {
-          gsap.to(validButtons, {
-            opacity: 0,
-            pointerEvents: 'none',
-            duration: 0,
-            overwrite: true
-          });
-          
+    reviewCollection.forEach(({ table, reviewsButton }) => {
+      if (roomNameState && table === roomNameState) {
+        const validButtons = reviewsButton.filter(Boolean);
+
+        if (validButtons.length > 0) {
+          if (activeAnimations) {
+            gsap.to(validButtons, {
+              opacity: 1,
+              pointerEvents: 'all',
+              duration: 0,
+              overwrite: true,
+            });
+          } else {
+            gsap.to(validButtons, {
+              opacity: 0,
+              pointerEvents: 'none',
+              duration: 0,
+              overwrite: true,
+            });
+          }
         }
       }
-    }
-  });
-}, [activeAnimations, roomNameState]);
+    });
+  }, [activeAnimations, roomNameState]);
 
   React.useEffect(() => {
     tableRefCollection.current = [
@@ -714,7 +713,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
                 handleTablesButtonClick({
                   tableRef: buttonTable5.current,
                   stateName: 'check_table_5',
-                  customers: null,
+                  customers: [manTable5.current, womanTable5.current],
                 });
               }}
               goText='Check Table'
@@ -724,6 +723,63 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             />
           </Html>
           <meshStandardMaterial visible={false} />
+        </mesh>
+
+        <mesh position={[5.016, 1.1, -8.51]} scale={0.057} name='man_table_3'>
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_5_man'
+              ref={manTable5}
+              onClick={() => {
+                setCustomerReview('man_table_5');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+
+        <mesh
+          position={[4.56, 1.092, -8.854]}
+          scale={0.057}
+          name='woman_table_3'
+        >
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_5_woman'
+              ref={womanTable5}
+              onClick={() => {
+                setCustomerReview('woman_table_5');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
+        </mesh>
+        <mesh position={[4.616, 1.1, -8.1]} scale={0.057} name='girl_table_3'>
+          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
+            <ButtonReusable
+              color='orange'
+              orangeButtonClass='orange_button'
+              id='table_3_girl'
+              ref={girlTable3}
+              onClick={() => {
+                setCustomerReview('girl_table_3');
+              }}
+              goText='Customer review'
+              outText='Leave Table'
+              enterEnvironment={false}
+              textSize='large'
+            />
+          </Html>
         </mesh>
       </group>
 
