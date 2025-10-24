@@ -88,7 +88,6 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <mesh
           ref={reflectMeshRef}
-          castShadow
           receiveShadow
           geometry={nodes.floor.geometry}
           material={nodes.floor.material}

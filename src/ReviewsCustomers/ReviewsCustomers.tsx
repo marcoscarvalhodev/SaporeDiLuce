@@ -57,7 +57,8 @@ const listCustomerReviews: customerReviews = [
   },
   {
     name: 'Lisa',
-    message: "This food here is so yummy, it's really, really perfect and makes me so happy",
+    message:
+      "This food here is so yummy, it's really, really perfect and makes me so happy",
     stars: 5,
     customer_id: 'girl_table_3',
     position: [5.016, 1.75, -8.6],
@@ -70,7 +71,29 @@ const listCustomerReviews: customerReviews = [
     customer_id: 'man_table_3',
     position: [5.016, 1.7, -9.5],
   },
-  {name: "Christine", message: "Definitely a 5-star meal, never had anything like it before", stars: 5, customer_id: "woman_table_3", position: [5.016, 1.7, -9.31]}
+  {
+    name: 'Christine',
+    message: 'Definitely a 5-star meal, never had anything like it before',
+    stars: 5,
+    customer_id: 'woman_table_3',
+    position: [5.016, 1.7, -9.31],
+  },
+  {
+    name: 'Patricia',
+    message:
+      'You can tell only the best ingredients are used in the food. Even the tablecloth is amazing, look',
+    stars: 5,
+    customer_id: 'woman_table_5',
+    position: [6.5, 1.16, -6.2],
+  },
+  {
+    name: 'Ronnie',
+    message:
+      'The environment is very romantic, let alone the food that is so delicious',
+    stars: 4.5,
+    customer_id: 'man_table_5',
+    position: [6.5, 1.16, -6.2],
+  },
 ];
 
 const ReviewsCustomers = () => {
