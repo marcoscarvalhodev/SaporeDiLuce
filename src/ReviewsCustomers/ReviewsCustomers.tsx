@@ -84,7 +84,7 @@ const listCustomerReviews: customerReviews = [
       'You can tell only the best ingredients are used in the food. Even the tablecloth is amazing, look',
     stars: 5,
     customer_id: 'woman_table_5',
-    position: [6.5, 1.16, -6.2],
+    position: [6.781, 1.212, -9.3],
   },
   {
     name: 'Ronnie',
@@ -92,7 +92,7 @@ const listCustomerReviews: customerReviews = [
       'The environment is very romantic, let alone the food that is so delicious',
     stars: 4.5,
     customer_id: 'man_table_5',
-    position: [6.5, 1.16, -6.2],
+    position: [6.781, 1.112, -7],
   },
 ];
 

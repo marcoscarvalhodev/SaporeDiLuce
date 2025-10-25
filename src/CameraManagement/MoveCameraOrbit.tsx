@@ -67,7 +67,7 @@ const cameraPositions = {
     setAzimuthalAngle: 1.5,
   },
   check_table_5: {
-    position: new THREE.Vector3(6.5, 1.16, -6.2),
+    position: new THREE.Vector3(6, 1.16, -6.2),
     target: new THREE.Vector3(7, 1.16, -7.8),
     limitRotation: true,
     fromAzimuth: { min: Math.PI / -1.9, max: Math.PI / -2.2 },
