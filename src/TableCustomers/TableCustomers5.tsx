@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
 import { UseAnimationsContext } from '../context/UseContexts';
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 type GLTFResult = GLTF & {
   nodes: {
     man_5_eyebrows: THREE.SkinnedMesh;
@@ -23,7 +24,6 @@ type GLTFResult = GLTF & {
     ['MCH-thigh_ik_targetparentL']: THREE.Bone;
     ['MCH-foot_ikparentR']: THREE.Bone;
     ['MCH-thigh_ik_targetparentR']: THREE.Bone;
-    neutral_bone: THREE.Bone;
     root_1: THREE.Bone;
     ['MCH-torsoparent_1']: THREE.Bone;
     ['MCH-hand_ikparentL_1']: THREE.Bone;
@@ -54,6 +54,20 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
   const man5Anim1 = actions['man_5_anim_1'];
   const man5AnimReview = actions['man_5_anim_review'];
   const woman5AnimReview = actions['woman_5_anim_review'];
+
+  const [
+    man_5_lowerbody,
+    man_5_upperbody,
+    woman_5_lowerbody,
+    woman_5_upperbody,
+    eyebrow_eyelash,
+  ] = [
+    TextureAssetsLoader('/textures/bodies/man_5_lowerbody.webp'),
+    TextureAssetsLoader('/textures/bodies/man_5_upperbody.webp'),
+    TextureAssetsLoader('/textures/bodies/woman_5_lowerbody.webp'),
+    TextureAssetsLoader('/textures/bodies/woman_5_upperbody.webp'),
+    TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
+  ];
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -92,21 +106,41 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             skeleton={nodes.man_5_eyebrows.skeleton}
             morphTargetDictionary={nodes.man_5_eyebrows.morphTargetDictionary}
             morphTargetInfluences={nodes.man_5_eyebrows.morphTargetInfluences}
-          />
+          >
+            <meshStandardMaterial
+              alphaMap={eyebrow_eyelash}
+              transparent
+              color={'#7b6522'}
+            />
+          </skinnedMesh>
           <skinnedMesh
+            castShadow
             name='man_5_lowerbody'
             geometry={nodes.man_5_lowerbody.geometry}
             material={nodes.man_5_lowerbody.material}
             skeleton={nodes.man_5_lowerbody.skeleton}
             morphTargetDictionary={nodes.man_5_lowerbody.morphTargetDictionary}
             morphTargetInfluences={nodes.man_5_lowerbody.morphTargetInfluences}
-          />
+          >
+            {' '}
+            <meshStandardMaterial
+              map={man_5_lowerbody}
+              lightMap={man_5_lowerbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <skinnedMesh
             name='man_5_upperbody'
             geometry={nodes.man_5_upperbody.geometry}
             material={nodes.man_5_upperbody.material}
             skeleton={nodes.man_5_upperbody.skeleton}
-          />
+          >
+            <meshStandardMaterial
+              map={man_5_upperbody}
+              lightMap={man_5_upperbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-hand_ikparentL']} />
@@ -117,7 +151,6 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           <primitive object={nodes['MCH-thigh_ik_targetparentL']} />
           <primitive object={nodes['MCH-foot_ikparentR']} />
           <primitive object={nodes['MCH-thigh_ik_targetparentR']} />
-          <primitive object={nodes.neutral_bone} />
         </group>
         <group name='rig_woman_5'>
           <skinnedMesh
@@ -131,8 +164,15 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             morphTargetInfluences={
               nodes.woman_5_eyebroews.morphTargetInfluences
             }
-          />
+          >
+            <meshStandardMaterial
+              alphaMap={eyebrow_eyelash}
+              transparent
+              color={'#b5743b'}
+            />
+          </skinnedMesh>
           <skinnedMesh
+            castShadow
             name='woman_5_lowerbody'
             geometry={nodes.woman_5_lowerbody.geometry}
             material={nodes.woman_5_lowerbody.material}
@@ -143,13 +183,25 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             morphTargetInfluences={
               nodes.woman_5_lowerbody.morphTargetInfluences
             }
-          />
+          >
+            <meshStandardMaterial
+              map={woman_5_lowerbody}
+              lightMap={woman_5_lowerbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <skinnedMesh
             name='woman_5_upperbody'
             geometry={nodes.woman_5_upperbody.geometry}
             material={nodes.woman_5_upperbody.material}
             skeleton={nodes.woman_5_upperbody.skeleton}
-          />
+          >
+            <meshStandardMaterial
+              map={woman_5_upperbody}
+              lightMap={woman_5_upperbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <primitive object={nodes.root_1} />
           <primitive object={nodes['MCH-torsoparent_1']} />
           <primitive object={nodes['MCH-hand_ikparentL_1']} />

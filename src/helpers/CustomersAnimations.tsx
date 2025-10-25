@@ -68,21 +68,19 @@ const CustomersAnimations = ({
     switch (roomNameState) {
       case table_id:
         {
-          setTimeout(() => {
-            review_actions.forEach((item) => {
-              const customer_cam = item.action.customer_cam;
-              const customer_init = item.action.customer_init;
+          review_actions.forEach((item) => {
+            const customer_cam = item.action.customer_cam;
+            const customer_init = item.action.customer_init;
 
-              if (customer_cam && customer_init) {
-                customer_cam.reset();
-                customer_cam.clampWhenFinished = true;
-                customer_cam.repetitions = 1;
-                customer_cam.timeScale = 1;
-                customer_cam.play();
-                customer_init.crossFadeTo(customer_cam, 1, true);
-              }
-            });
-          }, 2000);
+            if (customer_cam && customer_init) {
+              customer_cam.reset();
+              customer_cam.clampWhenFinished = true;
+              customer_cam.repetitions = 1;
+              customer_cam.timeScale = 1;
+              customer_cam.play();
+              customer_init.crossFadeTo(customer_cam, 1, true);
+            }
+          });
         }
         break;
       case 'dining_room_enter':
@@ -128,7 +126,7 @@ const CustomersAnimations = ({
     if (actions['blink_eyes']) {
       actions['blink_eyes'].paused = !activeAnimations;
     }
-    
+
     animActions.forEach((item) => {
       if (item) item.paused = !activeAnimations;
     });
@@ -141,7 +139,11 @@ const CustomersAnimations = ({
   React.useEffect(() => {
     if (!customerAnimationsReady) return;
 
-    if (activeAnimations) InitToCamAnim();
+    if (activeAnimations) {
+      setTimeout(() => {
+        InitToCamAnim();
+      }, 2000);
+    }
   }, [InitToCamAnim, customerAnimationsReady, activeAnimations]);
 
   React.useEffect(() => {

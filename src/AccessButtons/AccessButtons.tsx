@@ -725,7 +725,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           <meshStandardMaterial visible={false} />
         </mesh>
 
-        <mesh position={[5.016, 1.1, -8.51]} scale={0.057} name='man_table_3'>
+        <mesh position={[6.781, 1.092, -7.5]} scale={0.057} name='man_table_5'>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'
@@ -744,9 +744,9 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
         </mesh>
 
         <mesh
-          position={[4.56, 1.092, -8.854]}
+          position={[6.781, 1.092, -8]}
           scale={0.057}
-          name='woman_table_3'
+          name='woman_table_5'
         >
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
@@ -756,23 +756,6 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
               ref={womanTable5}
               onClick={() => {
                 setCustomerReview('woman_table_5');
-              }}
-              goText='Customer review'
-              outText='Leave Table'
-              enterEnvironment={false}
-              textSize='large'
-            />
-          </Html>
-        </mesh>
-        <mesh position={[4.616, 1.1, -8.1]} scale={0.057} name='girl_table_3'>
-          <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
-            <ButtonReusable
-              color='orange'
-              orangeButtonClass='orange_button'
-              id='table_3_girl'
-              ref={girlTable3}
-              onClick={() => {
-                setCustomerReview('girl_table_3');
               }}
               goText='Customer review'
               outText='Leave Table'
