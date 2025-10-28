@@ -100,6 +100,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
       <group name='Scene'>
         <group name='rig_man_5' position={[3.21, 0, 0]}>
           <skinnedMesh
+            frustumCulled={false}
             name='man_5_eyebrows'
             geometry={nodes.man_5_eyebrows.geometry}
             material={nodes.man_5_eyebrows.material}
@@ -114,6 +115,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            frustumCulled={false}
             castShadow
             name='man_5_lowerbody'
             geometry={nodes.man_5_lowerbody.geometry}
@@ -130,6 +132,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            frustumCulled={false}
             name='man_5_upperbody'
             geometry={nodes.man_5_upperbody.geometry}
             material={nodes.man_5_upperbody.material}
@@ -154,6 +157,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
         </group>
         <group name='rig_woman_5'>
           <skinnedMesh
+            frustumCulled={false}
             name='woman_5_eyebroews'
             geometry={nodes.woman_5_eyebroews.geometry}
             material={nodes.woman_5_eyebroews.material}
@@ -172,6 +176,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            frustumCulled={false}
             castShadow
             name='woman_5_lowerbody'
             geometry={nodes.woman_5_lowerbody.geometry}
@@ -191,6 +196,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            frustumCulled={false}
             name='woman_5_upperbody'
             geometry={nodes.woman_5_upperbody.geometry}
             material={nodes.woman_5_upperbody.material}

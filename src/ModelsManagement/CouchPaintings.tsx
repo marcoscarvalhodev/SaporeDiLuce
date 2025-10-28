@@ -18,6 +18,8 @@ export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
   const base_map = TextureAssetsLoader(
     '/textures/couch_paintings/couch_paintings_base.webp'
   );
+
+ 
   return (
     <group {...props} dispose={null}>
       <mesh

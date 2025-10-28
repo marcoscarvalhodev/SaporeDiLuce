@@ -27,6 +27,7 @@ import { GlassesBottles } from './ModelsManagement/GlassesBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
 
+
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
   const canvasRef = React.useRef<null | HTMLCanvasElement>(null);
@@ -77,7 +78,7 @@ function CanvasContainer() {
         />
 
         <Environment
-          files={'./environment.hdr'}
+          files={'./environment.exr'}
           environmentIntensity={0.8}
           background
         />
