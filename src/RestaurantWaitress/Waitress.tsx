@@ -12,7 +12,9 @@ import { useFrame } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
-    body_waitress001: THREE.SkinnedMesh;
+    waitress_eyebrows: THREE.SkinnedMesh;
+    waitress_lowerbody: THREE.SkinnedMesh;
+    waitress_upperbody: THREE.SkinnedMesh;
     root: THREE.Bone;
     ['MCH-torsoparent']: THREE.Bone;
     ['MCH-hand_ikparentL']: THREE.Bone;
@@ -31,7 +33,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
   const { nodes, animations } = useGLTF(
     '/restaurant_waitress.glb'
-  ) as GLTFResult;
+  ) as unknown as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
 
   const counterActive = React.useRef(false);
@@ -111,6 +113,10 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
       dialogueTalkTableServe.current = false;
     }
   });
+
+  React.useEffect(() => {
+    actions['blink_eyes']?.play();
+  }, [actions]);
 
   React.useEffect(() => {
     mixer.addEventListener('finished', ({ action }) => {
@@ -254,10 +260,36 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
         <group name='rig_waitress' position={[-4.53, 0, 0]}>
           <skinnedMesh
             frustumCulled={false}
-            name='body_waitress001'
-            geometry={nodes.body_waitress001.geometry}
-            material={nodes.body_waitress001.material}
-            skeleton={nodes.body_waitress001.skeleton}
+            name='waitress_eyebrows'
+            geometry={nodes.waitress_eyebrows.geometry}
+            material={nodes.waitress_eyebrows.material}
+            skeleton={nodes.waitress_eyebrows.skeleton}
+            morphTargetDictionary={
+              nodes.waitress_eyebrows.morphTargetDictionary
+            }
+            morphTargetInfluences={
+              nodes.waitress_eyebrows.morphTargetInfluences
+            }
+          />
+          <skinnedMesh
+            frustumCulled={false}
+            name='waitress_lowerbody'
+            geometry={nodes.waitress_lowerbody.geometry}
+            material={nodes.waitress_lowerbody.material}
+            skeleton={nodes.waitress_lowerbody.skeleton}
+            morphTargetDictionary={
+              nodes.waitress_lowerbody.morphTargetDictionary
+            }
+            morphTargetInfluences={
+              nodes.waitress_lowerbody.morphTargetInfluences
+            }
+          />
+          <skinnedMesh
+            frustumCulled={false}
+            name='waitress_upperbody'
+            geometry={nodes.waitress_upperbody.geometry}
+            material={nodes.waitress_upperbody.material}
+            skeleton={nodes.waitress_upperbody.skeleton}
           />
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
