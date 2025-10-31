@@ -16,7 +16,7 @@ import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
 import TableCustomersMain from './TableCustomers/TableCustomersMain';
 import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 import { Waitress } from './RestaurantWaitress/Waitress';
-import { NotepadPen } from './RestaurantWaitress/NotepadPen';
+import { NotepadPenDishes } from './RestaurantWaitress/NotepadPenDishes';
 import WaitressDialogue from './RestaurantWaitress/WaitressDialogue';
 import { Floor } from './ModelsManagement/Floor';
 import { CeillingWalls } from './ModelsManagement/CeillingWalls';
@@ -91,7 +91,7 @@ function CanvasContainer() {
         <RestaurantMenu />
         <RestaurantDishes />
 
-        <NotepadPen />
+        <NotepadPenDishes />
         <Waitress />
 
         <CeillingWalls />
