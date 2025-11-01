@@ -11,14 +11,13 @@ import { ContextFeaturesToggleProvider } from './context/FeaturesToggleContext.t
 import { ContextLoadingProvider } from './context/LoadingContext.tsx';
 import SceneComponent from './SceneComponent.tsx';
 
-
 createRoot(document.getElementById('root')!).render(
   <>
     <ContextLoadingProvider>
       <ContextFeaturesToggleProvider>
-        <ContextAudioChoiceProvider>
-          <ContextCameraMovementProvider>
-            <ContextButtonsProvider>
+        <ContextButtonsProvider>
+          <ContextAudioChoiceProvider>
+            <ContextCameraMovementProvider>
               <ContextOverlaysProvider>
                 <ContextAnimationsProvider>
                   <ContextHumansProvider>
@@ -28,9 +27,9 @@ createRoot(document.getElementById('root')!).render(
                   </ContextHumansProvider>
                 </ContextAnimationsProvider>
               </ContextOverlaysProvider>
-            </ContextButtonsProvider>
-          </ContextCameraMovementProvider>
-        </ContextAudioChoiceProvider>
+            </ContextCameraMovementProvider>
+          </ContextAudioChoiceProvider>
+        </ContextButtonsProvider>
       </ContextFeaturesToggleProvider>
     </ContextLoadingProvider>
   </>

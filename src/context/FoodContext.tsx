@@ -9,6 +9,7 @@ export const ContextFoodProvider = ({
   const [foodOrdered, setFoodOrdered] = React.useState(false);
   const [foodOnTable, setFoodOnTable] = React.useState(false);
   const [eatFood, setEatFood] = React.useState(false);
+  const [emptyDish, setEmptyDish] = React.useState(false);
 
   return (
     <CreateContextFood.Provider
@@ -19,6 +20,8 @@ export const ContextFoodProvider = ({
         setFoodOnTable,
         eatFood,
         setEatFood,
+        emptyDish,
+        setEmptyDish
       }}
     >
       {children}

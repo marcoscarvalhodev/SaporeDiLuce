@@ -68,7 +68,7 @@ interface OverlaysProps {
 }
 
 export type menuOptionsProps =
-  | ''
+  | 'dish_0'
   | 'dish_1'
   | 'dish_2'
   | 'dish_3'
@@ -93,6 +93,8 @@ interface FoodProps {
   setEatFood: React.Dispatch<React.SetStateAction<boolean>>;
   eatFood: boolean;
   setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmptyDish: React.Dispatch<React.SetStateAction<boolean>>;
+  emptyDish: boolean;
 }
 
 interface FeaturesToggleProps {

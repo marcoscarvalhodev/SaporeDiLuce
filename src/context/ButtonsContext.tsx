@@ -14,7 +14,7 @@ export const ContextButtonsProvider = ({
 
   const [menuActive, setMenuActive] = React.useState(false);
   const [menuOptionsClick, setMenuOptionsClick] =
-    React.useState<menuOptionsProps>('');
+    React.useState<menuOptionsProps>('dish_0');
   const [showEatButton, setShowEatButton] = React.useState(false);
 
   return (
