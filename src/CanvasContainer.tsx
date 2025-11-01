@@ -12,7 +12,6 @@ import {
   UseFeaturesToggleContext,
 } from './context/UseContexts';
 import { RestaurantMenu } from './RestaurantMenu/RestaurantMenu';
-import { RestaurantDishes } from './ModelsManagement/RestaurantDishes';
 import TableCustomersMain from './TableCustomers/TableCustomersMain';
 import ReviewsCustomers from './ReviewsCustomers/ReviewsCustomers';
 import { Waitress } from './RestaurantWaitress/Waitress';
@@ -26,7 +25,6 @@ import { MoldingDoors } from './ModelsManagement/MoldingDoors';
 import { GlassesBottles } from './ModelsManagement/GlassesBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
-
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -89,9 +87,7 @@ function CanvasContainer() {
         <WaitressDialogue />
 
         <RestaurantMenu />
-        <RestaurantDishes />
 
-        <NotepadPenDishes />
         <Waitress />
 
         <CeillingWalls />
@@ -102,6 +98,8 @@ function CanvasContainer() {
         <CouchPaintings />
         <Lights />
         <TableCustomersMain />
+        <NotepadPenDishes />
+
         <MoveCameraOrbit
           params={{
             name: roomNameState,
