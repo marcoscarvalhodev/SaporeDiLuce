@@ -9,6 +9,7 @@ import {
   UseHumansContext,
 } from '../context/UseContexts';
 import { useFrame } from '@react-three/fiber';
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,6 +37,11 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   ) as unknown as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
 
+  const [waitress_lowerbody, waitress_upperbody, waitress_eyebrows] = [
+    TextureAssetsLoader('/textures/bodies/waitress_lowerbody.webp'),
+    TextureAssetsLoader('/textures/bodies/waitress_upperbody.webp'),
+    TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
+  ];
   const counterActive = React.useRef(false);
 
   const { roomNameState } = UseCameraMovementContext();
@@ -270,7 +276,13 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
             morphTargetInfluences={
               nodes.waitress_eyebrows.morphTargetInfluences
             }
-          />
+          >
+            <meshStandardMaterial
+              alphaMap={waitress_eyebrows}
+              transparent
+              color={'#534316'}
+            />
+          </skinnedMesh>
           <skinnedMesh
             frustumCulled={false}
             name='waitress_lowerbody'
@@ -283,14 +295,26 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
             morphTargetInfluences={
               nodes.waitress_lowerbody.morphTargetInfluences
             }
-          />
+          >
+            <meshStandardMaterial
+              map={waitress_lowerbody}
+              lightMap={waitress_lowerbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <skinnedMesh
             frustumCulled={false}
             name='waitress_upperbody'
             geometry={nodes.waitress_upperbody.geometry}
             material={nodes.waitress_upperbody.material}
             skeleton={nodes.waitress_upperbody.skeleton}
-          />
+          >
+            <meshStandardMaterial
+              map={waitress_upperbody}
+              lightMap={waitress_upperbody}
+              lightMapIntensity={1}
+            />
+          </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
           <primitive object={nodes['MCH-hand_ikparentL']} />

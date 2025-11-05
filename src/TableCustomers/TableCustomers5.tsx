@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
@@ -62,10 +62,10 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
     woman_5_upperbody,
     eyebrow_eyelash,
   ] = [
-    TextureAssetsLoader('/textures/bodies/man_5_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/man_5_upperbody.webp'),
-    TextureAssetsLoader('/textures/bodies/woman_5_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/woman_5_upperbody.webp'),
+    useKTX2('/textures/bodies/man_5_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/man_5_upperbody.ktx2'),
+    useKTX2('/textures/bodies/woman_5_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/woman_5_upperbody.ktx2'),
     TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
   ];
 
@@ -127,8 +127,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             {' '}
             <meshStandardMaterial
               map={man_5_lowerbody}
-              lightMap={man_5_lowerbody}
-              lightMapIntensity={1}
+            
             />
           </skinnedMesh>
           <skinnedMesh
@@ -140,8 +139,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_5_upperbody}
-              lightMap={man_5_upperbody}
-              lightMapIntensity={1}
+              
             />
           </skinnedMesh>
           <primitive object={nodes.root} />
@@ -191,8 +189,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_5_lowerbody}
-              lightMap={woman_5_lowerbody}
-              lightMapIntensity={1}
+              
             />
           </skinnedMesh>
           <skinnedMesh
@@ -204,8 +201,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_5_upperbody}
-              lightMap={woman_5_upperbody}
-              lightMapIntensity={1}
+              
             />
           </skinnedMesh>
           <primitive object={nodes.root_1} />
