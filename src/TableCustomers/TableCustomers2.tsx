@@ -7,6 +7,7 @@ import { GLTF } from 'three/examples/jsm/Addons.js';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import CustomersAnimations from '../helpers/CustomersAnimations';
 import { UseAnimationsContext } from '../context/UseContexts';
+import { useKTX2 } from '@react-three/drei';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -91,14 +92,16 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     woman_2_upperbody,
     boy_lowerbody,
     boy_upperbody,
-    eyebrow_eyelash,
   ] = [
-    TextureAssetsLoader('/textures/bodies/man_2_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/man_2_upperbody.webp'),
-    TextureAssetsLoader('/textures/bodies/woman_2_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/woman_2_upperbody.webp'),
-    TextureAssetsLoader('/textures/bodies/boy_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/boy_upperbody.webp'),
+    useKTX2('/textures/bodies/man_2_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/man_2_upperbody.ktx2'),
+    useKTX2('/textures/bodies/woman_2_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/woman_2_upperbody.ktx2'),
+    useKTX2('/textures/bodies/boy_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/boy_upperbody.ktx2'),
+  ];
+
+  const [eyebrow_eyelash] = [
     TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
   ];
 
@@ -195,11 +198,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.boy_lowerbody.morphTargetDictionary}
             morphTargetInfluences={nodes.boy_lowerbody.morphTargetInfluences}
           >
-            <meshStandardMaterial
-              map={boy_lowerbody}
-              lightMap={boy_lowerbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={boy_lowerbody} />
           </skinnedMesh>
           <skinnedMesh
             name='boy_upperbody'
@@ -207,11 +206,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             material={nodes.boy_upperbody.material}
             skeleton={nodes.boy_upperbody.skeleton}
           >
-            <meshStandardMaterial
-              map={boy_upperbody}
-              lightMap={boy_upperbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={boy_upperbody} />
           </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />
@@ -248,11 +243,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.man_2_lowerbody.morphTargetDictionary}
             morphTargetInfluences={nodes.man_2_lowerbody.morphTargetInfluences}
           >
-            <meshStandardMaterial
-              map={man_2_lowerbody}
-              lightMap={man_2_lowerbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={man_2_lowerbody} />
           </skinnedMesh>
           <skinnedMesh
             name='man_2_upperbody'
@@ -260,11 +251,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             material={nodes.man_2_upperbody.material}
             skeleton={nodes.man_2_upperbody.skeleton}
           >
-            <meshStandardMaterial
-              map={man_2_upperbody}
-              lightMap={man_2_upperbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={man_2_upperbody} />
           </skinnedMesh>
           <primitive object={nodes.root_1} />
           <primitive object={nodes['MCH-torsoparent_1']} />
@@ -305,11 +292,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
               nodes.woman_2_lowerbody.morphTargetInfluences
             }
           >
-            <meshStandardMaterial
-              map={woman_2_lowerbody}
-              lightMap={woman_2_lowerbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={woman_2_lowerbody} />
           </skinnedMesh>
           <skinnedMesh
             receiveShadow
@@ -318,11 +301,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             material={nodes.woman_2_upperbody.material}
             skeleton={nodes.woman_2_upperbody.skeleton}
           >
-            <meshStandardMaterial
-              map={woman_2_upperbody}
-              lightMap={woman_2_upperbody}
-              lightMapIntensity={1}
-            />
+            <meshStandardMaterial map={woman_2_upperbody} />
           </skinnedMesh>
           <primitive object={nodes.root_2} />
           <primitive object={nodes['MCH-torsoparent_2']} />
