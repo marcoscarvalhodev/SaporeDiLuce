@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
@@ -15,8 +15,8 @@ type GLTFResult = GLTF & {
 export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/couch_paintings.glb') as GLTFResult;
 
-  const base_map = TextureAssetsLoader(
-    '/textures/couch_paintings/couch_paintings_base.webp'
+  const base_map = useKTX2(
+    '/textures/couch_paintings/couch_paintings_base.ktx2'
   );
 
  
@@ -27,7 +27,7 @@ export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
         material={nodes.couch_paintings.material}
         position={[2.473, 2.023, 5.344]}
       >
-        <meshStandardMaterial map={base_map} lightMap={base_map} lightMapIntensity={1}/>
+        <meshStandardMaterial map={base_map} />
       </mesh>
     </group>
   );

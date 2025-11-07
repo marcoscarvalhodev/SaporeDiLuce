@@ -78,6 +78,8 @@ function CanvasContainer() {
         <Environment
           files={'./environment.exr'}
           environmentIntensity={0.8}
+          backgroundIntensity={0.5}
+          environmentRotation={[0, 4, 0]}
           background
         />
 
