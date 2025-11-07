@@ -48,7 +48,12 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
     }
   }, [foodOrdered, OrderedFoodAudio]);
 
-  const base_map = TextureAssetsLoader('/textures/test_dishes/dishes_test.png');
+  const [base_map, roughness_map, normal_map] = [
+    TextureAssetsLoader('/textures/dishes/current_dish_base.webp'),
+    TextureAssetsLoader('/textures/dishes/current_dish_roughness.webp'),
+    TextureAssetsLoader('/textures/dishes/current_dish_normal.webp'),
+  ];
+
   const originalUV = React.useRef<
     null | (THREE.BufferAttribute | THREE.InterleavedBufferAttribute)
   >(null);
@@ -123,7 +128,12 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
             material={nodes.notepad_pen_dishes.material}
             skeleton={nodes.notepad_pen_dishes.skeleton}
           >
-            <meshStandardMaterial map={base_map} />
+            <meshStandardMaterial
+              map={base_map}
+              roughnessMap={roughness_map}
+              normalMap={normal_map}
+              normalScale={1}
+            />
           </skinnedMesh>
           <primitive object={nodes.bone_notepad} />
           <primitive object={nodes.bone_pen} />

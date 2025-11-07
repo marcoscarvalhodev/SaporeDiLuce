@@ -17,8 +17,8 @@ export function Lights(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <pointLight
-      position={[4.28, 5, -6.52]}
-      intensity={10}
+      position={[4, 7, -3]}
+      intensity={30}
       castShadow
       shadow-mapSize-width={1024}
       shadow-mapSize-height={1024}
