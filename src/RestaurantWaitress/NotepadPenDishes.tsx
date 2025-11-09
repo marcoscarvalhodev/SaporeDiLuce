@@ -1,10 +1,9 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import { UseFoodContext } from '../context/UseContexts';
-import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
 import { UseButtonsContext } from '../context/UseContexts';
 
@@ -49,9 +48,9 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
   }, [foodOrdered, OrderedFoodAudio]);
 
   const [base_map, roughness_map, normal_map] = [
-    TextureAssetsLoader('/textures/dishes/current_dish_base.webp'),
-    TextureAssetsLoader('/textures/dishes/current_dish_roughness.webp'),
-    TextureAssetsLoader('/textures/dishes/current_dish_normal.webp'),
+    useKTX2('/textures/dishes/current_dish_base.ktx2'),
+    useKTX2('/textures/dishes/current_dish_roughness.ktx2'),
+    useKTX2('/textures/dishes/current_dish_normal.ktx2'),
   ];
 
   const originalUV = React.useRef<
@@ -130,6 +129,7 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={base_map}
+              roughness={1}
               roughnessMap={roughness_map}
               normalMap={normal_map}
               normalScale={1}

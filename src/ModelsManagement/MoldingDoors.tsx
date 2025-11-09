@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import React from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -15,8 +14,8 @@ type GLTFResult = GLTF & {
 export function MoldingDoors(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/molding_doors.glb') as GLTFResult;
 
-  const base_map = TextureAssetsLoader(
-    '/textures/molding_doors/molding_doors_base.webp'
+  const base_map = useKTX2(
+    '/textures/molding_doors/molding_doors_base.ktx2'
   );
   return (
     <group {...props} dispose={null}>

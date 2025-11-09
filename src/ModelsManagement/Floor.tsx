@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import { MeshReflectorMaterial } from '../helpers/MeshReflectorMaterial';
 import { useFrame, useThree } from '@react-three/fiber';
 import { UseFeaturesToggleContext } from '../context/UseContexts';
@@ -19,9 +18,10 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null);
   const { nodes } = useGLTF('/floor.glb') as GLTFResult;
   const reflectMeshRef = React.useRef<null | THREE.Mesh>(null);
-  const base_map = TextureAssetsLoader('/textures/floor/floor_base.webp');
-  const normal_map = TextureAssetsLoader('/textures/floor/floor_normal.webp');
-  
+  const [base_map, normal_map] = [
+    useKTX2('/textures/floor/floor_base.ktx2'),
+    useKTX2('/textures/floor/floor_normal.ktx2'),
+  ];
 
   const { gl, camera, scene } = useThree();
   const { activeReflections } = UseFeaturesToggleContext();
@@ -56,8 +56,9 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
           reflectMeshRef.current.material.setValues({
             map: base_map,
             normalMap: normal_map,
+            
             lightMap: base_map,
-            normalScale: new THREE.Vector2(2, 2),
+            normalScale: new THREE.Vector2(3, 3),
             lightMapIntensity: 1,
           });
         }
@@ -65,7 +66,7 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
         reflectMeshRef.current.material = new THREE.MeshStandardMaterial({
           map: base_map,
           normalMap: normal_map,
-          normalScale: new THREE.Vector2(2, 2),
+          normalScale: new THREE.Vector2(3, 3),
           lightMap: base_map,
           lightMapIntensity: 1,
         });

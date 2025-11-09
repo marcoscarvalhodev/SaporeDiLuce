@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import {
@@ -38,8 +38,8 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
   const { actions, mixer } = useAnimations(animations, group);
 
   const [waitress_lowerbody, waitress_upperbody, waitress_eyebrows] = [
-    TextureAssetsLoader('/textures/bodies/waitress_lowerbody.webp'),
-    TextureAssetsLoader('/textures/bodies/waitress_upperbody.webp'),
+    useKTX2('/textures/bodies/waitress_lowerbody.ktx2'),
+    useKTX2('/textures/bodies/waitress_upperbody.ktx2'),
     TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
   ];
   const counterActive = React.useRef(false);

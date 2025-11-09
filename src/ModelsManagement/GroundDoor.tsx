@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
-import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import {
   UseCameraMovementContext,
   UseAnimationsContext,
@@ -26,8 +25,8 @@ type GLTFResult = GLTF & {
 export function GroundDoor(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF('/ground_door.glb') as GLTFResult;
   const group = useRef<THREE.Group>(null);
-  const base_map = TextureAssetsLoader(
-    '/textures/ground_door/ground_door_base.webp'
+  const base_map = useKTX2(
+    '/textures/ground_door/ground_door_base.ktx2'
   );
   const { mixer } = useAnimations(animations, group);
 
@@ -82,10 +81,10 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
             envMapIntensity={0.9}
             transparent
             opacity={0.8}
-            reflectivity={1}
+            reflectivity={0.8}
             transmission={1.0}
             color={'#ccd3ff'}
-            depthWrite={false}
+            
           />
         </skinnedMesh>
         <skinnedMesh
