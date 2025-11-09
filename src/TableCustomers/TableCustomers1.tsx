@@ -114,7 +114,6 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           </skinnedMesh>
           <skinnedMesh
             castShadow
-            receiveShadow
             name='man_1_lowerbody'
             geometry={nodes.man_1_lowerbody.geometry}
             material={nodes.man_1_lowerbody.material}
@@ -124,7 +123,8 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_1_lowerbody}
-              
+              lightMap={man_1_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -135,7 +135,8 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_1_upperbody}
-              
+              lightMap={man_1_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root} />
@@ -180,7 +181,8 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_1_lowerbody}
-             
+              lightMap={woman_1_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -191,7 +193,8 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_1_upperbody}
-            
+              lightMap={woman_1_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root_1} />

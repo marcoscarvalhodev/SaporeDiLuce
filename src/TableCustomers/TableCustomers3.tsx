@@ -151,7 +151,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={girl_lowerbody}
-              
+              lightMap={girl_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -162,7 +163,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={girl_upperbody}
-             
+              lightMap={girl_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root} />
@@ -202,7 +204,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_3_lowerbody}
-             
+              lightMap={man_3_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -213,7 +216,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_3_upperbody}
-              
+              lightMap={man_3_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root_1} />
@@ -257,7 +261,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_3_lowerbody}
-             
+              lightMap={woman_3_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -268,7 +273,8 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_3_upperbody}
-              
+              lightMap={woman_3_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root_2} />

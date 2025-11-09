@@ -127,7 +127,8 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
             {' '}
             <meshStandardMaterial
               map={man_5_lowerbody}
-            
+              lightMap={man_5_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -139,7 +140,8 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_5_upperbody}
-              
+              lightMap={man_5_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root} />
@@ -189,7 +191,8 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_5_lowerbody}
-              
+              lightMap={woman_5_lowerbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -201,7 +204,8 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_5_upperbody}
-              
+              lightMap={woman_5_upperbody}
+              lightMapIntensity={1}
             />
           </skinnedMesh>
           <primitive object={nodes.root_1} />

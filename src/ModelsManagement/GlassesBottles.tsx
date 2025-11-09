@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
@@ -16,15 +16,11 @@ type GLTFResult = GLTF & {
 export function GlassesBottles(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/glasses_bottles.glb') as GLTFResult;
 
-  const base_map_bottles = TextureAssetsLoader(
-    '/textures/glasses_bottles/glasses_bottles_base.webp'
-  );
-  const base_map_glasses = TextureAssetsLoader(
-    '/textures/glasses_bottles/glasses_liquid_base.webp'
-  );
-  const alpha_map = TextureAssetsLoader(
-    '/textures/glasses_bottles/glasses_liquid_alpha.webp'
-  );
+  const [base_map_bottles, base_map_glasses, alpha_map] = [
+    useKTX2('/textures/glasses_bottles/glasses_bottles_base.ktx2'),
+    useKTX2('/textures/glasses_bottles/glasses_liquid_base.ktx2'),
+    TextureAssetsLoader('/textures/glasses_bottles/glasses_liquid_alpha.webp'),
+  ];
 
   return (
     <group {...props} dispose={null}>
