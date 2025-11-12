@@ -28,7 +28,7 @@ export function CeillingWalls(props: JSX.IntrinsicElements['group']) {
         <meshStandardMaterial
           map={base_map}
           lightMap={base_map}
-          lightMapIntensity={1}
+          lightMapIntensity={2}
         />
       </mesh>
     </group>
