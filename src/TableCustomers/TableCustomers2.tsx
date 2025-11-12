@@ -64,8 +64,10 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
   ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
-  const [chairs_base_map] = [
+  const [chairs_base, chairs_roughness, chairs_normal] = [
     useKTX2('/textures/chairs_decorations/chairs_decorations_base.ktx2'),
+    useKTX2('/textures/chairs_decorations/chairs_decorations_roughness.ktx2'),
+    useKTX2('/textures/chairs_decorations/chairs_decorations_normal.ktx2'),
   ];
 
   const { customersAnimationsReady } = UseAnimationsContext();
@@ -164,8 +166,11 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             skeleton={nodes.chairs_decoration.skeleton}
           >
             <meshStandardMaterial
-              map={chairs_base_map}
-              lightMap={chairs_base_map}
+              map={chairs_base}
+              lightMap={chairs_base}
+              roughnessMap={chairs_roughness}
+              normalMap={chairs_normal}
+              normalScale={1}
               lightMapIntensity={1}
             />
           </skinnedMesh>

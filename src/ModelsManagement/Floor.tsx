@@ -6,6 +6,7 @@ import { JSX } from 'react';
 import { MeshReflectorMaterial } from '../helpers/MeshReflectorMaterial';
 import { useFrame, useThree } from '@react-three/fiber';
 import { UseFeaturesToggleContext } from '../context/UseContexts';
+import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
