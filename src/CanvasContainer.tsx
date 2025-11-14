@@ -88,8 +88,7 @@ function CanvasContainer() {
         <ReviewsCustomers />
         <WaitressDialogue />
 
-        <RestaurantMenu />
-
+        
         <Waitress />
 
         <CeillingWalls />
@@ -112,6 +111,8 @@ function CanvasContainer() {
 
         <EffectsComponent />
         <GlassesBottles />
+        <RestaurantMenu />
+
       </Canvas>
     </>
   );
