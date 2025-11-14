@@ -47,7 +47,6 @@ export function RestaurantMenu() {
 
   const [menuOptionsHover, setMenuOptionsHover] = React.useState('');
 
-
   React.useEffect(() => {
     if (menuActive) {
       setMenuOverlay(true);
@@ -101,44 +100,109 @@ export function RestaurantMenu() {
   };
 
   React.useEffect(() => {
+    const tl = gsap.timeline();
+
     if (refMenu.current) {
       if (menuActive) {
-        gsap.to(refMenu.current.position, {
-          x: 6.8,
-          y: 1.36,
-          z: -4.8,
-          duration: 1,
-        });
-
-        gsap.to(refMenu.current.rotation, {
-          x: 0,
-          y: 0,
-          z: -1.4,
-          duration: 1,
-          onComplete: () => {
-            refMenu.current?.updateMatrixWorld();
+        tl.to(
+          refMenu.current.position,
+          {
+            x: 6.383,
+            y: 1.1,
+            z: -4.5,
+            ease: 'sine.inOut',
+            duration: 1,
           },
-        });
+          0
+        )
+          .to(
+            refMenu.current.rotation,
+            {
+              x: 0,
+              y: 0,
+              z: -0.5,
+              ease: 'sine.inOut',
+              duration: 1,
+            },
+            0
+          )
+          .to(
+            refMenu.current.position,
+            {
+              x: 6.8,
+              y: 1.36,
+              z: -4.8,
+              ease: 'sine.inOut',
+              duration: 1.8,
+            },
+            0.4
+          )
+          .to(
+            refMenu.current.rotation,
+            {
+              x: 0,
+              y: 0,
+              z: -1.4,
+              duration: 1.8,
+              ease: 'sine.inOut',
+              onComplete: () => {
+                refMenu.current?.updateMatrixWorld();
+              },
+            },
+            0.4
+          );
       } else {
-        gsap.to(refMenu.current.position, {
-          x: 6.383,
-          y: 0.992,
-          z: -4.597,
-          duration: 1,
-        });
-
-        gsap.to(refMenu.current.rotation, {
-          x: 0,
-          y: 0,
-          z: 0,
-          duration: 1,
-          onComplete: () => {
-            refMenu.current?.updateMatrixWorld();
+        tl.to(
+          refMenu.current.position,
+          {
+            x: 6.383,
+            y: 1.1,
+            z: -4.5,
+            ease: 'sine.inOut',
+            duration: 1,
           },
-        });
+          0
+        )
+          .to(
+            refMenu.current.rotation,
+            {
+              x: 0,
+              y: 0,
+              z: -0.5,
+              ease: 'sine.inOut',
+              duration: 1,
+            },
+            0
+          )
+          .to(
+            refMenu.current.position,
+            {
+              x: 6.383,
+              y: 1,
+              z: -4.597,
+              ease: 'sine.inOut',
+              duration: 0.5,
+            },
+            0.8
+          )
+          .to(
+            refMenu.current.rotation,
+            {
+              x: 0,
+              y: 0,
+              z: 0,
+              ease: 'sine.inOut',
+              duration: 0.5,
+              onComplete: () => {
+                refMenu.current?.updateMatrixWorld();
+              },
+            },
+            0.8
+          );
       }
     }
   }, [menuActive]);
+
 
   return (
     <>
@@ -167,13 +231,13 @@ export function RestaurantMenu() {
             }
             name='menu_option_1'
             geometry={nodes.menu_option_1.geometry}
-            material={nodes.menu_option_1.material}
+            
             position={[-0.16, 0.004, -0.073]}
             renderOrder={1}
           >
             {' '}
             <meshBasicMaterial
-              color={new THREE.Color(0, 0, 0)}
+              color={"black"}
               transparent={true}
               opacity={menuOptionsHover === 'menu_option_1' ? 0.1 : 0}
               depthWrite={false}

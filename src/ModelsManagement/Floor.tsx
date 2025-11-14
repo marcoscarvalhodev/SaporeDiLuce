@@ -6,7 +6,6 @@ import { JSX } from 'react';
 import { MeshReflectorMaterial } from '../helpers/MeshReflectorMaterial';
 import { useFrame, useThree } from '@react-three/fiber';
 import { UseFeaturesToggleContext } from '../context/UseContexts';
-import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -59,7 +58,7 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
             normalMap: normal_map,
             
             lightMap: base_map,
-            normalScale: new THREE.Vector2(3, 3),
+            normalScale: new THREE.Vector2(10, 10),
             lightMapIntensity: 1,
           });
         }
@@ -67,7 +66,7 @@ export function Floor(props: JSX.IntrinsicElements['group']) {
         reflectMeshRef.current.material = new THREE.MeshStandardMaterial({
           map: base_map,
           normalMap: normal_map,
-          normalScale: new THREE.Vector2(3, 3),
+          normalScale: new THREE.Vector2(10, 10),
           lightMap: base_map,
           lightMapIntensity: 1,
         });
