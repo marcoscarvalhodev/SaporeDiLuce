@@ -40,9 +40,7 @@ function CanvasContainer() {
   return (
     <>
       <Canvas
-        onCreated={({ gl }) => {
-          gl.sortObjects = false;
-        }}
+        
         shadows={activeShadows}
         id='canvas-component'
         ref={canvasRef}

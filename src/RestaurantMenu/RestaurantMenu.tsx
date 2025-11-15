@@ -239,7 +239,7 @@ export function RestaurantMenu() {
             <meshBasicMaterial
               color={"black"}
               transparent={true}
-              opacity={menuOptionsHover === 'menu_option_1' ? 0.1 : 0}
+              opacity={menuOptionsHover === 'menu_option_1' ? 0.2 : 0}
               depthWrite={false}
               depthTest={true}
             />

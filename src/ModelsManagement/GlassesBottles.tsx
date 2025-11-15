@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 
+
 type GLTFResult = GLTF & {
   nodes: {
     wine_bottles: THREE.Mesh;
@@ -42,12 +43,17 @@ export function GlassesBottles(props: JSX.IntrinsicElements['group']) {
           map={base_map_glasses}
           alphaMap={alpha_map}
           alphaTest={0}
-          roughness={0.1}
-          metalness={0.3}
-          transmission={0.2}
-          clearcoat={1}
+          roughness={0.2}
+          thickness={0.3}
+          metalness={0.1}
+          opacity={1}
+          transmission={1.2}
+          reflectivity={1}
+          envMapIntensity={0.9}
+          envMap={base_map_glasses}
+          clearcoat={1.2}
           transparent
-          ior={1.3}
+          ior={1.7}
         />
       </mesh>
     </group>
