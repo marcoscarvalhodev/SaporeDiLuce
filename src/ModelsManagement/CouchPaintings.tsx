@@ -14,7 +14,6 @@ type GLTFResult = GLTF & {
 export function CouchPaintings(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/couch_paintings.glb') as GLTFResult;
 
-
   const base_map = useKTX2(
     '/textures/couch_paintings/couch_paintings_base.ktx2'
   );

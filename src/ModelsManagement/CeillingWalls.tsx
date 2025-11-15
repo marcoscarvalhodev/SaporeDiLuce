@@ -5,6 +5,7 @@ import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 
 
+
 type GLTFResult = GLTF & {
   nodes: {
     ceilling_walls: THREE.Mesh;
