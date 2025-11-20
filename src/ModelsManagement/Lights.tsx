@@ -26,6 +26,9 @@ export function Lights(props: JSX.IntrinsicElements['group']) {
       shadow-bias={-0.000001}
         
       />
+
+<ambientLight intensity={0.8}/>
+
       <mesh
         geometry={nodes.Cylinder046.geometry}
         material={nodes.Cylinder046.material}

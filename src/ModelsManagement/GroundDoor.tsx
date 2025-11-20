@@ -78,7 +78,8 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           <meshPhysicalMaterial
             roughness={0.1}
             metalness={0.1}
-            envMapIntensity={0.9}
+
+            envMapIntensity={0.8}
             transparent
             opacity={0.8}
             reflectivity={0.8}

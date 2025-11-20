@@ -25,6 +25,7 @@ import { MoldingDoors } from './ModelsManagement/MoldingDoors';
 import { GlassesBottles } from './ModelsManagement/GlassesBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
+import { Skybox } from './ModelsManagement/Skybox';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
@@ -74,13 +75,14 @@ function CanvasContainer() {
         />
 
         <Environment
-          files={'./environment.exr'}
+          files={'./environment.hdr'}
           environmentIntensity={0.8}
-          backgroundIntensity={0.5}
-          environmentRotation={[0, 4, 0]}
-          background
+          
+          environmentRotation={[-2,4.5, -4.5]}
+          
         />
 
+        <Skybox />
         <AccessButtons />
 
         <ReviewsCustomers />

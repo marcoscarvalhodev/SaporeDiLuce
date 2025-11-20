@@ -284,6 +284,7 @@ export function Waitress(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+            castShadow
             frustumCulled={false}
             name='waitress_lowerbody'
             geometry={nodes.waitress_lowerbody.geometry}
