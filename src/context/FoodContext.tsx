@@ -1,5 +1,5 @@
 import React from 'react';
-import { CreateContextFood } from './CreateContexts';
+import { CreateContextFood, knifeForkTable4Props } from './CreateContexts';
 
 export const ContextFoodProvider = ({
   children,
@@ -10,6 +10,8 @@ export const ContextFoodProvider = ({
   const [foodOnTable, setFoodOnTable] = React.useState(false);
   const [eatFood, setEatFood] = React.useState(false);
   const [emptyDish, setEmptyDish] = React.useState(false);
+  const [knifeForkTable4, setKnifeForkTable4] =
+    React.useState<knifeForkTable4Props>('still');
 
   return (
     <CreateContextFood.Provider
@@ -21,7 +23,9 @@ export const ContextFoodProvider = ({
         eatFood,
         setEatFood,
         emptyDish,
-        setEmptyDish
+        setEmptyDish,
+        knifeForkTable4,
+        setKnifeForkTable4,
       }}
     >
       {children}
