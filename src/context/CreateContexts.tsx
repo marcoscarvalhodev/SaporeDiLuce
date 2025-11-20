@@ -86,6 +86,8 @@ interface ButtonsProps {
   setMenuOptionsClick: React.Dispatch<React.SetStateAction<menuOptionsProps>>;
 }
 
+export type knifeForkTable4Props = 'still' | 'over_table' | 'over_dish';
+
 interface FoodProps {
   foodOrdered: boolean;
   setFoodOrdered: React.Dispatch<React.SetStateAction<boolean>>;
@@ -95,6 +97,10 @@ interface FoodProps {
   setFoodOnTable: React.Dispatch<React.SetStateAction<boolean>>;
   setEmptyDish: React.Dispatch<React.SetStateAction<boolean>>;
   emptyDish: boolean;
+  knifeForkTable4: knifeForkTable4Props;
+  setKnifeForkTable4: React.Dispatch<
+    React.SetStateAction<knifeForkTable4Props>
+  >;
 }
 
 interface FeaturesToggleProps {

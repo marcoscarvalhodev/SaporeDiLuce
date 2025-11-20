@@ -9,8 +9,13 @@ import { AudioEffects } from '../AudioManagement/AudioEffects';
 const EatingOverlay = () => {
   const refEatingOverlay = React.useRef<null | HTMLDivElement>(null);
   const { setShowEatButton } = UseButtonsContext();
-  const { eatFood, setEatFood, setFoodOrdered, setEmptyDish } =
-    UseFoodContext();
+  const {
+    eatFood,
+    setEatFood,
+    setFoodOrdered,
+    setEmptyDish,
+    setKnifeForkTable4,
+  } = UseFoodContext();
   const { setWaitressShowTable } = UseHumansContext();
 
   const { EatingAudio } = AudioEffects();
@@ -31,6 +36,7 @@ const EatingOverlay = () => {
         duration: 1,
         pointerEvents: 'all',
         onComplete: () => {
+          setKnifeForkTable4('over_dish');
           setEmptyDish(true);
           setShowEatButton(false);
           setEatFood(false);
@@ -51,6 +57,7 @@ const EatingOverlay = () => {
     setWaitressShowTable,
     setFoodOrdered,
     setEmptyDish,
+    setKnifeForkTable4,
   ]);
 
   return (

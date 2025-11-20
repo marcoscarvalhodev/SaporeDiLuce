@@ -11,7 +11,8 @@ const FoodReadyOverlay = () => {
   const { finishedWaitressAnim, setWaitressReset, setFinishedWaitressAnim } =
     UseHumansContext();
   const { setShowEatButton } = UseButtonsContext();
-  const { setFoodOnTable, setFoodOrdered } = UseFoodContext();
+  const { setFoodOnTable, setFoodOrdered, setKnifeForkTable4 } =
+    UseFoodContext();
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(foodReadOverlayRef.current, { opacity: 0 });
@@ -26,6 +27,7 @@ const FoodReadyOverlay = () => {
           onComplete: () => {
             setFoodOnTable(true);
             setShowEatButton(true);
+            setWaitressReset(true);
           },
         }).to(foodReadOverlayRef.current, {
           opacity: 0,
@@ -33,8 +35,8 @@ const FoodReadyOverlay = () => {
           duration: 1,
           delay: 3,
           onStart: () => {
-            setWaitressReset(true);
             setFoodOrdered(false);
+            setKnifeForkTable4('over_table');
           },
           onComplete: () => {
             setWaitressReset(false);
@@ -52,6 +54,7 @@ const FoodReadyOverlay = () => {
     setWaitressReset,
     setFinishedWaitressAnim,
     setFoodOrdered,
+    setKnifeForkTable4,
   ]);
 
   return (

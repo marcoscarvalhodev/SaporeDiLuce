@@ -6,8 +6,10 @@ import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/Addons.js';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import CustomersAnimations from '../helpers/CustomersAnimations';
-import { UseAnimationsContext } from '../context/UseContexts';
+
+import { UseAnimationsContext, UseFoodContext } from '../context/UseContexts';
 import { useKTX2 } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -21,7 +23,9 @@ type GLTFResult = GLTF & {
     woman_2_eyebrows: THREE.SkinnedMesh;
     woman_2_lowerbody: THREE.SkinnedMesh;
     woman_2_upperbody: THREE.SkinnedMesh;
-    Bone: THREE.Bone;
+    fork_table_2: THREE.Bone;
+    fork_table_4: THREE.Bone;
+    knife_table_4: THREE.Bone;
     neutral_bone: THREE.Bone;
     root: THREE.Bone;
     ['MCH-torsoparent']: THREE.Bone;
@@ -58,6 +62,13 @@ type GLTFResult = GLTF & {
 };
 
 export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
+  const { knifeForkTable4 } = UseFoodContext();
+  const refTables = React.useRef<null | THREE.SkinnedMesh>(null);
+
+  const originalUV = React.useRef<
+    null | (THREE.BufferAttribute | THREE.InterleavedBufferAttribute)
+  >(null);
+
   const group = useRef<Group | null>(null);
   const { nodes, animations } = useGLTF(
     '/table_customers/table_customers_2.glb'
@@ -104,6 +115,49 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
   const [eyebrow_eyelash] = [
     TextureAssetsLoader('/textures/bodies/eyebrow_eyelash.webp'),
   ];
+
+  const [forkTable4, knifeTable4] = [nodes.fork_table_4, nodes.knife_table_4];
+
+  useFrame(() => {
+    if (knifeForkTable4 === 'over_dish') {
+      knifeTable4.position.set(2.7, -0.56, -0.025);
+      knifeTable4.rotation.set(0, 0.08, 5.2);
+      forkTable4.position.set(2.7, -0.56, -0.027);
+      forkTable4.rotation.set(0, 0.17, 4.3);
+    }
+  });
+
+  useFrame(() => {
+    if (knifeForkTable4 === 'over_table') {
+      knifeTable4.position.set(2.617, -0.751, -0.025);
+      knifeTable4.rotation.set(-0.154, 0.01, -1.669);
+      forkTable4.position.set(2.613, -0.794, -0.035);
+      forkTable4.rotation.set(-0.155, -0.009, -1.698);
+    }
+  });
+
+  React.useEffect(() => {
+    const geometry = refTables.current?.geometry;
+
+    if (geometry) {
+      if (!originalUV.current && geometry.attributes.uv) {
+        originalUV.current = geometry.attributes.uv;
+      }
+
+      const uvWrapper = {
+        uv: originalUV.current,
+        uv1: geometry.attributes.uv1,
+      };
+
+      if (knifeForkTable4 === 'over_table' && uvWrapper.uv) {
+        geometry.setAttribute('uv', uvWrapper.uv);
+      } else if (knifeForkTable4 === 'over_dish' && uvWrapper.uv1) {
+        geometry.setAttribute('uv', uvWrapper.uv1);
+      }
+
+      geometry.attributes.uv.needsUpdate = true;
+    }
+  });
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -158,6 +212,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
           rotation={[1.486, -0.01, 0.122]}
         >
           <skinnedMesh
+            ref={refTables}
             receiveShadow
             castShadow
             name='chairs_decoration'
@@ -174,7 +229,9 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
               lightMapIntensity={1}
             />
           </skinnedMesh>
-          <primitive object={nodes.Bone} />
+          <primitive object={nodes.fork_table_2} />
+          <primitive object={nodes.fork_table_4} />
+          <primitive object={nodes.knife_table_4} />
           <primitive object={nodes.neutral_bone} />
         </group>
         <group name='rig_boy' position={[-19.655, 0, 0]}>
