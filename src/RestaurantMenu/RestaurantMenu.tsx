@@ -179,7 +179,7 @@ export function RestaurantMenu() {
             {
               x: 6.383,
               y: 1,
-              z: -4.597,
+              z: -4.58,
               ease: 'sine.inOut',
               duration: 0.5,
             },
@@ -351,11 +351,13 @@ export function RestaurantMenu() {
             />
           </mesh>
           <mesh
+          castShadow
             name='menu_1'
             geometry={nodes.menu_1.geometry}
             material={materials.menu}
           />
           <mesh
+          castShadow
             name='menu_2'
             geometry={nodes.menu_2.geometry}
             material={materials['Material.005']}
