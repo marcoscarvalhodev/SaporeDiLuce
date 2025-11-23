@@ -120,10 +120,10 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
 
   useFrame(() => {
     if (knifeForkTable4 === 'over_dish') {
-      knifeTable4.position.set(2.7, -0.56, -0.025);
-      knifeTable4.rotation.set(0, 0.08, 5.2);
-      forkTable4.position.set(2.7, -0.56, -0.027);
-      forkTable4.rotation.set(0, 0.17, 4.3);
+      knifeTable4.position.set(2.665, -0.582, -0.027);
+      knifeTable4.rotation.set(0, 0.08, 5.03);
+      forkTable4.position.set(2.655, -0.538, -0.026);
+      forkTable4.rotation.set(0, 0.2, 3.96);
     }
   });
 

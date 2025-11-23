@@ -4,6 +4,7 @@ import { useGLTF, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 
+
 type GLTFResult = GLTF & {
   nodes: {
     skybox: THREE.Mesh;
@@ -22,9 +23,13 @@ export function Skybox(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.skybox.geometry}
         material={nodes.skybox.material}
         position={[0.263, -0.016, -0.42]}
-        rotation={[0, -1.296, 0]}
+        rotation={[Math.PI, 0.142, -3.142]}
       >
-        <meshStandardMaterial map={skybox_base} lightMap={skybox_base} lightMapIntensity={2}/>
+        <meshStandardMaterial
+          map={skybox_base}
+          lightMap={skybox_base}
+          lightMapIntensity={1}
+        />
       </mesh>
     </group>
   );

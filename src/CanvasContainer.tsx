@@ -4,7 +4,7 @@ import { Environment, PerspectiveCamera } from '@react-three/drei';
 import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
 
-import { PerspectiveCamera as TypePerspectiveCamera } from 'three';
+import { PCFSoftShadowMap, PerspectiveCamera as TypePerspectiveCamera } from 'three';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
 import {
@@ -27,6 +27,7 @@ import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
 import { Skybox } from './ModelsManagement/Skybox';
 
+
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
   const canvasRef = React.useRef<null | HTMLCanvasElement>(null);
@@ -41,8 +42,8 @@ function CanvasContainer() {
   return (
     <>
       <Canvas
-        
-        shadows={activeShadows}
+       
+        shadows={{enabled: activeShadows, type: PCFSoftShadowMap}}
         id='canvas-component'
         ref={canvasRef}
         style={{
