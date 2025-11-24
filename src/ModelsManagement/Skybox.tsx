@@ -22,7 +22,7 @@ export function Skybox(props: JSX.IntrinsicElements['group']) {
       <mesh
         geometry={nodes.skybox.geometry}
         material={nodes.skybox.material}
-        position={[0.263, -0.016, -0.42]}
+        position={[2.864, -0.005, -1.361]}
         rotation={[Math.PI, 0.142, -3.142]}
       >
         <meshStandardMaterial

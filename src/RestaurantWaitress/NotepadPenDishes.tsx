@@ -8,6 +8,7 @@ import { AudioEffects } from '../AudioManagement/AudioEffects';
 import { UseButtonsContext } from '../context/UseContexts';
 
 import CurrentDish from './CurrentDish';
+import { ParticleSteam } from '../ParticleSmoke/ParticleSteam';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -113,6 +114,9 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
   }, [emptyDish, nodes.dish_0.scale, menuOptionsClick]);
   return (
     <group ref={group} {...props} dispose={null}>
+      
+      {showEatButton && <ParticleSteam position={[6.5, 1, -4.95]}/>}
+
       <group name='Scene'>
         <group
           ref={dishesWrapperRef}
