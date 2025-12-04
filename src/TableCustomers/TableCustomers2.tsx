@@ -356,6 +356,7 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
+          
             castShadow
             name='woman_2_lowerbody'
             geometry={nodes.woman_2_lowerbody.geometry}
