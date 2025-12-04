@@ -4,7 +4,7 @@ import { Environment, PerspectiveCamera } from '@react-three/drei';
 import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
 
-import { PCFSoftShadowMap, PerspectiveCamera as TypePerspectiveCamera } from 'three';
+import {PerspectiveCamera as TypePerspectiveCamera } from 'three';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
 import {
@@ -43,7 +43,7 @@ function CanvasContainer() {
     <>
       <Canvas
        
-        shadows={{enabled: activeShadows, type: PCFSoftShadowMap}}
+        shadows={activeShadows}
         id='canvas-component'
         ref={canvasRef}
         style={{
@@ -68,8 +68,8 @@ function CanvasContainer() {
       >
         <PerspectiveCamera
           fov={50}
-          near={0.1}
-          far={1000}
+          near={0.01}
+          far={10000}
           ref={perspectiveRef}
           makeDefault
           position={[15.08, 2.84, -2.54]}
