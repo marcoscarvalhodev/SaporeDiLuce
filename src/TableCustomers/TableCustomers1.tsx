@@ -109,7 +109,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             <meshStandardMaterial
               alphaMap={eyebrow_eyelash}
               transparent
-              color={'#f1cc8f'}
+              color={'#f6d278'}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -122,7 +122,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.man_1_lowerbody.morphTargetDictionary}
             morphTargetInfluences={nodes.man_1_lowerbody.morphTargetInfluences}
           >
-            <meshStandardMaterial map={man_1_lowerbody} />
+            <meshStandardMaterial map={man_1_lowerbody} lightMap={man_1_lowerbody} lightMapIntensity={2} />
           </skinnedMesh>
           <skinnedMesh
             name='man_1_upperbody'
@@ -178,7 +178,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_1_lowerbody}
-              
+              lightMap={woman_1_lowerbody} lightMapIntensity={1.5}
             />
           </skinnedMesh>
           <skinnedMesh
