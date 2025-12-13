@@ -110,6 +110,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
               alphaMap={eyebrow_eyelash}
               transparent
               color={'#f6d278'}
+              
             />
           </skinnedMesh>
           <skinnedMesh
@@ -122,7 +123,11 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             morphTargetDictionary={nodes.man_1_lowerbody.morphTargetDictionary}
             morphTargetInfluences={nodes.man_1_lowerbody.morphTargetInfluences}
           >
-            <meshStandardMaterial map={man_1_lowerbody} lightMap={man_1_lowerbody} lightMapIntensity={2} />
+            <meshStandardMaterial
+              map={man_1_lowerbody}
+              lightMap={man_1_lowerbody}
+              lightMapIntensity={2}
+            />
           </skinnedMesh>
           <skinnedMesh
             name='man_1_upperbody'
@@ -132,8 +137,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={man_1_upperbody}
-              lightMap={man_1_upperbody}
-              lightMapIntensity={1}
+             
             />
           </skinnedMesh>
           <primitive object={nodes.root} />
@@ -178,7 +182,8 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
           >
             <meshStandardMaterial
               map={woman_1_lowerbody}
-              lightMap={woman_1_lowerbody} lightMapIntensity={1.5}
+              lightMap={woman_1_lowerbody}
+              lightMapIntensity={1.5}
             />
           </skinnedMesh>
           <skinnedMesh
@@ -187,10 +192,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             material={nodes.woman_1_upperbody.material}
             skeleton={nodes.woman_1_upperbody.skeleton}
           >
-            <meshStandardMaterial
-              map={woman_1_upperbody}
-             
-            />
+            <meshStandardMaterial map={woman_1_upperbody} />
           </skinnedMesh>
           <primitive object={nodes.root_1} />
           <primitive object={nodes['MCH-torsoparent_1']} />
