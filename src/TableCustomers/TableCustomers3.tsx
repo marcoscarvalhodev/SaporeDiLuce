@@ -205,7 +205,7 @@ export function TableCustomers3(props: JSX.IntrinsicElements['group']) {
             <meshStandardMaterial
               map={man_3_lowerbody}
               lightMap={man_3_lowerbody}
-              lightMapIntensity={1.5}
+              lightMapIntensity={0}
             />
           </skinnedMesh>
           <skinnedMesh
