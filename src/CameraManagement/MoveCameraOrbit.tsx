@@ -5,7 +5,10 @@ import * as THREE from 'three';
 import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import { AudioEffects } from '../AudioManagement/AudioEffects';
 import gsap from 'gsap';
-import { UseAnimationsContext } from '../context/UseContexts';
+import {
+  UseAnimationsContext,
+  UseAudioChoiceContext,
+} from '../context/UseContexts';
 import { roomNameProps } from '../context/CameraMovementContext';
 
 const cameraPositions = {
@@ -112,7 +115,8 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
   const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
 
   const { MovementAudio, DoorAudio } = AudioEffects();
-  const { setDoorClose } = UseAnimationsContext();
+  const { setDoorClose, doorClose } = UseAnimationsContext();
+  const { audioPlay } = UseAudioChoiceContext();
 
   const limitRotationInit = React.useCallback(() => {
     if (currentPosition.params.name) {
@@ -183,18 +187,10 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
         ease: 'power2.inOut',
         onStart: () => {
           MovementAudio();
-          setDoorClose(false);
-        },
-
-        onComplete: () => {
-          setDoorClose(true);
-          DoorAudio();
         },
       });
     }
   }, [
-    DoorAudio,
-    setDoorClose,
     camera.position,
     initialCameraPosition.x,
     initialCameraPosition.y,
@@ -217,14 +213,11 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           onStart: () => {
             if (currentPosition.params.moveSound) {
               MovementAudio();
-              setDoorClose(false);
             }
           },
 
           onComplete: () => {
             if (currentPosition.params.doorSound) {
-              DoorAudio();
-              setDoorClose(true);
               controlsRef.current?.update();
             }
           },
@@ -285,15 +278,23 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
       limitRotationInit();
     }
   }, [
-    DoorAudio,
     MovementAudio,
     currentPosition.params.doorSound,
     camera.position,
     currentPosition.params.moveSound,
     currentPosition.params.name,
-    setDoorClose,
+
     limitRotationInit,
   ]);
+
+  React.useEffect(() => {
+    console.log(`doorclose: ${doorClose}`);
+    console.log(`audioplay: ${audioPlay}`);
+    if (doorClose && audioPlay) {
+
+      DoorAudio();
+    }
+  }, [doorClose, DoorAudio, audioPlay, setDoorClose]);
 
   React.useEffect(() => {
     if (!controlsRef.current) return;

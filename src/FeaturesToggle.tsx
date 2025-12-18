@@ -2,6 +2,7 @@ import React from 'react';
 import KnifeForkGear from './assets/knife_fork_gear.svg?react';
 
 import {
+  UseAudioChoiceContext,
   UseCameraMovementContext,
   UseFeaturesToggleContext,
 } from './context/UseContexts';
@@ -19,6 +20,7 @@ const FeaturesToggle = () => {
     activeAnimations,
     activeShadows,
   } = UseFeaturesToggleContext();
+  const { audioPlay, setAudioPlay } = UseAudioChoiceContext();
   const [settingsActive, setSettingsActive] = React.useState(false);
   const parentWrapperRef = React.useRef<null | HTMLElement>(null);
   const { roomNameState } = UseCameraMovementContext();
@@ -74,6 +76,15 @@ const FeaturesToggle = () => {
             : 'opacity-0 pointer-events-none w-0 h-0'
         }`}
       >
+        <li
+          className='button_call w-max'
+          onClick={() => {
+            setAudioPlay(!audioPlay);
+          }}
+        >
+          {audioPlay ? 'Disable sound' : 'Enable sound'}
+        </li>
+
         <li
           className='button_call w-max'
           onClick={() => {
