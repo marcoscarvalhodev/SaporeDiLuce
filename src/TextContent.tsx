@@ -13,6 +13,8 @@ const TextContent = () => {
       ambientMusicRef.current.play();
       ambientMusicRef.current.loop = true;
       ambientMusicRef.current.volume = 0.5;
+    } else {
+      ambientMusicRef.current?.pause();
     }
   }, [audioPlay]);
 

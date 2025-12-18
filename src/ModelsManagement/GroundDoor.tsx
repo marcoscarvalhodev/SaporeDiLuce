@@ -25,14 +25,12 @@ type GLTFResult = GLTF & {
 export function GroundDoor(props: JSX.IntrinsicElements['group']) {
   const { nodes, animations } = useGLTF('/ground_door.glb') as GLTFResult;
   const group = useRef<THREE.Group>(null);
-  const base_map = useKTX2(
-    '/textures/ground_door/ground_door_base.ktx2'
-  );
+  const base_map = useKTX2('/textures/ground_door/ground_door_base.ktx2');
   const { mixer } = useAnimations(animations, group);
 
   const { roomNameState } = UseCameraMovementContext();
 
-  const { doorClose } = UseAnimationsContext();
+  const { doorClose, setDoorClose } = UseAnimationsContext();
 
   const { door_right, door_left } = nodes;
 
@@ -41,23 +39,56 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
       roomNameState === 'restaurant_enter' ||
       roomNameState === 'restaurant_leave'
     ) {
-      gsap.to(door_left.rotation, {
-        y: 1.6,
-        duration: 1.3,
-      });
-
-      gsap.to(door_right.rotation, {
-        y: -1.6,
-        duration: 1.3,
-      });
+      const tl = gsap.timeline();
+      tl.to(
+        door_left.rotation,
+        {
+          y: 1.6,
+          duration: 1.3,
+          onStart: () => {
+            setDoorClose(true);
+          },
+        },
+        0
+      )
+        .to(
+          door_right.rotation,
+          {
+            y: -1.6,
+            duration: 1.3,
+          },
+          0
+        )
+        .to(
+          door_left.rotation,
+          {
+            y: 0,
+            duration: 1.3,
+            onComplete: () => {
+              setDoorClose(false);
+            },
+          },
+          2
+        )
+        .to(
+          door_right.rotation,
+          {
+            y: 0,
+            duration: 1.3,
+          },
+          2
+        );
     }
   }, [roomNameState, animations, mixer]);
 
-  useGSAP(() => {
+  /*useGSAP(() => {
     if (doorClose) {
       gsap.to(door_left.rotation, {
         y: 0,
         duration: 1.3,
+        onComplete: () => {
+          setDoorClose(false);
+        },
       });
 
       gsap.to(door_right.rotation, {
@@ -65,7 +96,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
         duration: 1.3,
       });
     }
-  }, [doorClose, animations, mixer]);
+  }, [doorClose, animations, mixer]);*/
 
   return (
     <group {...props} dispose={null}>
@@ -78,14 +109,12 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           <meshPhysicalMaterial
             roughness={0.1}
             metalness={0.1}
-
             envMapIntensity={0.8}
             transparent
             opacity={0.8}
             reflectivity={0.8}
             transmission={1.0}
             color={'#ccd3ff'}
-            
           />
         </skinnedMesh>
         <skinnedMesh

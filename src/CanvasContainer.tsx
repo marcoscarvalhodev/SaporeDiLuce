@@ -72,12 +72,14 @@ function CanvasContainer() {
           far={10000}
           ref={perspectiveRef}
           makeDefault
-          position={[15.08, 2.84, -2.54]}
+          position={[15.08, 2.4, 2]}
+          
         />
 
         <Environment
           files={'./environment.hdr'}
-          environmentIntensity={0.8}
+          environmentIntensity={0.9}
+          
           
           environmentRotation={[-2,4.5, -4.5]}
           
