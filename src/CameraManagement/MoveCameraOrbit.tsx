@@ -3,12 +3,9 @@ import { OrbitControls } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
-import { AudioEffects } from '../AudioManagement/AudioEffects';
+
 import gsap from 'gsap';
-import {
-  UseAnimationsContext,
-  UseAudioChoiceContext,
-} from '../context/UseContexts';
+import { UseAnimationsContext } from '../context/UseContexts';
 import { roomNameProps } from '../context/CameraMovementContext';
 
 const cameraPositions = {
@@ -112,11 +109,9 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
     new THREE.Vector3(-20, 1.8, -2.12)
   );
 
-  const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
+  const { setCameraMoving } = UseAnimationsContext();
 
-  const { MovementAudio, DoorAudio } = AudioEffects();
-  const { setDoorClose, doorClose } = UseAnimationsContext();
-  const { audioPlay } = UseAudioChoiceContext();
+  const initialCameraPosition = new THREE.Vector3(15.08, 2.84, -1);
 
   const limitRotationInit = React.useCallback(() => {
     if (currentPosition.params.name) {
@@ -186,16 +181,19 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
         duration: 3,
         ease: 'power2.inOut',
         onStart: () => {
-          MovementAudio();
+          setCameraMoving(true);
+        },
+        onComplete: () => {
+          setCameraMoving(false);
         },
       });
     }
   }, [
+    setCameraMoving,
     camera.position,
     initialCameraPosition.x,
     initialCameraPosition.y,
     initialCameraPosition.z,
-    MovementAudio,
   ]);
 
   const RestaurantInsideMovement = React.useCallback(() => {
@@ -210,11 +208,10 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           z: cameraPositions[currentPosition.params.name].position.z,
           duration: 3,
           ease: 'power2.inOut',
-          onStart: () => {
+          /* onStart: () => {
             if (currentPosition.params.moveSound) {
-              MovementAudio();
             }
-          },
+          },*/
 
           onComplete: () => {
             if (currentPosition.params.doorSound) {
@@ -256,6 +253,8 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           duration: 3,
           ease: 'power2.inOut',
           onStart: () => {
+            setCameraMoving(true);
+
             if (controlsRef.current) {
               controlsRef.current.minPolarAngle = Math.PI / 6;
               controlsRef.current.maxPolarAngle = Math.PI / 1.5;
@@ -267,6 +266,7 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
           },
 
           onComplete: () => {
+            setCameraMoving(false);
             if (controlsRef.current) {
               setInitialOrbit(controlsRef.current.target);
               controlsRef.current.update();
@@ -278,23 +278,13 @@ const MoveCameraOrbit = (currentPosition: MoveCameraOrbitProps) => {
       limitRotationInit();
     }
   }, [
-    MovementAudio,
+    setCameraMoving,
     currentPosition.params.doorSound,
     camera.position,
-    currentPosition.params.moveSound,
     currentPosition.params.name,
 
     limitRotationInit,
   ]);
-
-  React.useEffect(() => {
-    console.log(`doorclose: ${doorClose}`);
-    console.log(`audioplay: ${audioPlay}`);
-    if (doorClose && audioPlay) {
-
-      DoorAudio();
-    }
-  }, [doorClose, DoorAudio, audioPlay, setDoorClose]);
 
   React.useEffect(() => {
     if (!controlsRef.current) return;

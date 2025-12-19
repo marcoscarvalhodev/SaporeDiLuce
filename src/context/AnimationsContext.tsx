@@ -1,13 +1,14 @@
 import React from 'react';
 import { CreateContextAnimations } from './CreateContexts';
+import { DoorStateTypes } from './CreateContexts';
 
 export const ContextAnimationsProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [doorClose, setDoorClose] = React.useState(false);
-  const [movementAudioState, setMovementAudioState] = React.useState(false);
+  const [doorState, setDoorState] = React.useState<DoorStateTypes>('closed');
+  const [cameraMoving, setCameraMoving] = React.useState(false);
   const [doorOpen, setDoorOpen] = React.useState(false);
   const [clickedAudio, setClickedAudio] = React.useState(false);
   const [customersAnimationsReady, setCustomersAnimationsReady] =
@@ -20,15 +21,15 @@ export const ContextAnimationsProvider = ({
   return (
     <CreateContextAnimations.Provider
       value={{
-        doorClose,
-        setDoorClose,
+        doorState,
+        setDoorState,
         doorOpen,
         setDoorOpen,
-        movementAudioState,
-        setMovementAudioState,
         customersAnimationsReady,
         clickedAudio,
         setClickedAudio,
+        cameraMoving,
+        setCameraMoving,
       }}
     >
       {children}

@@ -7,6 +7,7 @@ import WaitressActionsOverlay from './RestaurantOverlays/WaitressActionsOverlay'
 import FeaturesToggle from './FeaturesToggle';
 import AudioChoice from './AudioManagement/AudioChoice';
 import { UseLoadingContext } from './context/UseContexts';
+import AudioController from './AudioManagement/AudioController';
 
 const SceneComponent = () => {
   const { isLoading } = UseLoadingContext();
@@ -18,6 +19,7 @@ const SceneComponent = () => {
       {!isLoading && (
         <>
           <AudioChoice />
+          <AudioController />
           <TextContent />
           <EatingOverlay />
           <WaitressActionsOverlay />

@@ -30,7 +30,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
 
   const { roomNameState } = UseCameraMovementContext();
 
-  const { doorClose, setDoorClose } = UseAnimationsContext();
+  const { setDoorState } = UseAnimationsContext();
 
   const { door_right, door_left } = nodes;
 
@@ -46,7 +46,10 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           y: 1.6,
           duration: 1.3,
           onStart: () => {
-            setDoorClose(true);
+            setDoorState('opening');
+          },
+          onComplete: () => {
+            setDoorState('closed');
           },
         },
         0
@@ -64,11 +67,14 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           {
             y: 0,
             duration: 1.3,
+            onStart: () => {
+              setDoorState('closing');
+            },
             onComplete: () => {
-              setDoorClose(false);
+              setDoorState('closed');
             },
           },
-          2
+          3
         )
         .to(
           door_right.rotation,
@@ -76,27 +82,10 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
             y: 0,
             duration: 1.3,
           },
-          2
+          3
         );
     }
   }, [roomNameState, animations, mixer]);
-
-  /*useGSAP(() => {
-    if (doorClose) {
-      gsap.to(door_left.rotation, {
-        y: 0,
-        duration: 1.3,
-        onComplete: () => {
-          setDoorClose(false);
-        },
-      });
-
-      gsap.to(door_right.rotation, {
-        y: 0,
-        duration: 1.3,
-      });
-    }
-  }, [doorClose, animations, mixer]);*/
 
   return (
     <group {...props} dispose={null}>

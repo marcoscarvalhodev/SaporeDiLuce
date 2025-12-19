@@ -381,6 +381,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
             color='black'
             id='restaurant_button'
             ref={buttonRestaurant}
+            delayButton={3.5}
             onClick={handleRestaurantButtonClick}
             goText='Enter Restaurant'
             outText='Leave Restaurant'
@@ -743,11 +744,7 @@ export function AccessButtons(props: JSX.IntrinsicElements['group']) {
           </Html>
         </mesh>
 
-        <mesh
-          position={[6.781, 1.092, -8]}
-          scale={0.057}
-          name='woman_table_5'
-        >
+        <mesh position={[6.781, 1.092, -8]} scale={0.057} name='woman_table_5'>
           <Html style={{ pointerEvents: 'none' }} position={[0, 0.1, 0]}>
             <ButtonReusable
               color='orange'

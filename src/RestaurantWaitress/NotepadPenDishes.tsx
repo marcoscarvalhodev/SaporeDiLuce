@@ -4,7 +4,6 @@ import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import { UseFoodContext } from '../context/UseContexts';
-import { AudioEffects } from '../AudioManagement/AudioEffects';
 import { UseButtonsContext } from '../context/UseContexts';
 
 import CurrentDish from './CurrentDish';
@@ -38,15 +37,7 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
   const { foodOrdered, emptyDish, setEmptyDish } = UseFoodContext();
   const dishesWrapperRef = React.useRef<null | THREE.Group>(null);
 
-  const { OrderedFoodAudio } = AudioEffects();
-
   CurrentDish(dishesWrapperRef.current, menuOptionsClick, showEatButton);
-
-  React.useEffect(() => {
-    if (foodOrdered) {
-      OrderedFoodAudio();
-    }
-  }, [foodOrdered, OrderedFoodAudio]);
 
   const [base_map, roughness_map, normal_map] = [
     useKTX2('/textures/dishes/current_dish_base.ktx2'),
@@ -114,8 +105,7 @@ export function NotepadPenDishes(props: JSX.IntrinsicElements['group']) {
   }, [emptyDish, nodes.dish_0.scale, menuOptionsClick]);
   return (
     <group ref={group} {...props} dispose={null}>
-      
-      {showEatButton && <ParticleSteam position={[6.5, 1, -4.95]}/>}
+      {showEatButton && <ParticleSteam position={[6.5, 1, -4.95]} />}
 
       <group name='Scene'>
         <group

@@ -4,7 +4,6 @@ import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
-import { UseAnimationsContext } from '../context/UseContexts';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 type GLTFResult = GLTF & {
   nodes: {
@@ -44,8 +43,6 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
     '/table_customers/table_customers_5.glb'
   ) as GLTFResult;
 
-  const { customersAnimationsReady } = UseAnimationsContext();
-
   const { actions } = useAnimations(animations, group);
 
   const man5AnimCam = actions['man_5_anim_cam'];
@@ -73,7 +70,7 @@ export function TableCustomers5(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
       <CustomersAnimations
         actions={actions}
-        customerAnimationsReady={customersAnimationsReady}
+        
         review_actions={[
           {
             action: {

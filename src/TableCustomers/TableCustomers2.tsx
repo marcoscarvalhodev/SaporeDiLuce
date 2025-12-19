@@ -7,7 +7,7 @@ import { GLTF } from 'three/examples/jsm/Addons.js';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 import CustomersAnimations from '../helpers/CustomersAnimations';
 
-import { UseAnimationsContext, UseFoodContext } from '../context/UseContexts';
+import { UseFoodContext } from '../context/UseContexts';
 import { useKTX2 } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
@@ -80,8 +80,6 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     useKTX2('/textures/chairs_decorations/chairs_decorations_roughness.ktx2'),
     useKTX2('/textures/chairs_decorations/chairs_decorations_normal.ktx2'),
   ];
-
-  const { customersAnimationsReady } = UseAnimationsContext();
 
   const man2AnimCam = actions['man_2_anim_cam'];
   const woman2AnimCam = actions['woman_2_anim_cam'];
@@ -163,7 +161,6 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
       <CustomersAnimations
         actions={actions}
-        customerAnimationsReady={customersAnimationsReady}
         review_actions={[
           {
             action: {
@@ -356,7 +353,6 @@ export function TableCustomers2(props: JSX.IntrinsicElements['group']) {
             />
           </skinnedMesh>
           <skinnedMesh
-          
             castShadow
             name='woman_2_lowerbody'
             geometry={nodes.woman_2_lowerbody.geometry}

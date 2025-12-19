@@ -4,7 +4,6 @@ import { useGLTF, useAnimations, useKTX2 } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { JSX } from 'react';
 import CustomersAnimations from '../helpers/CustomersAnimations';
-import { UseAnimationsContext } from '../context/UseContexts';
 import TextureAssetsLoader from '../helpers/TextureAssetsLoader';
 type GLTFResult = GLTF & {
   nodes: {
@@ -44,7 +43,6 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
     '/table_customers/table_customers_1.glb'
   ) as GLTFResult;
   const { actions } = useAnimations(animations, group);
-  const { customersAnimationsReady } = UseAnimationsContext();
 
   const [
     man_1_lowerbody,
@@ -73,7 +71,6 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
     <group ref={group} {...props} dispose={null}>
       <CustomersAnimations
         actions={actions}
-        customerAnimationsReady={customersAnimationsReady}
         review_actions={[
           {
             action: {
@@ -110,7 +107,6 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
               alphaMap={eyebrow_eyelash}
               transparent
               color={'#f6d278'}
-              
             />
           </skinnedMesh>
           <skinnedMesh
@@ -135,10 +131,7 @@ export function TableCustomers1(props: JSX.IntrinsicElements['group']) {
             material={nodes.man_1_upperbody.material}
             skeleton={nodes.man_1_upperbody.skeleton}
           >
-            <meshStandardMaterial
-              map={man_1_upperbody}
-             
-            />
+            <meshStandardMaterial map={man_1_upperbody} />
           </skinnedMesh>
           <primitive object={nodes.root} />
           <primitive object={nodes['MCH-torsoparent']} />

@@ -5,7 +5,6 @@ import {
   UseFoodContext,
   UseHumansContext,
 } from '../context/UseContexts';
-import { AudioEffects } from '../AudioManagement/AudioEffects';
 const EatingOverlay = () => {
   const refEatingOverlay = React.useRef<null | HTMLDivElement>(null);
   const { setShowEatButton } = UseButtonsContext();
@@ -17,16 +16,6 @@ const EatingOverlay = () => {
     setKnifeForkTable4,
   } = UseFoodContext();
   const { setWaitressShowTable } = UseHumansContext();
-
-  const { EatingAudio } = AudioEffects();
-
-  React.useEffect(() => {
-    if (eatFood) {
-      setTimeout(() => {
-        EatingAudio();
-      }, 800);
-    }
-  }, [eatFood, EatingAudio]);
 
   React.useEffect(() => {
     const tl = gsap.timeline();
