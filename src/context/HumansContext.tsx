@@ -16,6 +16,7 @@ export const ContextHumansProvider = ({
   const [waitressTalkTable, setWaitressTalkTable] = React.useState(false);
   const [waitressReset, setWaitressReset] = React.useState(false);
 
+
   return (
     <CreateContextHumans.Provider
       value={{
@@ -30,7 +31,7 @@ export const ContextHumansProvider = ({
         waitressReset,
         setWaitressReset,
         waitressDialogueCurrent,
-        setWaitressDialogueCurrent,
+        setWaitressDialogueCurrent
       }}
     >
       {children}

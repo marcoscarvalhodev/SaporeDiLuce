@@ -11,9 +11,16 @@ export const AudioEffects = () => {
     moveAudio.play();
   }, [audioPlay]);
 
-  const DoorAudio = React.useCallback(() => {
+  const DoorClosingAudio = React.useCallback(() => {
     if (!audioPlay) return;
-    const doorAudio = new Audio('/audio/door_closing.wav');
+    const doorAudio = new Audio('/audio/door_closing.mp3');
+
+    doorAudio.play();
+  }, [audioPlay]);
+
+  const DoorOpeningAudio = React.useCallback(() => {
+    if (!audioPlay) return;
+    const doorAudio = new Audio('/audio/door_opening.mp3');
 
     doorAudio.play();
   }, [audioPlay]);
@@ -33,7 +40,8 @@ export const AudioEffects = () => {
 
   return {
     MovementAudio,
-    DoorAudio,
+    DoorClosingAudio,
+    DoorOpeningAudio,
     EatingAudio,
     OrderedFoodAudio,
   };

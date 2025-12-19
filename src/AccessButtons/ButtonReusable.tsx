@@ -9,6 +9,7 @@ interface ButtonReusableProps {
   outText: string;
   enterEnvironment: boolean;
   onClick: () => void;
+  delayButton?: number;
   color: 'black' | 'orange';
   id:
     | 'dinner_button'
@@ -45,11 +46,12 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
       textSize,
       color,
       hideButton,
+      delayButton = 2,
     },
     ref
   ) => {
     const [buttonMessage, setButtonMessage] = React.useState(false);
-    
+
     React.useEffect(() => {
       setTimeout(() => setButtonMessage(enterEnvironment), 1000);
     }, [setButtonMessage, enterEnvironment]);
@@ -77,9 +79,9 @@ const ButtonReusable = forwardRef<HTMLDivElement, ButtonReusableProps>(
         opacity: 1,
         duration: 1,
         pointerEvents: 'all',
-        delay: 2,
+        delay: delayButton,
       });
-    }, [hideButton, id]);
+    }, [hideButton, id, delayButton]);
 
     return (
       <div

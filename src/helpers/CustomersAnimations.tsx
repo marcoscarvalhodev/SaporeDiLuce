@@ -15,7 +15,7 @@ interface reviewAnimProps {
 
 interface CustomersAnimationProps {
   actions: { [x: string]: THREE.AnimationAction | null };
-  customerAnimationsReady: boolean;
+
   review_actions: {
     action: {
       customer_cam: THREE.AnimationAction | null;
@@ -28,7 +28,6 @@ interface CustomersAnimationProps {
 }
 
 const CustomersAnimations = ({
-  customerAnimationsReady,
   review_actions,
   table_id,
   actions,
@@ -137,14 +136,12 @@ const CustomersAnimations = ({
   }, [actions]);
 
   React.useEffect(() => {
-    if (!customerAnimationsReady) return;
-
     if (activeAnimations) {
       setTimeout(() => {
         InitToCamAnim();
       }, 2000);
     }
-  }, [InitToCamAnim, customerAnimationsReady, activeAnimations]);
+  }, [InitToCamAnim, activeAnimations]);
 
   React.useEffect(() => {
     if (activeAnimations) InitReviewAnim();

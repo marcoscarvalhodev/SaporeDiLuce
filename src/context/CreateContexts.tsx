@@ -28,13 +28,15 @@ export type waiterDialogueProps =
   | 'table_talk'
   | 'table_talk_serve';
 
+export type DoorStateTypes = 'closed' | 'closing' | 'opening';
+
 interface AnimationsProps {
-  doorClose: boolean;
-  setDoorClose: React.Dispatch<React.SetStateAction<boolean>>;
+  doorState: DoorStateTypes;
+  setDoorState: React.Dispatch<React.SetStateAction<DoorStateTypes>>;
   doorOpen: boolean;
   setDoorOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  movementAudioState: boolean;
-  setMovementAudioState: React.Dispatch<React.SetStateAction<boolean>>;
+  cameraMoving: boolean;
+  setCameraMoving: React.Dispatch<React.SetStateAction<boolean>>;
   customersAnimationsReady: boolean;
   clickedAudio: boolean;
   setClickedAudio: React.Dispatch<React.SetStateAction<boolean>>;
