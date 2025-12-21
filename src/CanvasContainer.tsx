@@ -54,7 +54,7 @@ function CanvasContainer() {
           right: '0',
           cursor: 'grab',
         }}
-        className='bg-[#ffffff]'
+        className='bg-[#eeecec]'
         onPointerDown={() => {
           gsap.to(canvasRef.current, {
             cursor: 'grabbing',

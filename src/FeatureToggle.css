@@ -1,16 +1,52 @@
+/*svg-icons*/
+
 .settings_gear #fork,
 .settings_gear #knife {
-  
-    fill: #d8d7d7;
-    transition: fill 0.7s ease;
-  
+  fill: #eeecec;
+  transition: fill 0.7s ease;
+}
+
+.icon_sound #sound_base,
+.icon_sound #sound_wave_back,
+.icon_sound #sound_wave_front,
+.icon_sound #sound_cross > * {
+  stroke: #eeecec;
+  transition: stroke 0.7s ease;
+}
+
+.icon_sound_wrapper {
+  transition: height 1s ease, background-color 2s ease;
+  background-color: #dbd7d700;
+  height: 6rem;
+
+  .slider_wrapper {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+}
+
+.icon_sound_wrapper:hover {
+  transition: background-color 0.5s ease, height 1s ease;
+  background-color: #f0f0f073;
+  height: 21.5rem;
+  #sound_base,
+  #sound_wave_back,
+  #sound_wave_front,
+  #sound_cross > * {
+    stroke: #e40b0b;
+  }
+
+  .slider_wrapper {
+    transition: all 1s ease 0.5s;
+    opacity: 1;
+    pointer-events: all;
+  }
 }
 
 .settings_gear:hover #fork,
 .settings_gear:hover #knife {
-
-    fill: #e40b0b;
-  
+  fill: #e40b0b;
 }
 
 .fork_active {
@@ -38,5 +74,44 @@
     opacity: 1;
     transition: all;
     transition-duration: 0.7s;
+  }
+}
+
+.sound_off {
+  #sound_wave_back,
+  #sound_wave_front {
+    transition: all 0.7s ease;
+    opacity: 0;
+  }
+
+  #sound_cross {
+    transition: all 0.7s ease;
+    opacity: 1;
+  }
+}
+
+.sound_mid {
+  #sound_wave_back {
+    transition: all 0.7s ease;
+    opacity: 1;
+  }
+
+  #sound_wave_front,
+  #sound_cross {
+    transition: all 0.7s ease;
+    opacity: 0;
+  }
+}
+
+.sound_full {
+  #sound_wave_back,
+  #sound_wave_front {
+    transition: all 0.7s ease;
+    opacity: 1;
+  }
+
+  #sound_cross {
+    transition: all 0.7s ease;
+    opacity: 0;
   }
 }
