@@ -62,6 +62,8 @@ interface HumansProps {
 interface AudioChoiceProps {
   audioPlay: boolean;
   setAudioPlay: React.Dispatch<React.SetStateAction<boolean>>;
+  volumeControl: number;
+  setVolumeControl: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface OverlaysProps {

@@ -1,0 +1,16 @@
+<svg width="78" height="64" viewBox="0 0 78 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="sound_icon" clip-path="url(#clip0_2_4)">
+<path id="sound_base" d="M3 42.7256V21.2745C3 19.1899 4.62298 17.5 6.625 17.5H19.6235C20.5849 17.5 21.5069 17.1023 22.1867 16.3945L33.0618 4.11309C35.3455 1.7353 39.25 3.41933 39.25 6.78203V57.218C39.25 60.6041 35.2987 62.2774 33.0291 59.8523L22.1921 47.6401C21.5098 46.9111 20.5737 46.5 19.5961 46.5H6.625C4.62298 46.5 3 44.81 3 42.7256Z" stroke="#D8D7D7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="sound_wave_back" d="M53.75 19.3125C58.5832 25.757 58.5832 38.243 53.75 44.6875" stroke="#D8D7D7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="sound_wave_front" d="M64.625 6.625C79.0811 20.4303 79.1689 43.662 64.625 57.375" stroke="#D8D7D7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="sound_cross">
+<path id="cross_2" d="M74.8523 42.7612L53 21.0911" stroke="#D8D7D7" stroke-width="5" stroke-linecap="round"/>
+<path id="cross_1" d="M53.091 42.8523L74.7612 21" stroke="#D8D7D7" stroke-width="5" stroke-linecap="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_2_4">
+<rect width="78" height="64" fill="white"/>
+</clipPath>
+</defs>
+</svg>

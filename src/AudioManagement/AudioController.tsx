@@ -13,6 +13,7 @@ const AudioController = () => {
     DoorClosingAudio,
     OrderedFoodAudio,
     EatingAudio,
+    SongAudio,
   } = AudioEffects();
   const { doorState, cameraMoving } = UseAnimationsContext();
   const { audioPlay } = UseAudioChoiceContext();
@@ -44,9 +45,15 @@ const AudioController = () => {
     if (eatFood && audioPlay) {
       setTimeout(() => {
         EatingAudio();
-      }, 800);
+      }, 1200);
     }
   }, [eatFood, EatingAudio, audioPlay]);
+
+  React.useEffect(() => {
+    SongAudio();
+  }, [SongAudio]);
+
+  
 
   return <></>;
 };
