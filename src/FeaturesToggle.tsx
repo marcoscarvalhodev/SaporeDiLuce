@@ -40,7 +40,6 @@ const FeaturesToggle = () => {
   };
 
   React.useEffect(() => {
-    console.log(audioPlay);
     if (!audioPlay) {
       setVolumeControl(0);
     } else {
