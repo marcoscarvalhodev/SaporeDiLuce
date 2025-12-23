@@ -4,7 +4,7 @@ import { Environment, PerspectiveCamera } from '@react-three/drei';
 import MoveCameraOrbit from './CameraManagement/MoveCameraOrbit';
 import gsap from 'gsap';
 
-import {PerspectiveCamera as TypePerspectiveCamera } from 'three';
+import { PerspectiveCamera as TypePerspectiveCamera } from 'three';
 
 import { AccessButtons } from './AccessButtons/AccessButtons';
 import {
@@ -26,11 +26,13 @@ import { GlassesBottles } from './ModelsManagement/GlassesBottles';
 import { CouchPaintings } from './ModelsManagement/CouchPaintings';
 import { GroundDoor } from './ModelsManagement/GroundDoor';
 import { Skybox } from './ModelsManagement/Skybox';
-
+import ContainerSizes from './helpers/ContainerSizes';
 
 function CanvasContainer() {
   const perspectiveRef = React.useRef<TypePerspectiveCamera | null>(null);
   const canvasRef = React.useRef<null | HTMLCanvasElement>(null);
+
+  const { xlarge, large, medium, small } = ContainerSizes();
 
   const { roomNameState, refCanvasUpdated } = UseCameraMovementContext();
   const { activeShadows } = UseFeaturesToggleContext();
@@ -42,7 +44,6 @@ function CanvasContainer() {
   return (
     <>
       <Canvas
-       
         shadows={activeShadows}
         id='canvas-component'
         ref={canvasRef}
@@ -67,22 +68,18 @@ function CanvasContainer() {
         }}
       >
         <PerspectiveCamera
-          fov={50}
+          fov={xlarge ? 43 : large ? 50 : medium ? 60 : small ? 80 : 90}
           near={0.01}
           far={10000}
           ref={perspectiveRef}
           makeDefault
           position={[15.08, 2.4, 2]}
-          
         />
 
         <Environment
           files={'./environment.hdr'}
           environmentIntensity={0.9}
-          
-          
-          environmentRotation={[-2,4.5, -4.5]}
-          
+          environmentRotation={[-2, 4.5, -4.5]}
         />
 
         <Skybox />
@@ -91,7 +88,6 @@ function CanvasContainer() {
         <ReviewsCustomers />
         <WaitressDialogue />
 
-        
         <Waitress />
 
         <CeillingWalls />
@@ -115,7 +111,6 @@ function CanvasContainer() {
         <EffectsComponent />
         <GlassesBottles />
         <RestaurantMenu />
-
       </Canvas>
     </>
   );

@@ -44,7 +44,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
         door_left.rotation,
         {
           y: 1.6,
-          duration: 1.3,
+          duration: 1.8,
           onStart: () => {
             setDoorState('opening');
           },
@@ -58,7 +58,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           door_right.rotation,
           {
             y: -1.6,
-            duration: 1.3,
+            duration: 1.8,
           },
           0
         )
@@ -66,7 +66,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           door_left.rotation,
           {
             y: 0,
-            duration: 1.3,
+            duration: 1.8,
             onStart: () => {
               setDoorState('closing');
             },
@@ -80,7 +80,7 @@ export function GroundDoor(props: JSX.IntrinsicElements['group']) {
           door_right.rotation,
           {
             y: 0,
-            duration: 1.3,
+            duration: 1.8,
           },
           3
         );
